@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" class="h-full antialiased">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,16 +28,16 @@
 
 <body class="h-full bg-[var(--ui-bg)] text-[var(--text-primary)]">
 
-   <!-- Layout base -->
-   <div class="flex h-screen">
+  <!-- Layout base -->
+  <div class="flex h-screen">
 
-     <!-- SIDEBAR -->
-     <div id="sidebar-placeholder"></div>
+    <!-- SIDEBAR -->
+    <div id="sidebar-placeholder"></div>
 
-     <!-- CONTENIDO -->
-     <main class="flex-1 overflow-y-auto bg-[var(--page-bg)]">
-       <!-- Topbar -->
-       <div id="topbar-placeholder" data-breadcrumb='["Workspace", "Sobre mí"]'></div>
+    <!-- CONTENIDO -->
+    <main class="flex-1 overflow-y-auto bg-[var(--page-bg)]">
+      <!-- Topbar -->
+      <div id="topbar-placeholder" data-breadcrumb='["Workspace", "Sobre mí"]'></div>
 
       <div class="max-w-[var(--notion-max-width)] mx-auto px-8 sm:px-16 py-12">
 
@@ -54,126 +55,118 @@
         <!-- Intro -->
         <div class="notion-block relative group mb-8">
           <div class="block-controls absolute -left-8 top-1 flex flex-col gap-1">
-            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
-            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
           </div>
 
           <p class="text-lg leading-relaxed py-1 px-1">
-            Hola, soy [Tu Nombre], un desarrollador full-stack apasionado por crear experiencias digitales excepcionales. Con más de 5 años de experiencia en el desarrollo web y móvil, me especializo en tecnologías modernas y mejores prácticas de desarrollo.
-          </p>
+            <strong>Mi Enfoque:</strong><br><br>
+            Soy Josué David Vargas, un <strong>Software Engineer</strong> con experiencia construyendo soluciones
+            eficientes, manteniendo sistemas críticos en producción. Me gusta trabajar de forma
+            práctica, resolver problemas reales y aportar valor real dentro de los equipos.<br><br>
+
+            Uno de mis pasatiempos favoritos es <strong>crear herramientas y soluciones</strong> que hagan más sencillo
+            mi día a día, siempre
+            aprendiendo algo nuevo en el proceso. En el ámbito profesional, valoro el trabajo en equipo, el aprendizaje
+            continuo y formar parte de una empresa que acompañe mis objetivos de desarrollo personal y profesional.
+            <br><br>
+
+            <strong>Formación:</strong><br><br>
+            • <strong>Técnico en Desarrollo de Software</strong> — Universidad Galileo (2023 - 2025)<br>
+            • <strong>Platzi, Udemy y Coursera:</strong> Cursos en desarrollo móvil, backend, DevOps y SCRUM.<br>
+            • <strong>Certificaciones:</strong><br>
+            &nbsp;&nbsp;• <strong style="font-size: 1.05rem;">CISCO – IT Essentials</strong>: Fundamentos sólidos de
+            hardware, redes, mantenimiento de equipos, ciberseguridad básica y soporte técnico profesional.<br>
+            &nbsp;&nbsp;• <strong>PCI DSS Awareness / Fundamentals</strong>: Estándares esenciales de seguridad para el
+            manejo de datos de tarjetas y cumplimiento en entornos financieros.<br>
+            &nbsp;&nbsp;• <strong>Prevención de Fraude y Lavado de Dinero (AML / KYC)</strong>: Buenas prácticas para
+            identificación del cliente y prevención de lavado de dinero. <br>
+
+
         </div>
 
         <!-- Skills Section -->
         <div class="notion-block relative group mb-8">
           <div class="block-controls absolute -left-8 top-1 flex flex-col gap-1">
-            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
-            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
           </div>
 
           <h2 class="text-2xl font-semibold py-1 px-1 mb-4">
-            🛠️ Habilidades Técnicas
+            🛠️ Skills / Competencias Clave
           </h2>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
-              <h3 class="font-semibold mb-2">Frontend</h3>
-              <div class="flex flex-wrap gap-2">
-                <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-sm">React</span>
-                <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-sm">Vue.js</span>
-                <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-sm">TypeScript</span>
-                <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-sm">Tailwind CSS</span>
-              </div>
-            </div>
-
-            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
-              <h3 class="font-semibold mb-2">Backend</h3>
-              <div class="flex flex-wrap gap-2">
-                <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-sm">Node.js</span>
-                <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-sm">Python</span>
-                <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-sm">PostgreSQL</span>
-                <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-sm">MongoDB</span>
-              </div>
-            </div>
-
-            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
-              <h3 class="font-semibold mb-2">Herramientas</h3>
-              <div class="flex flex-wrap gap-2">
-                <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded text-sm">Git</span>
-                <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded text-sm">Docker</span>
-                <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded text-sm">AWS</span>
-                <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded text-sm">Figma</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Experience -->
-        <div class="notion-block relative group mb-8">
-          <div class="block-controls absolute -left-8 top-1 flex flex-col gap-1">
-            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
-            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
-          </div>
-
-          <h2 class="text-2xl font-semibold py-1 px-1 mb-4">
-            💼 Experiencia Profesional
-          </h2>
-
-          <div class="space-y-6">
-            <div class="border-l-4 border-blue-500 pl-4">
-              <h3 class="font-bold text-lg">Senior Full-Stack Developer</h3>
-              <p class="text-[var(--text-secondary)] mb-2">TechCorp Inc. • 2022 - Presente</p>
-              <ul class="list-disc list-inside space-y-1 text-sm">
-                <li>Lideré el desarrollo de aplicaciones web escalables sirviendo a 100k+ usuarios</li>
-                <li>Implementé arquitecturas de microservicios mejorando la performance en 40%</li>
-                <li>Mentoricé a 5 desarrolladores junior en mejores prácticas</li>
-              </ul>
-            </div>
-
-            <div class="border-l-4 border-green-500 pl-4">
-              <h3 class="font-bold text-lg">Full-Stack Developer</h3>
-              <p class="text-[var(--text-secondary)] mb-2">StartupXYZ • 2020 - 2022</p>
-              <ul class="list-disc list-inside space-y-1 text-sm">
-                <li>Desarrollé el MVP desde cero, llevando la startup de 0 a 10k usuarios</li>
-                <li>Integré APIs de terceros y sistemas de pago</li>
-                <li>Colaboré estrechamente con el equipo de diseño para implementar UI/UX</li>
-              </ul>
-            </div>
-
-            <div class="border-l-4 border-purple-500 pl-4">
-              <h3 class="font-bold text-lg">Junior Developer</h3>
-              <p class="text-[var(--text-secondary)] mb-2">WebAgency • 2019 - 2020</p>
-              <ul class="list-disc list-inside space-y-1 text-sm">
-                <li>Desarrollé sitios web responsive y aplicaciones web</li>
-                <li>Aprendí y apliqué frameworks modernos como React y Node.js</li>
-                <li>Participé en code reviews y mejora de procesos de desarrollo</li>
-              </ul>
-            </div>
-          </div>
+          <table class="w-full border-collapse border border-[var(--ui-border)]">
+            <thead>
+              <tr class="bg-[var(--ui-hover)]">
+                <th class="border border-[var(--ui-border)] p-2 text-left font-semibold">Categoría</th>
+                <th class="border border-[var(--ui-border)] p-2 text-left font-semibold">Tecnologías Clave</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-[var(--ui-border)] p-2 font-medium">Mobile Development</td>
+                <td class="border border-[var(--ui-border)] p-2">Kotlin, Capacitor, Ionic,
+                  Android Studio, Xcode.</td>
+              </tr>
+              <tr>
+                <td class="border border-[var(--ui-border)] p-2 font-medium">Backend & Full-Stack</td>
+                <td class="border border-[var(--ui-border)] p-2">Node.js, PHP, Go, PostgreSQL, SOAP, GraphQL.</td>
+              </tr>
+              <tr>
+                <td class="border border-[var(--ui-border)] p-2 font-medium">Cloud & DevOps</td>
+                <td class="border border-[var(--ui-border)] p-2"><strong>Docker</strong>, AWS EC2 & S3, DigitalOcean,
+                  Cloudflare, Nexus Repository, Azure Artifacts.</td>
+              </tr>
+              <tr>
+                <td class="border border-[var(--ui-border)] p-2 font-medium">Metodologías & Tools</td>
+                <td class="border border-[var(--ui-border)] p-2">SCRUM, XP, Jira, Azure DevOps, Gitlab, OpsGenie.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Education -->
         <div class="notion-block relative group mb-8">
           <div class="block-controls absolute -left-8 top-1 flex flex-col gap-1">
-            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
-            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
           </div>
 
           <h2 class="text-2xl font-semibold py-1 px-1 mb-4">
             🎓 Educación
           </h2>
 
-          <div class="p-4 border border-[var(--ui-border)] rounded-lg">
-            <h3 class="font-bold text-lg">Ingeniería en Sistemas Computacionales</h3>
-            <p class="text-[var(--text-secondary)]">Universidad Tecnológica • 2015 - 2019</p>
-            <p class="mt-2">Graduado con honores. Proyecto final: Sistema de gestión universitaria desarrollado con tecnologías web modernas.</p>
+          <div class="space-y-4">
+            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
+              <h3 class="font-bold text-lg">Técnico en Desarrollo de Software</h3>
+              <p class="text-[var(--text-secondary)]">Universidad Galileo • 2023 - 2025</p>
+            </div>
+            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
+              <h3 class="font-bold text-lg">Herramientas Digitales para el Diseño Gráfico</h3>
+              <p class="text-[var(--text-secondary)]">Universidad de Occidente</p>
+            </div>
+            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
+              <h3 class="font-bold text-lg">Certificación CISCO – IT Essentials</h3>
+              <p class="text-[var(--text-secondary)]">Fundamentos de hardware, redes, mantenimiento de equipos,
+                ciberseguridad básica y soporte técnico profesional.</p>
+            </div>
           </div>
         </div>
 
         <!-- Contact -->
         <div class="notion-block relative group mb-8">
           <div class="block-controls absolute -left-8 top-1 flex flex-col gap-1">
-            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
-            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
           </div>
 
           <h2 class="text-2xl font-semibold py-1 px-1 mb-4">
@@ -184,8 +177,10 @@
             <div>
               <h3 class="font-semibold mb-2">Información de Contacto</h3>
               <div class="space-y-2">
-                <p>📧 <a href="mailto:hola@ejemplo.com" class="text-blue-600 dark:text-blue-400 hover:underline">hola@ejemplo.com</a></p>
-                <p>📱 <a href="tel:+1234567890" class="text-blue-600 dark:text-blue-400 hover:underline">+1 (234) 567-890</a></p>
+                <p>📧 <a href="mailto:hola@ejemplo.com"
+                    class="text-blue-600 dark:text-blue-400 hover:underline">hola@ejemplo.com</a></p>
+                <p>📱 <a href="tel:+1234567890" class="text-blue-600 dark:text-blue-400 hover:underline">+1 (234)
+                    567-890</a></p>
                 <p>📍 Ciudad, País</p>
               </div>
             </div>
@@ -212,4 +207,5 @@
   <script src="assets/js/script.js"></script>
 
 </body>
+
 </html>
