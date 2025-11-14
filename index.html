@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full antialiased">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="view-transition" content="same-origin" />
+
+  <!-- Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!-- Theme script -->
+  <script>
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') document.documentElement.classList.add('dark');
+  </script>
+
+  <title>Home - Mi Portafolio Digital</title>
+</head>
+
+<body class="h-full bg-[var(--ui-bg)] text-[var(--text-primary)]">
+
+   <!-- Layout base -->
+   <div class="flex h-screen">
+
+     <!-- SIDEBAR -->
+     <div id="sidebar-placeholder"></div>
+
+     <!-- CONTENIDO -->
+     <main class="flex-1 overflow-y-auto bg-[var(--page-bg)]">
+       <!-- Topbar -->
+       <div id="topbar-placeholder" data-breadcrumb='["Home"]'></div>
+
+      <div class="max-w-[var(--notion-max-width)] mx-auto px-8 sm:px-16 py-12">
+
+        <!-- Page Icon + Title -->
+        <div class="mb-6">
+          <div class="page-icon text-7xl mb-4 cursor-pointer inline-block">🏠</div>
+          <h1 class="text-[40px] font-bold leading-tight tracking-tight mb-2">
+            Bienvenido a Mi Espacio Digital
+          </h1>
+          <div class="flex items-center gap-4 text-sm text-[var(--text-secondary)]">
+            <span>✏️ Última edición: hace 5 min</span>
+          </div>
+        </div>
+
+        <!-- Welcome paragraph -->
+        <div class="notion-block relative group mb-2">
+          <div class="block-controls absolute -left-8 top-1 flex flex-col gap-1">
+            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
+            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
+          </div>
+
+          <p class="text-base leading-relaxed py-1 px-1">
+            ¡Hola! Soy un desarrollador apasionado por crear experiencias digitales excepcionales. Explora mi portafolio para conocer mis proyectos, habilidades y trayectoria profesional.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="notion-block relative group mb-2 mt-8">
+          <div class="block-controls absolute -left-8 top-1 flex flex-col gap-1">
+            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
+            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
+          </div>
+
+          <h2 class="text-2xl font-semibold py-1 px-1">
+            🔗 Enlaces Rápidos
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <a href="portafolio.html" class="notion-block relative group p-4 border border-[var(--ui-border)] rounded-lg hover:bg-[var(--ui-hover)] transition-colors">
+            <div class="text-3xl mb-2">📄</div>
+            <h3 class="font-semibold mb-1">Portafolio</h3>
+            <p class="text-sm text-[var(--text-secondary)]">Conoce mis proyectos y habilidades</p>
+          </a>
+
+          <a href="proyectos.html" class="notion-block relative group p-4 border border-[var(--ui-border)] rounded-lg hover:bg-[var(--ui-hover)] transition-colors">
+            <div class="text-3xl mb-2">💼</div>
+            <h3 class="font-semibold mb-1">Proyectos</h3>
+            <p class="text-sm text-[var(--text-secondary)]">Trabajos destacados y casos de estudio</p>
+          </a>
+
+          <a href="sobre-mi.html" class="notion-block relative group p-4 border border-[var(--ui-border)] rounded-lg hover:bg-[var(--ui-hover)] transition-colors">
+            <div class="text-3xl mb-2">👨‍💻</div>
+            <h3 class="font-semibold mb-1">Sobre mí</h3>
+            <p class="text-sm text-[var(--text-secondary)]">Mi historia y experiencia profesional</p>
+          </a>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="notion-block relative group mb-2">
+          <div class="block-controls absolute -left-8 top-1 flex flex-col gap-1">
+            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
+            <button class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
+          </div>
+
+          <h2 class="text-2xl font-semibold py-1 px-1">
+            📈 Actividad Reciente
+          </h2>
+        </div>
+
+        <div class="space-y-2 mb-8">
+          <div class="flex items-center gap-3 p-3 border border-[var(--ui-border)] rounded-lg">
+            <span class="text-2xl">🚀</span>
+            <div>
+              <p class="font-medium">Nuevo proyecto completado</p>
+              <p class="text-sm text-[var(--text-secondary)]">Aplicación web full-stack - hace 2 días</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 p-3 border border-[var(--ui-border)] rounded-lg">
+            <span class="text-2xl">📚</span>
+            <div>
+              <p class="font-medium">Aprendiendo nuevas tecnologías</p>
+              <p class="text-sm text-[var(--text-secondary)]">React, Node.js, y bases de datos - hace 1 semana</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Espaciado final -->
+        <div class="h-64"></div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/script.js"></script>
+
+</body>
+</html>

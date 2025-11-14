@@ -1,0 +1,222 @@
+:root {
+  /* Contenedor principal */
+  --notion-max-width: 900px;
+
+  /* UI Chrome Light */
+  --ui-bg: #FFFFFF;
+  --ui-sidebar-bg: #F7F6F3;
+  --ui-hover: #F5F4F1;
+  --ui-border: rgba(55, 53, 47, 0.08);
+
+  /* Content Light */
+  --page-bg: #FFFFFF;
+  --text-primary: #37352F;
+  --text-secondary: rgba(55, 53, 47, 0.65);
+  --text-tertiary: rgba(55, 53, 47, 0.45);
+
+  /* Accents */
+  --accent-blue: #0A7AFF;
+  --accent-blue-light: #F0F6FF;
+}
+
+html.dark {
+  /* UI Chrome Dark */
+  --ui-bg: #2F3437;
+  --ui-sidebar-bg: #252525;
+  --ui-hover: rgba(255,255,255,0.08);
+  --ui-border: rgba(255, 255, 255, 0.08);
+
+  /* Content Dark */
+  --page-bg: #191919;
+  --text-primary: rgba(255,255,255,0.9);
+  --text-secondary: rgba(255,255,255,0.6);
+  --text-tertiary: rgba(255,255,255,0.4);
+
+  /* Accents */
+  --accent-blue: #3291FF;
+  --accent-blue-light: rgba(50, 145, 255, 0.1);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--page-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Sidebar fixed width */
+.sidebar {
+  width: 240px;
+  background-color: var(--ui-sidebar-bg);
+  border-right: 1px solid var(--ui-border);
+}
+
+/* Notion blocks - comportamiento subtle */
+.notion-block {
+  position: relative;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.notion-block:hover {
+  background-color: var(--ui-hover);
+}
+
+/* UI bajo demanda (ocultar controles) */
+.notion-block:hover .block-controls {
+  opacity: 1;
+}
+
+.block-controls {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+}
+
+/* Editable placeholder */
+[contenteditable]:empty:before {
+  content: attr(placeholder);
+  color: var(--text-tertiary);
+  pointer-events: none;
+  font-weight: 400;
+}
+
+[contenteditable]:focus {
+  outline: none;
+  background-color: var(--accent-blue-light);
+  border-radius: 4px;
+}
+
+/* Smooth scrollbar mejorado */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(55, 53, 47, 0.2);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(55, 53, 47, 0.4);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Page icon hover */
+.page-icon {
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
+  cursor: pointer;
+}
+
+.page-icon:hover {
+  transform: scale(1.08);
+  opacity: 0.85;
+}
+
+/* Toggle list - Notion style */
+.toggle-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+  opacity: 0;
+}
+
+.toggle-content.open {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+/* Divider - más sutil */
+.notion-divider {
+  border-top: 1px solid var(--ui-border);
+  margin: 12px 0;
+}
+
+/* Buttons - Notion style */
+button {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--ui-border);
+  background-color: var(--ui-bg);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+button:hover {
+  background-color: var(--ui-hover);
+  border-color: var(--ui-border);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Links */
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* Focus visible - mejor accesibilidad */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--ui-border);
+  }
+}
+
+/* Smooth transitions para tema */
+body, aside, main, .notion-block, button, a, nav, div, span, h1, h2, h3, h4, h5, h6, p, ul, li {
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
