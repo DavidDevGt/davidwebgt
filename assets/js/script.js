@@ -1,15 +1,14 @@
 // Navigation data
 const navigation = [
   { href: 'index.html', icon: '🏠', text: 'Home' },
-  { href: 'portafolio.html', icon: '📄', text: 'Portafolio' },
   { href: 'proyectos.html', icon: '💼', text: 'Proyectos' },
   { href: 'sobre-mi.html', icon: '👨‍💻', text: 'Sobre mí' }
 ];
 
 const favorites = [
-  { href: 'https://github.com', icon: '🐙', text: 'GitHub', external: true },
-  { href: 'https://linkedin.com', icon: '💼', text: 'LinkedIn', external: true },
-  { href: 'mailto:hola@ejemplo.com', icon: '📧', text: 'Email', external: true }
+  { href: 'https://github.com/DavidDevGt', icon: '🐙', text: 'GitHub', external: true },
+  { href: 'https://www.linkedin.com/in/jdavidvl/', icon: '💼', text: 'LinkedIn', external: true },
+  { href: 'mailto:josuedavidvl18@gmail.com', icon: '📧', text: 'Email', external: true }
 ];
 
 // Generate sidebar HTML
