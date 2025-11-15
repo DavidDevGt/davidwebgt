@@ -69,7 +69,7 @@
           <span class="text-sm font-medium">davidwebgt</span>
         </div>
 
-        <div
+        <div onclick="openSearchModal()"
           class="px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm text-[var(--text-secondary)] flex items-center gap-2">
           <i data-lucide="search" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
           <span>Buscar</span>
@@ -137,10 +137,9 @@
       </div>
     </aside>
 
-    <!-- CONTENIDO -->
     <main class="flex-1 overflow-y-auto bg-[var(--page-bg)]">
       <!-- Topbar -->
-      <div id="topbar-placeholder" data-breadcrumb='["Home"]'></div>
+      <div id="topbar-placeholder" data-breadcrumb='["Inicio"]'></div>
 
       <div class="max-w-[var(--notion-max-width)] mx-auto px-8 sm:px-16 py-12">
 
@@ -182,7 +181,20 @@
             entornos móviles, servicios cloud y arquitecturas modernas que permiten desplegar, escalar y mantener
             sistemas con miles de usuarios activos.
           </p>
+        </div>
 
+        <!-- Callout -->
+        <div class="notion-block notion-callout animate-in mt-4 relative group" data-type="callout">
+          <div class="block-controls absolute -left-8 top-1 flex flex-col gap-1">
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
+          </div>
+          <div class="text-xl">💡</div>
+          <div contenteditable="false" placeholder="Escribe algo..." class="flex-1 text-base">
+            Revisa mis proyectos destacados y mi experiencia profesional. Navegando por el portafolio podrás conocer más sobre mi.
+          </div>
         </div>
 
         <!-- Quick Links -->
@@ -217,13 +229,14 @@
 
 
         <!-- Espaciado final -->
-        <div class="h-64"></div>
+        <div class="h-32"></div>
 
       </div>
     </main>
   </div>
 
   <!-- Scripts -->
+  <script src="assets/js/searchIndex.js"></script>
   <script src="assets/js/script.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 

@@ -68,7 +68,7 @@
           <span class="text-sm font-medium">davidwebgt</span>
         </div>
 
-        <div
+        <div onclick="openSearchModal()"
           class="px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm text-[var(--text-secondary)] flex items-center gap-2">
           <i data-lucide="search" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
           <span>Buscar</span>
@@ -138,7 +138,7 @@
     <!-- CONTENIDO -->
     <main class="flex-1 overflow-y-auto bg-[var(--page-bg)]">
       <!-- Topbar -->
-      <div id="topbar-placeholder" data-breadcrumb='["Workspace", "Sobre mí"]'></div>
+      <div id="topbar-placeholder" data-breadcrumb='["Inicio", "Sobre mí"]'></div>
 
       <div class="max-w-[var(--notion-max-width)] mx-auto px-8 sm:px-16 py-12">
 
@@ -383,6 +383,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="assets/js/searchIndex.js"></script>
   <script src="assets/js/script.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
