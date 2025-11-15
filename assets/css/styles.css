@@ -70,7 +70,7 @@ html.dark {
 body {
   /* FUENTE: Se incluye 'Inter' como fallback moderno de la fuente de Notion */
   font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: var(--text-size-body);
+  font-size: clamp(14px, 4vw, 16px);
   font-weight: 400;
   line-height: 1.5;
   /* Ligeramente ajustado para más compacidad */
@@ -80,10 +80,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Layout principal fluido */
+.app {
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.main {
+  flex: 1;
+  padding: var(--spacing-lg);
+  max-width: var(--notion-max-width);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
 /* Headings */
 h1 {
   /* Font weight y line-height más cercanos al estilo predeterminado de Notion */
-  font-size: var(--text-size-h1);
+  font-size: clamp(24px, 5vw, 32px);
   font-weight: 700;
   /* Más audaz */
   line-height: 1.1;
@@ -93,7 +108,7 @@ h1 {
 }
 
 h2 {
-  font-size: var(--text-size-h2);
+  font-size: clamp(20px, 4vw, 24px);
   font-weight: 600;
   /* Más audaz */
   line-height: 1.2;
@@ -104,10 +119,11 @@ h2 {
 
 /* Sidebar fixed width - Se mantiene */
 .sidebar {
-  width: 240px;
+  flex: 0 0 240px;
   background-color: var(--ui-sidebar-bg);
   border-right: 1px solid var(--ui-border);
   padding: var(--spacing-md) 0;
+  box-sizing: border-box;
 }
 
 /* Notion blocks - El cambio clave es hacer el bloque de hover más sutil */
@@ -118,6 +134,7 @@ h2 {
   /* Ligeramente más pequeño */
   padding: var(--block-vertical-padding) var(--block-horizontal-padding);
   /* Padding mínimo */
+  box-sizing: border-box;
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
 
   /* Animación: Se mantiene la animación, pero se ajusta la duración */
@@ -230,7 +247,7 @@ h2 {
 
 .block-controls {
   position: absolute;
-  left: -24pxpx;
+  left: -24px;
   top: 4px;
   transform: none;
   opacity: 0;
@@ -403,23 +420,135 @@ svg.lucide {
   /* Un poco más rápido */
 }
 
-/* Responsive adjustments - Se mantienen */
-@media (max-width: 768px) {
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  /* Mobile: sidebar como drawer oculto */
   .sidebar {
-    width: 200px;
+    position: fixed;
+    top: 0;
+    left: -240px;
+    width: 240px;
+    height: 100vh;
+    z-index: 1000;
+    border-right: none;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .main {
+    padding: var(--spacing-sm);
   }
 
   body {
-    font-size: 15px;
-    /* Ligeramente ajustado */
+    font-size: clamp(14px, 4vw, 16px);
+  }
+
+  h1 {
+    font-size: clamp(24px, 6vw, 32px);
+    padding: 4px 0 2px 0;
+  }
+
+  h2 {
+    font-size: clamp(20px, 5vw, 24px);
+    padding: 3px 0 2px 0;
+  }
+
+  .notion-block {
+    padding: 2px 1px;
+  }
+
+  .notion-heading,
+  .notion-paragraph {
+    padding: 2px 1px;
+  }
+
+  .notion-callout {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .toggle-trigger {
+    padding: 2px 1px;
+  }
+
+  .notion-quote {
+    padding-left: var(--spacing-sm);
+  }
+
+  button {
+    padding: 3px 6px;
+    font-size: 13px;
+  }
+
+  #options-menu button {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  /* Desactivar reading mode en mobile */
+  body.reading-mode main {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none;
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+    font-size: clamp(14px, 4vw, 16px);
+    line-height: 1.5;
+  }
+
+  body.reading-mode .notion-block {
+    margin-bottom: 0;
+  }
+
+  body.reading-mode h1 {
+    font-size: clamp(24px, 6vw, 32px);
+    margin-bottom: 0;
+  }
+
+  body.reading-mode h2 {
+    font-size: clamp(20px, 5vw, 24px);
+    margin-bottom: 0;
+  }
+
+  /* Ocultar opción de reading mode en mobile */
+  #reading-mode-btn {
+    display: none !important;
   }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablet */
   .sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid var(--ui-border);
+    flex: 0 0 200px;
+  }
+
+  .main {
+    padding: var(--spacing-md);
+  }
+
+  body {
+    font-size: clamp(15px, 3vw, 16px);
+  }
+
+  h1 {
+    font-size: clamp(28px, 4vw, 32px);
+  }
+
+  h2 {
+    font-size: clamp(22px, 3.5vw, 24px);
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop */
+  .sidebar {
+    flex: 0 0 240px;
+  }
+
+  .main {
+    padding: var(--spacing-lg);
   }
 }
 
