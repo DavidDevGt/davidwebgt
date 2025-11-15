@@ -1,20 +1,20 @@
 // Navigation data
 const navigation = [
-  { href: 'index.html', icon: 'home', text: 'Home' },
-  { href: 'proyectos.html', icon: 'briefcase', text: 'Proyectos' },
-  { href: 'sobre-mi.html', icon: 'code', text: 'Sobre mí' }
+    { href: 'index.html', icon: 'home', text: 'Home' },
+    { href: 'proyectos.html', icon: 'briefcase', text: 'Proyectos' },
+    { href: 'sobre-mi.html', icon: 'code', text: 'Sobre mí' }
 ];
 
 const favorites = [
-  { href: 'https://github.com/DavidDevGt', icon: 'github', text: 'GitHub', external: true },
-  { href: 'https://www.linkedin.com/in/jdavidvl/', icon: 'briefcase', text: 'LinkedIn', external: true },
-  { href: 'mailto:josuedavidvl18@gmail.com', icon: 'mail', text: 'Email', external: true }
+    { href: 'https://github.com/DavidDevGt', icon: 'github', text: 'GitHub', external: true },
+    { href: 'https://www.linkedin.com/in/jdavidvl/', icon: 'briefcase', text: 'LinkedIn', external: true },
+    { href: 'mailto:josuedavidvl18@gmail.com', icon: 'mail', text: 'Email', external: true }
 ];
 
 // Generate sidebar HTML
 function generateSidebar() {
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-  return `
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    return `
     <aside class="sidebar border-r border-[var(--ui-border)] bg-[var(--ui-sidebar-bg)] flex flex-col overflow-y-auto" style="view-transition-name: sidebar">
       <!-- Top Section -->
       <div class="p-3">
@@ -71,21 +71,21 @@ function generateSidebar() {
 
 // Generate topbar HTML
 function generateTopbar(breadcrumb) {
-  const readingModeEnabled = localStorage.getItem('readingMode') === 'true';
-  const readingIcon = readingModeEnabled ? 'book' : 'book-open';
-  const readingText = readingModeEnabled ? 'Salir Modo Lectura' : 'Modo Lectura';
+    const readingModeEnabled = localStorage.getItem('readingMode') === 'true';
+    const readingIcon = readingModeEnabled ? 'book' : 'book-open';
+    const readingText = readingModeEnabled ? 'Salir Modo Lectura' : 'Modo Lectura';
 
-  return `
+    return `
     <div class="sticky top-0 z-10 bg-[var(--page-bg)]/80 backdrop-blur-sm border-b border-[var(--ui-border)] px-8 py-2" style="view-transition-name: topbar">
       <div class="max-w-[var(--notion-max-width)] mx-auto flex items-center gap-2 text-sm text-[var(--text-secondary)]">
         ${breadcrumb.map((item, index) => {
-          const isLast = index === breadcrumb.length - 1;
-          const clickHandler = !isLast && item === 'Inicio' ? 'onclick="window.location.href=\'index.html\'"' : '';
-          return `
+        const isLast = index === breadcrumb.length - 1;
+        const clickHandler = !isLast && item === 'Inicio' ? 'onclick="window.location.href=\'index.html\'"' : '';
+        return `
             <span class="hover:bg-[var(--ui-hover)] px-2 py-1 rounded cursor-pointer ${isLast ? 'text-[var(--text-primary)]' : ''}" ${clickHandler}>${item}</span>
             ${!isLast ? '<span>/</span>' : ''}
           `;
-        }).join('')}
+    }).join('')}
         <div class="ml-auto flex items-center gap-2 relative">
           <button onclick="sharePage()" class="hover:bg-[var(--ui-hover)] px-2 py-1 rounded cursor-pointer">Compartir</button>
           <div class="relative">
@@ -112,14 +112,14 @@ function generateTopbar(breadcrumb) {
 }
 
 function toggleList(element) {
-  const arrow = element.querySelector('.toggle-arrow');
-  const content = element.nextElementSibling;
+    const arrow = element.querySelector('.toggle-arrow');
+    const content = element.nextElementSibling;
 
-  if (content.classList.contains('open')) {
-    content.classList.remove('open');
-    arrow.style.transform = 'rotate(0deg)';
-  } else {
-    content.classList.add('open');
-    arrow.style.transform = 'rotate(90deg)';
-  }
+    if (content.classList.contains('open')) {
+        content.classList.remove('open');
+        arrow.style.transform = 'rotate(0deg)';
+    } else {
+        content.classList.add('open');
+        arrow.style.transform = 'rotate(90deg)';
+    }
 }

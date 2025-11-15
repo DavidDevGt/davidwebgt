@@ -1,48 +1,25 @@
 :root {
-  /* Contenedor principal - Se mantiene */
   --notion-max-width: 900px;
-
-  /* Espaciado (grid de 8px) - Se mantiene */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
-
-  /* Sombras - Se mantienen */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.1);
-
-  /* Tipografía - Se mantiene, pero se ajusta la fuente primaria en 'body' */
   --text-size-h1: 32px;
   --text-size-h2: 24px;
   --text-size-body: 16px;
-
-  /* Nuevos valores para espaciado en bloques (más sutil) */
   --block-vertical-padding: 3px;
   --block-horizontal-padding: 2px;
-
-  /* UI Chrome Light - AJUSTADO para la paleta exacta de Notion */
   --ui-bg: #FFFFFF;
-  /* Fondo principal de la página (dentro del canvas) */
   --ui-sidebar-bg: #FFFFFF;
-  /* La sidebar de Notion es blanca por defecto */
   --ui-hover: #F7F7F5;
-  /* Fondo más sutil al pasar el ratón (más fiel a Notion) */
   --ui-border: rgba(55, 53, 47, 0.09);
-  /* Borde un poco más definido */
-
-  /* Content Light - AJUSTADO para la paleta exacta de Notion */
   --page-bg: #FFFFFF;
-  /* El canvas de Notion es blanco */
   --text-primary: #37352F;
-  /* Texto principal */
   --text-secondary: rgba(55, 53, 47, 0.6);
-  /* Texto gris (secundario) */
   --text-tertiary: rgba(55, 53, 47, 0.4);
-  /* Placeholder y texto muy sutil */
-
-  /* Accents - Se mantienen */
   --accent-blue: #0A7AFF;
   --accent-blue-light: #F0F6FF;
 }
@@ -52,39 +29,29 @@ html {
 }
 
 html.dark {
-  /* UI Chrome Dark - AJUSTADO: Se usan tonos más oscuros y menos saturados */
   --ui-bg: #191919;
   --ui-sidebar-bg: #191919;
   --ui-hover: rgba(255, 255, 255, 0.08);
-  /* Ligeramente más evidente que antes */
   --ui-border: rgba(255, 255, 255, 0.12);
-  /* Borde más visible en oscuro */
-
-  /* Content Dark - AJUSTADO */
   --page-bg: #191919;
   --text-primary: #EAEAEA;
   --text-secondary: #B8B8B8;
   --text-tertiary: #8A8A8A;
-
-  /* Accents - Se mantienen */
   --accent-blue: #3291FF;
   --accent-blue-light: rgba(50, 145, 255, 0.15);
 }
 
 body {
-  /* FUENTE: Se incluye 'Inter' como fallback moderno de la fuente de Notion */
   font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: clamp(14px, 4vw, 16px);
   font-weight: 400;
   line-height: 1.5;
-  /* Ligeramente ajustado para más compacidad */
   color: var(--text-primary);
   background-color: var(--page-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Layout principal fluido */
 .app {
   display: flex;
   min-height: 100vh;
@@ -99,29 +66,22 @@ body {
   box-sizing: border-box;
 }
 
-/* Headings */
 h1 {
-  /* Font weight y line-height más cercanos al estilo predeterminado de Notion */
   font-size: clamp(24px, 5vw, 32px);
   font-weight: 700;
-  /* Más audaz */
   line-height: 1.1;
   margin: 0;
   padding: 8px 0 2px 0;
-  /* Espaciado sutil superior */
 }
 
 h2 {
   font-size: clamp(20px, 4vw, 24px);
   font-weight: 600;
-  /* Más audaz */
   line-height: 1.2;
   margin: 0;
   padding: 6px 0 2px 0;
-  /* Espaciado sutil superior */
 }
 
-/* Sidebar fixed width - Se mantiene */
 .sidebar {
   flex: 0 0 240px;
   background-color: var(--ui-sidebar-bg);
@@ -130,27 +90,19 @@ h2 {
   box-sizing: border-box;
 }
 
-/* Notion blocks - El cambio clave es hacer el bloque de hover más sutil */
 .notion-block {
-  /* Se eliminan las sombras y padding excesivos, los bloques de Notion son planos */
   position: relative;
   border-radius: 3px;
-  /* Ligeramente más pequeño */
   padding: var(--block-vertical-padding) var(--block-horizontal-padding);
-  /* Padding mínimo */
   box-sizing: border-box;
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
-
-  /* Animación: Se mantiene la animación, pero se ajusta la duración */
   opacity: 0;
   transform: translate3d(0, 10px, 0);
   will-change: opacity, transform;
 }
 
 .notion-block:hover {
-  /* El efecto de hover en Notion es muy sutil, casi sin bordes */
   background-color: var(--ui-hover);
-  /* Se elimina box-shadow al hacer hover para mantener la apariencia plana */
   box-shadow: none;
 }
 
@@ -168,16 +120,12 @@ html.dark .project-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Specific block types */
-
-/* Párrafo y cabeceras son solo el texto, sin padding ni hover de fondo */
 .notion-heading {
   padding: var(--block-vertical-padding) var(--block-horizontal-padding);
   box-shadow: none;
 }
 
 .notion-heading:hover {
-  /* Se desactiva el hover para headings, solo aparece el control de arrastre */
   background-color: transparent;
   box-shadow: none;
 }
@@ -185,39 +133,32 @@ html.dark .project-card:hover {
 .notion-paragraph {
   padding: var(--block-vertical-padding) var(--block-horizontal-padding);
   line-height: 1.5;
-  /* Coherente con el body */
   box-shadow: none;
 }
 
 .notion-paragraph:hover {
-  /* Se desactiva el hover para párrafos */
   background-color: transparent;
   box-shadow: none;
 }
 
 .notion-callout {
-  /* Padding ajustado para parecerse más a Notion */
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
   background-color: var(--accent-blue-light);
   border-left: 3px solid var(--accent-blue);
-  /* Borde ligeramente más fino */
   border-radius: 3px;
   box-shadow: none;
-  /* Callout de Notion no tiene sombra */
 }
 
 .notion-callout:hover {
   background-color: var(--accent-blue-light);
-  /* Evita que el hover UI afecte el color base */
   box-shadow: none;
 }
 
 .notion-quote {
   border-left: 3px solid var(--text-tertiary);
-  /* Color del borde más sutil */
   padding-left: var(--spacing-md);
   font-style: italic;
   color: var(--text-secondary);
@@ -234,7 +175,6 @@ html.dark .project-card:hover {
 }
 
 .notion-toggle:hover {
-  /* El toggle tiene el efecto de hover como el bloque principal */
   background-color: var(--ui-hover);
   box-shadow: none;
 }
@@ -243,10 +183,8 @@ html.dark .project-card:hover {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  /* Gap más pequeño para mayor compacidad */
   width: 100%;
   padding: var(--block-vertical-padding) var(--block-horizontal-padding);
-  /* Padding mínimo */
   background: none;
   border: none;
   text-align: left;
@@ -302,7 +240,6 @@ html.dark .project-card:hover {
 
 ::-webkit-scrollbar-thumb {
   background: rgba(55, 53, 47, 0.15);
-  /* Más sutil en light mode */
   border-radius: 4px;
   transition: background 0.2s ease;
 }
@@ -313,7 +250,6 @@ html.dark .project-card:hover {
 
 html.dark ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
-  /* Más sutil en dark mode */
 }
 
 html.dark ::-webkit-scrollbar-thumb:hover {
@@ -342,7 +278,6 @@ html.dark ::-webkit-scrollbar-thumb:hover {
   max-height: 2000px;
   opacity: 1;
   padding-top: var(--block-vertical-padding);
-  /* Espaciado interno sutil */
   padding-bottom: var(--block-vertical-padding);
 }
 
@@ -354,14 +289,12 @@ html.dark ::-webkit-scrollbar-thumb:hover {
 
 button {
   padding: 5px 10px;
-  /* Más compacto */
   border-radius: 3px;
   border: 1px solid var(--ui-border);
   background-color: var(--ui-bg);
   color: var(--text-primary);
   font-size: 14px;
   font-weight: 400;
-  /* Menos audaz */
   cursor: pointer;
   transition: all 0.1s ease;
 }
@@ -373,7 +306,6 @@ button:hover {
 
 button:active {
   transform: scale(0.99);
-  /* Efecto de click más sutil */
 }
 
 button:disabled {
@@ -381,7 +313,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Links - Se mantienen */
 a {
   color: var(--accent-blue);
   text-decoration: none;
@@ -392,35 +323,28 @@ a:hover {
   opacity: 0.8;
 }
 
-/* Focus visible - Mejor accesibilidad (manteniendo el estilo del foco) */
 button:focus-visible,
 a:focus-visible,
 [contenteditable]:focus-visible {
   outline: 2px solid var(--accent-blue);
   outline-offset: 1px;
-  /* Foco más cerca del elemento */
   border-radius: 3px;
   box-shadow: none;
-  /* Se elimina el box-shadow de foco */
 }
 
 ::selection {
-  /* Color de selección de Notion */
   background: var(--accent-blue-light);
   color: var(--text-primary);
 }
 
-/* Lucide icons alignment - Se mantiene */
 svg.lucide {
   vertical-align: middle;
 }
 
-/* Animations - Se mantienen */
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translate3d(0, 10px, 0);
-    /* Distancia más corta */
   }
 
   to {
@@ -435,12 +359,10 @@ svg.lucide {
 
 .notion-block.animate-in {
   animation: fadeInUp 0.5s ease-out forwards;
-  /* Un poco más rápido */
 }
 
-/* Responsive adjustments */
 @media (max-width: 767px) {
-  /* Mobile: sidebar como drawer oculto */
+
   .sidebar {
     position: fixed;
     top: 0;
@@ -505,7 +427,6 @@ svg.lucide {
     font-size: 13px;
   }
 
-  /* Desactivar reading mode en mobile */
   body.reading-mode main {
     margin-left: 0;
     margin-right: 0;
@@ -530,13 +451,13 @@ svg.lucide {
     margin-bottom: 0;
   }
 
-  /* Ocultar opción de reading mode en mobile */
   #reading-mode-btn {
     display: none !important;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
+
   /* Tablet */
   .sidebar {
     flex: 0 0 200px;
@@ -560,7 +481,7 @@ svg.lucide {
 }
 
 @media (min-width: 1024px) {
-  /* Desktop */
+
   .sidebar {
     flex: 0 0 240px;
   }
@@ -570,7 +491,6 @@ svg.lucide {
   }
 }
 
-/* Search modal styles */
 #search-modal {
   display: none;
 }
@@ -580,7 +500,7 @@ svg.lucide {
 }
 
 #search-input {
-  font-size: 16px; /* Prevent zoom on iOS */
+  font-size: 16px;
 }
 
 #search-results a {
@@ -593,7 +513,6 @@ svg.lucide {
   border-radius: 2px;
 }
 
-/* Options dropdown menu */
 #options-menu {
   box-shadow: var(--shadow-md);
   border-radius: 6px;
@@ -628,7 +547,6 @@ svg.lucide {
   flex-shrink: 0;
 }
 
-/* Reading mode styles */
 body.reading-mode {
   transition: all 0.3s ease;
 }
