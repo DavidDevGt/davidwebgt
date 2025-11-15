@@ -1,14 +1,14 @@
 // Navigation data
 const navigation = [
-  { href: 'index.html', icon: '🏠', text: 'Home' },
-  { href: 'proyectos.html', icon: '💼', text: 'Proyectos' },
-  { href: 'sobre-mi.html', icon: '👨‍💻', text: 'Sobre mí' }
+  { href: 'index.html', icon: 'home', text: 'Home' },
+  { href: 'proyectos.html', icon: 'briefcase', text: 'Proyectos' },
+  { href: 'sobre-mi.html', icon: 'code', text: 'Sobre mí' }
 ];
 
 const favorites = [
-  { href: 'https://github.com/DavidDevGt', icon: '🐙', text: 'GitHub', external: true },
-  { href: 'https://www.linkedin.com/in/jdavidvl/', icon: '💼', text: 'LinkedIn', external: true },
-  { href: 'mailto:josuedavidvl18@gmail.com', icon: '📧', text: 'Email', external: true }
+  { href: 'https://github.com/DavidDevGt', icon: 'github', text: 'GitHub', external: true },
+  { href: 'https://www.linkedin.com/in/jdavidvl/', icon: 'briefcase', text: 'LinkedIn', external: true },
+  { href: 'mailto:josuedavidvl18@gmail.com', icon: 'mail', text: 'Email', external: true }
 ];
 
 // Generate sidebar HTML
@@ -19,12 +19,12 @@ function generateSidebar() {
       <!-- Top Section -->
       <div class="p-3">
         <div class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer mb-1">
-          <span class="text-lg">👤</span>
+          <i data-lucide="user" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
           <span class="text-sm font-medium">davidwebgt</span>
         </div>
 
         <div class="px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm text-[var(--text-secondary)] flex items-center gap-2">
-          <span>🔍</span>
+          <i data-lucide="search" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
           <span>Buscar</span>
           <span class="ml-auto text-xs">⌘K</span>
         </div>
@@ -38,7 +38,7 @@ function generateSidebar() {
 
         ${navigation.map(item => `
           <a href="${item.href}" class="nav-link flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm ${item.href === currentPath ? 'bg-[var(--ui-hover)]' : ''}">
-            <span>${item.icon}</span>
+            <i data-lucide="${item.icon}" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
             <span>${item.text}</span>
           </a>
         `).join('')}
@@ -51,7 +51,7 @@ function generateSidebar() {
 
         ${favorites.map(item => `
           <a href="${item.href}" ${item.external ? 'target="_blank"' : ''} class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm">
-            <span>${item.icon}</span>
+            <i data-lucide="${item.icon}" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
             <span>${item.text}</span>
           </a>
         `).join('')}
@@ -61,7 +61,7 @@ function generateSidebar() {
       <div class="mt-auto p-3 border-t border-[var(--ui-border)]">
         <button onclick="toggleTheme()"
                 class="w-full text-sm px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-left flex items-center gap-2">
-          <span id="theme-icon">🌓</span>
+          <i id="theme-icon" data-lucide="sun" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
           <span id="theme-text">Cambiar Tema</span>
         </button>
       </div>
@@ -101,25 +101,20 @@ function updateThemeButton() {
   const icon = document.getElementById('theme-icon');
   const text = document.getElementById('theme-text');
   if (icon && text) {
-    icon.textContent = isDark ? '☀️' : '🌙';
+    icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
     text.textContent = isDark ? 'Modo Claro' : 'Modo Oscuro';
+    // Re-create icons after changing data-lucide
+    if (typeof lucide !== 'undefined' && lucide.createIcons) {
+      lucide.createIcons();
+    }
   }
 }
 
 // Load theme on page load
 document.addEventListener('DOMContentLoaded', function() {
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    document.documentElement.classList.add('dark');
-  }
   updateThemeButton();
 
-  // Insert sidebar and topbar
-  const sidebarEl = document.getElementById('sidebar-placeholder');
-  if (sidebarEl) {
-    sidebarEl.outerHTML = generateSidebar();
-  }
-
+  // Insert topbar
   const topbarEl = document.getElementById('topbar-placeholder');
   if (topbarEl) {
     const breadcrumb = topbarEl.dataset.breadcrumb ? JSON.parse(topbarEl.dataset.breadcrumb) : ['Workspace'];
@@ -146,6 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // Create Lucide icons after DOM is ready
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons();
+  }
+
 });
 
 function toggleList(element) {
@@ -159,4 +159,37 @@ function toggleList(element) {
     content.classList.add('open');
     arrow.style.transform = 'rotate(90deg)';
   }
+}
+
+// Intersection Observer for stagger animations
+document.addEventListener('DOMContentLoaded', function() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        staggerAnimateBlocks();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe the main content area
+  const main = document.querySelector('main');
+  if (main) {
+    observer.observe(main);
+  }
+});
+
+// Stagger animation function for all blocks
+function staggerAnimateBlocks() {
+  const blocks = document.querySelectorAll('.notion-block');
+  blocks.forEach((block, index) => {
+    setTimeout(() => {
+      block.classList.add('animate-in');
+    }, index * 100); // 100ms stagger
+  });
 }

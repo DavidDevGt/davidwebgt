@@ -2,6 +2,22 @@
   /* Contenedor principal */
   --notion-max-width: 900px;
 
+  /* Espaciado (grid de 8px) */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  /* Tipografía */
+  --text-size-h1: 32px;
+  --text-size-h2: 24px;
+  --text-size-body: 16px;
+
   /* UI Chrome Light */
   --ui-bg: #FFFFFF;
   --ui-sidebar-bg: #F7F6F3;
@@ -21,16 +37,16 @@
 
 html.dark {
   /* UI Chrome Dark */
-  --ui-bg: #2F3437;
-  --ui-sidebar-bg: #252525;
-  --ui-hover: rgba(255,255,255,0.08);
+  --ui-bg: #1e1e1e;
+  --ui-sidebar-bg: #2a2a2a;
+  --ui-hover: rgba(255,255,255,0.06);
   --ui-border: rgba(255, 255, 255, 0.08);
 
   /* Content Dark */
-  --page-bg: #191919;
-  --text-primary: rgba(255,255,255,0.9);
-  --text-secondary: rgba(255,255,255,0.6);
-  --text-tertiary: rgba(255,255,255,0.4);
+  --page-bg: #0f0f0f;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-tertiary: #707070;
 
   /* Accents */
   --accent-blue: #3291FF;
@@ -39,13 +55,28 @@ html.dark {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-size: var(--text-size-body);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--text-primary);
   background-color: var(--page-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1 {
+  font-size: var(--text-size-h1);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h2 {
+  font-size: var(--text-size-h2);
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0;
 }
 
 /* Sidebar fixed width */
@@ -53,17 +84,101 @@ body {
   width: 240px;
   background-color: var(--ui-sidebar-bg);
   border-right: 1px solid var(--ui-border);
+  padding: var(--spacing-md) 0;
 }
 
 /* Notion blocks - comportamiento subtle */
 .notion-block {
   position: relative;
   border-radius: 4px;
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  will-change: opacity, transform;
 }
 
 .notion-block:hover {
   background-color: var(--ui-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* Specific block types */
+.notion-heading {
+  padding: var(--spacing-sm) 0;
+  box-shadow: none;
+}
+
+.notion-heading:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.notion-paragraph {
+  padding: var(--spacing-sm) 0;
+  line-height: 1.6;
+  box-shadow: none;
+}
+
+.notion-paragraph:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.notion-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background-color: var(--accent-blue-light);
+  border-left: 4px solid var(--accent-blue);
+  border-radius: 4px;
+  box-shadow: var(--shadow-sm);
+}
+
+.notion-callout:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.notion-quote {
+  border-left: 4px solid var(--ui-border);
+  padding-left: var(--spacing-md);
+  font-style: italic;
+  color: var(--text-secondary);
+  box-shadow: none;
+}
+
+.notion-quote:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.notion-toggle {
+  box-shadow: none;
+}
+
+.notion-toggle:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.toggle-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: var(--spacing-sm) 0;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: inherit;
+  color: inherit;
+}
+
+.toggle-arrow {
+  transition: transform 0.2s ease;
 }
 
 /* UI bajo demanda (ocultar controles) */
@@ -128,7 +243,7 @@ html.dark ::-webkit-scrollbar-thumb:hover {
 }
 
 .page-icon:hover {
-  transform: scale(1.08);
+  transform: scale(1.5);
   opacity: 0.85;
 }
 
@@ -216,7 +331,45 @@ a:focus-visible {
   }
 }
 
-/* Smooth transitions para tema */
-body, aside, main, .notion-block, button, a, nav, div, span, h1, h2, h3, h4, h5, h6, p, ul, li {
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+/* Transiciones deshabilitadas para cambio instantáneo de tema */
+
+/* Microinteractions */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+  box-shadow: var(--shadow-md);
+}
+
+::selection {
+  background: var(--accent-blue-light);
+  color: var(--text-primary);
+}
+
+/* Lucide icons alignment */
+svg.lucide {
+  vertical-align: middle;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.notion-block.animate-in {
+  animation: fadeInUp 0.6s ease-out forwards;
 }

@@ -6,6 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="view-transition" content="same-origin" />
 
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Sobre mí - David Vargas, Software Engineer con experiencia en desarrollo móvil, web y cloud. Historia profesional y habilidades técnicas." />
+  <meta name="keywords" content="David Vargas, sobre mí, experiencia, habilidades, Software Engineer, Guatemala" />
+  <meta name="author" content="David Vargas" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://davidwebgt.com/sobre-mi.html" />
+  <meta property="og:title" content="Sobre mí - David Vargas" />
+  <meta property="og:description" content="Conoce la historia profesional y habilidades de David Vargas, desarrollador de software especializado en tecnologías modernas." />
+  <meta property="og:image" content="https://davidwebgt.com/assets/images/og-image.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://davidwebgt.com/sobre-mi.html" />
+  <meta property="twitter:title" content="Sobre mí - David Vargas" />
+  <meta property="twitter:description" content="Conoce la historia profesional y habilidades de David Vargas, desarrollador de software especializado en tecnologías modernas." />
+  <meta property="twitter:image" content="https://davidwebgt.com/assets/images/og-image.jpg" />
+
   <!-- Inter (Notion default) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,8 +39,12 @@
 
   <!-- Theme script -->
   <script>
-    const theme = localStorage.getItem('theme');
-    if (theme === 'dark') document.documentElement.classList.add('dark');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+      if (!savedTheme) localStorage.setItem('theme', 'dark');
+    }
   </script>
 
   <title>Sobre mí - Mi Portafolio Digital</title>
@@ -32,7 +56,73 @@
   <div class="flex h-screen">
 
     <!-- SIDEBAR -->
-    <div id="sidebar-placeholder"></div>
+    <aside class="sidebar border-r border-[var(--ui-border)] bg-[var(--ui-sidebar-bg)] flex flex-col overflow-y-auto" style="view-transition-name: sidebar">
+      <!-- Top Section -->
+      <div class="p-3">
+        <div class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer mb-1">
+          <i data-lucide="user" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
+          <span class="text-sm font-medium">davidwebgt</span>
+        </div>
+
+        <div class="px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm text-[var(--text-secondary)] flex items-center gap-2">
+          <i data-lucide="search" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
+          <span>Buscar</span>
+          <span class="ml-auto text-xs">⌘K</span>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="px-3 space-y-0.5">
+        <div class="text-xs font-semibold text-[var(--text-tertiary)] px-2 py-1.5 uppercase tracking-wide">
+          Workspace
+        </div>
+
+        <a href="index.html" class="nav-link flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm">
+          <i data-lucide="rocket" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+          <span>Inicio</span>
+        </a>
+
+        <a href="proyectos.html" class="nav-link flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm">
+          <i data-lucide="briefcase" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+          <span>Proyectos</span>
+        </a>
+
+        <a href="sobre-mi.html" class="nav-link flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm bg-[var(--ui-hover)]">
+          <i data-lucide="code" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+          <span>Sobre mí</span>
+        </a>
+
+        <div class="notion-divider my-2"></div>
+
+        <div class="text-xs font-semibold text-[var(--text-tertiary)] px-2 py-1.5 uppercase tracking-wide">
+          Favoritos
+        </div>
+
+        <a href="https://github.com/DavidDevGt" target="_blank" class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm">
+          <i data-lucide="github" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+          <span>GitHub</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/jdavidvl/" target="_blank" class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm">
+          <i data-lucide="briefcase" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+          <span>LinkedIn</span>
+        </a>
+
+        <a href="mailto:josuedavidvl18@gmail.com" class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm">
+          <i data-lucide="mail" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+          <span>Email</span>
+        </a>
+      </nav>
+
+      <!-- Bottom Section -->
+      <div class="mt-auto p-3 border-t border-[var(--ui-border)]">
+        <button onclick="toggleTheme()"
+                class="w-full text-sm px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-left flex items-center gap-2">
+          <i id="theme-icon" data-lucide="sun" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
+          <span id="theme-text">Cambiar Tema</span>
+        </button>
+      </div>
+    </aside>
 
     <!-- CONTENIDO -->
     <main class="flex-1 overflow-y-auto bg-[var(--page-bg)]">
@@ -43,13 +133,18 @@
 
         <!-- Page Icon + Title -->
         <div class="mb-6">
-          <div class="page-icon text-7xl mb-4 cursor-pointer inline-block">👨‍💻</div>
+          <div class="page-icon inline-flex items-center justify-center mb-4 cursor-pointer"
+            style="width: 60px; height: 60px;">
+            <i data-lucide="code" class="w-10 h-10"></i>
+          </div>
           <h1 class="text-[40px] font-bold leading-tight tracking-tight mb-2">
             Sobre Mí
           </h1>
-          <div class="flex items-center gap-4 text-sm text-[var(--text-secondary)]">
-            <span>✏️ Última edición: hace 3 días</span>
+          <div class="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+            <i data-lucide="pencil" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+            <span>Última edición: hace 3 días</span>
           </div>
+
         </div>
 
         <!-- Intro -->
@@ -71,19 +166,7 @@
             mi día a día, siempre
             aprendiendo algo nuevo en el proceso. En el ámbito profesional, valoro el trabajo en equipo, el aprendizaje
             continuo y formar parte de una empresa que acompañe mis objetivos de desarrollo personal y profesional.
-            <br><br>
-
-            <strong>Formación:</strong><br><br>
-            • <strong>Técnico en Desarrollo de Software</strong> — Universidad Galileo (2023 - 2025)<br>
-            • <strong>Platzi, Udemy y Coursera:</strong> Cursos en desarrollo móvil, backend, DevOps y SCRUM.<br>
-            • <strong>Certificaciones:</strong><br>
-            &nbsp;&nbsp;• <strong style="font-size: 1.05rem;">CISCO – IT Essentials</strong>: Fundamentos sólidos de
-            hardware, redes, mantenimiento de equipos, ciberseguridad básica y soporte técnico profesional.<br>
-            &nbsp;&nbsp;• <strong>PCI DSS Awareness / Fundamentals</strong>: Estándares esenciales de seguridad para el
-            manejo de datos de tarjetas y cumplimiento en entornos financieros.<br>
-            &nbsp;&nbsp;• <strong>Prevención de Fraude y Lavado de Dinero (AML / KYC)</strong>: Buenas prácticas para
-            identificación del cliente y prevención de lavado de dinero. <br>
-
+            <br>
 
         </div>
 
@@ -96,9 +179,11 @@
               class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
           </div>
 
-          <h2 class="text-2xl font-semibold py-1 px-1 mb-4">
-            🛠️ Skills / Competencias Clave
+          <h2 class="text-2xl font-semibold flex items-center gap-2 py-1 px-1 mb-4">
+            <i data-lucide="wrench" class="w-5 h-5 align-middle shrink-0"></i>
+            Skills / Competencias Clave
           </h2>
+
 
           <table class="w-full border-collapse border border-[var(--ui-border)]">
             <thead>
@@ -109,18 +194,18 @@
             </thead>
             <tbody>
               <tr>
-                <td class="border border-[var(--ui-border)] p-2 font-medium">Mobile Development</td>
+                <td class="border border-[var(--ui-border)] p-2 font-medium">Mobile</td>
                 <td class="border border-[var(--ui-border)] p-2">Kotlin, Capacitor, Ionic,
                   Android Studio, Xcode.</td>
               </tr>
               <tr>
-                <td class="border border-[var(--ui-border)] p-2 font-medium">Backend & Full-Stack</td>
-                <td class="border border-[var(--ui-border)] p-2">Node.js, PHP, Go, PostgreSQL, SOAP, GraphQL.</td>
+                <td class="border border-[var(--ui-border)] p-2 font-medium">Backend</td>
+                <td class="border border-[var(--ui-border)] p-2">Node.js, PHP, Go, PostgreSQL, MongoDB, GraphQL.</td>
               </tr>
               <tr>
                 <td class="border border-[var(--ui-border)] p-2 font-medium">Cloud & DevOps</td>
-                <td class="border border-[var(--ui-border)] p-2"><strong>Docker</strong>, AWS EC2 & S3, DigitalOcean,
-                  Cloudflare, Nexus Repository, Azure Artifacts.</td>
+                <td class="border border-[var(--ui-border)] p-2">Docker, AWS EC2 & S3, DigitalOcean,
+                  Cloudflare, Azure Artifacts.</td>
               </tr>
               <tr>
                 <td class="border border-[var(--ui-border)] p-2 font-medium">Metodologías & Tools</td>
@@ -128,6 +213,60 @@
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="notion-block relative group mb-8">
+          <div class="block-controls absolute -left-8 top-1 flex flex-col gap-1">
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded cursor-grab">⋮⋮</button>
+            <button
+              class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
+          </div>
+
+          <h2 class="text-2xl font-semibold flex items-center gap-2 py-1 px-1 mb-4">
+            <i data-lucide="file-text" class="w-5 h-5 align-middle shrink-0"></i> Experiencia Profesional
+          </h2>
+
+          <div class="space-y-4">
+            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
+              <h3 class="font-bold text-lg">Assistant Software Engineer - Zigi App</h3>
+              <p class="text-[var(--text-secondary)]">Sep. 2024 - Presente</p>
+              <p class="mt-2">Apoyo a Gerencia de Tecnología en gestión administrativa, manejo de
+                información clave y coordinación con los equipos de desarrollo.</p>
+            </div>
+            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
+              <h3 class="font-bold text-lg">Mobile Software Engineer - Allied Global IT Services (GyT Continental)
+              </h3>
+              <p class="text-[var(--text-secondary)]">Oct. 2024 - Sep. 2025</p>
+              <p class="mt-2">Desarrollo móvil, sector bancario, frontend, integración de APIs y sistemas de
+                autenticación.</p>
+            </div>
+            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
+              <h3 class="font-bold text-lg">Support Engineer - Red Chapina / Tranzmit</h3>
+              <p class="text-[var(--text-secondary)]">Mar. 2024 - Oct. 2024</p>
+              <p class="mt-2">Operaciones de soporte L2, incluyendo deploys, gestión de acceso a producción y
+                diagnóstico en servidores Linux (AWS) y bases de datos.</p>
+            </div>
+            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
+              <h3 class="font-bold text-lg">Programador full stack - Tubagua, S.A</h3>
+              <p class="text-[var(--text-secondary)]">Sep. 2023 - Mar. 2024</p>
+              <p class="mt-2">Administración de servidores y bases de datos, mejora continua y
+                refactorización de sistemas ERP con PHP y jQuery. Automatización de procesos internos y reportes.</p>
+            </div>
+            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
+              <h3 class="font-bold text-lg">Desarrollador web - Página Web Guatemala</h3>
+              <p class="text-[var(--text-secondary)]">May. 2023 - Ago. 2023</p>
+              <p class="mt-2">Maquetación web desde cero (HTML, CSS, jQuery, Bootstrap 5), desarrollo con PHP y
+                MySQL, y soluciones usando WordPress.</p>
+            </div>
+            <div class="p-4 border border-[var(--ui-border)] rounded-lg">
+              <h3 class="font-bold text-lg">Analista de sistemas de TI - DISMAFER</h3>
+              <p class="text-[var(--text-secondary)]">Sep. 2020 - Abr. 2023</p>
+              <p class="mt-2">Soporte técnico remoto a clientes, soporte IT a departamentos, inspección de
+                infraestructura de red, y mantenimiento de sistemas ERP y páginas web.</p>
+            </div>
+          </div>
         </div>
 
         <!-- Education -->
@@ -139,8 +278,8 @@
               class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
           </div>
 
-          <h2 class="text-2xl font-semibold py-1 px-1 mb-4">
-            🎓 Educación
+          <h2 class="text-2xl font-semibold flex items-center gap-2 py-1 px-1 mb-4">
+            <i data-lucide="graduation-cap" class="align-middle shrink-0"></i> Educación
           </h2>
 
           <div class="space-y-4">
@@ -149,13 +288,12 @@
               <p class="text-[var(--text-secondary)]">Universidad Galileo • 2023 - 2025</p>
             </div>
             <div class="p-4 border border-[var(--ui-border)] rounded-lg">
-              <h3 class="font-bold text-lg">Herramientas Digitales para el Diseño Gráfico</h3>
-              <p class="text-[var(--text-secondary)]">Universidad de Occidente</p>
+              <h3 class="font-bold text-lg">Diplomado en Herramientas Digitales de Diseño Gráfico</h3>
+              <p class="text-[var(--text-secondary)]">Universidad de Occidente • 2022</p>
             </div>
             <div class="p-4 border border-[var(--ui-border)] rounded-lg">
               <h3 class="font-bold text-lg">Certificación CISCO – IT Essentials</h3>
-              <p class="text-[var(--text-secondary)]">Fundamentos de hardware, redes, mantenimiento de equipos,
-                ciberseguridad básica y soporte técnico profesional.</p>
+              <p class="text-[var(--text-secondary)]">INTECAP • 2021</p>
             </div>
           </div>
         </div>
@@ -169,28 +307,75 @@
               class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
           </div>
 
-          <h2 class="text-2xl font-semibold py-1 px-1 mb-4">
-            📬 Contacto
+          <h2 class="text-2xl font-semibold flex items-center gap-2 py-1 px-1 mb-4">
+            Contacto
           </h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
             <div>
               <h3 class="font-semibold mb-2">Información de Contacto</h3>
               <div class="space-y-2">
-                <p>📧 <a href="mailto:josuedavidvl18@gmail.com"
-                    class="text-blue-600 dark:text-blue-400 hover:underline">josuedavidvl18@gmail.com</a></p>
-                <p>📍 CA-9, Guatemala</p>
+
+                <p class="flex items-center gap-2">
+                  <i data-lucide="mail" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+                  <a href="mailto:josuedavidvl18@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline">
+                    josuedavidvl18@gmail.com
+                  </a>
+                </p>
+
+                <p class="flex items-center gap-2">
+                  <i data-lucide="map-pin" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+                  CA-9, Guatemala
+                </p>
+
               </div>
             </div>
 
             <div>
               <h3 class="font-semibold mb-2">Redes Sociales</h3>
               <div class="space-y-2">
-                <p>💼 <a href="https://www.linkedin.com/in/jdavidvl/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">LinkedIn</a></p>
-                <p>🐙 <a href="https://github.com/DavidDevGt" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">GitHub</a></p>
+
+                <p class="flex items-center gap-2">
+                  <i data-lucide="briefcase" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+                  <a href="https://www.linkedin.com/in/jdavidvl/" target="_blank"
+                    class="text-blue-600 dark:text-blue-400 hover:underline">
+                    LinkedIn
+                  </a>
+                </p>
+
+                <p class="flex items-center gap-2">
+                  <i data-lucide="github" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+                  <a href="https://github.com/DavidDevGt" target="_blank"
+                    class="text-blue-600 dark:text-blue-400 hover:underline">
+                    GitHub
+                  </a>
+                </p>
+
               </div>
             </div>
+
           </div>
+
+          <div class="mt-6">
+            <h3 class="font-semibold mb-4">Envíame un Mensaje</h3>
+            <form action="https://formspree.io/f/xqkowpwq" method="POST" class="space-y-4">
+              <div>
+                <label for="name" class="block text-sm font-medium mb-1">Nombre</label>
+                <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-[var(--ui-border)] rounded bg-[var(--ui-bg)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium mb-1">Email</label>
+                <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-[var(--ui-border)] rounded bg-[var(--ui-bg)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+              <div>
+                <label for="message" class="block text-sm font-medium mb-1">Mensaje</label>
+                <textarea id="message" name="message" rows="4" required class="w-full px-3 py-2 border border-[var(--ui-border)] rounded bg-[var(--ui-bg)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+              </div>
+              <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">Enviar</button>
+            </form>
+          </div>
+
         </div>
 
         <!-- Espaciado final -->
@@ -202,6 +387,7 @@
 
   <!-- Scripts -->
   <script src="assets/js/script.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 
 </body>
 
