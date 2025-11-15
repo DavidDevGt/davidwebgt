@@ -47,6 +47,10 @@
   --accent-blue-light: #F0F6FF;
 }
 
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 html.dark {
   /* UI Chrome Dark - AJUSTADO: Se usan tonos más oscuros y menos saturados */
   --ui-bg: #191919;
@@ -148,6 +152,20 @@ h2 {
   background-color: var(--ui-hover);
   /* Se elimina box-shadow al hacer hover para mantener la apariencia plana */
   box-shadow: none;
+}
+
+/* Project cards micro-interactions */
+.project-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+html.dark .project-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Specific block types */
