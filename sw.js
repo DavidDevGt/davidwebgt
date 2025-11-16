@@ -29,13 +29,44 @@ self.addEventListener('install', event => {
     );
 });
 
-// Fetch event
+// Fetch event - Stale While Revalidate strategy
 self.addEventListener('fetch', event => {
+    // Skip cross-origin requests
+    if (!event.request.url.startsWith(self.location.origin)) {
+        return;
+    }
+
+    // Handle navigation requests
+    if (event.request.mode === 'navigate') {
+        event.respondWith(
+            fetch(event.request)
+                .catch(() => {
+                    return caches.match('/index.html');
+                })
+        );
+        return;
+    }
+
+    // Stale while revalidate for other requests
     event.respondWith(
         caches.match(event.request)
             .then(response => {
-                // Return cached version or fetch from network
-                return response || fetch(event.request);
+                const fetchPromise = fetch(event.request).then(networkResponse => {
+                    // Only cache successful responses
+                    if (networkResponse.ok) {
+                        const responseClone = networkResponse.clone();
+                        caches.open(CACHE_NAME).then(cache => {
+                            cache.put(event.request, responseClone);
+                        });
+                    }
+                    return networkResponse;
+                }).catch(() => {
+                    // Return cached response if network fails
+                    return response;
+                });
+
+                // Return cached version immediately, then update cache
+                return response || fetchPromise;
             })
     );
 });

@@ -49,10 +49,13 @@ function getValidatedReadingMode() {
 
 // Initialize theme on load (moved from inline script)
 (function() {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = getValidatedTheme();
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.documentElement.classList.add('dark');
-        if (!savedTheme) localStorage.setItem('theme', 'dark');
+    // Only apply theme if not already applied by inline script
+    if (!document.documentElement.classList.contains('dark')) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = getValidatedTheme();
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+            if (!savedTheme) localStorage.setItem('theme', 'dark');
+        }
     }
 })();
