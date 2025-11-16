@@ -1,0 +1,124 @@
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: clamp(14px, 4vw, 16px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--page-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+  padding: 8px 0 2px 0;
+}
+
+h2 {
+  font-size: clamp(20px, 4vw, 24px);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  padding: 6px 0 2px 0;
+}
+
+button {
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid var(--ui-border);
+  background-color: var(--ui-bg);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+button:hover {
+  background-color: var(--ui-hover);
+  border-color: var(--ui-border);
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+button:focus-visible,
+a:focus-visible,
+[contenteditable]:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 1px;
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+[contenteditable]:empty:before {
+  content: attr(placeholder);
+  color: var(--text-tertiary);
+  pointer-events: none;
+  font-weight: 400;
+}
+
+[contenteditable]:focus {
+  outline: none;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(55, 53, 47, 0.15);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(55, 53, 47, 0.3);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+::selection {
+  background: var(--accent-blue-light);
+  color: var(--text-primary);
+}
+
+svg.lucide {
+  vertical-align: middle;
+}

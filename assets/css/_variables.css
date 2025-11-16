@@ -1,0 +1,38 @@
+:root {
+  --notion-max-width: 900px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --text-size-h1: 32px;
+  --text-size-h2: 24px;
+  --text-size-body: 16px;
+  --block-vertical-padding: 3px;
+  --block-horizontal-padding: 2px;
+  --ui-bg: #FFFFFF;
+  --ui-sidebar-bg: #FFFFFF;
+  --ui-hover: #F7F7F5;
+  --ui-border: rgba(55, 53, 47, 0.09);
+  --page-bg: #FFFFFF;
+  --text-primary: #37352F;
+  --text-secondary: rgba(55, 53, 47, 0.6);
+  --text-tertiary: rgba(55, 53, 47, 0.4);
+  --accent-blue: #0A7AFF;
+  --accent-blue-light: #F0F6FF;
+}
+
+html.dark {
+  --ui-bg: #191919;
+  --ui-sidebar-bg: #191919;
+  --ui-hover: rgba(255, 255, 255, 0.08);
+  --ui-border: rgba(255, 255, 255, 0.12);
+  --page-bg: #191919;
+  --text-primary: #EAEAEA;
+  --text-secondary: #B8B8B8;
+  --text-tertiary: #8A8A8A;
+  --accent-blue: #3291FF;
+  --accent-blue-light: rgba(50, 145, 255, 0.15);
+}

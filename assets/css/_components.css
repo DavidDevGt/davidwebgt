@@ -1,0 +1,248 @@
+.notion-block {
+  position: relative;
+  border-radius: 3px;
+  padding: var(--block-vertical-padding) var(--block-horizontal-padding);
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  will-change: opacity, transform;
+}
+
+.notion-block:hover {
+  background-color: var(--ui-hover);
+  box-shadow: none;
+}
+
+/* Project cards micro-interactions */
+.project-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+html.dark .project-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.notion-heading {
+  padding: var(--block-vertical-padding) var(--block-horizontal-padding);
+  box-shadow: none;
+}
+
+.notion-heading:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.notion-paragraph {
+  padding: var(--block-vertical-padding) var(--block-horizontal-padding);
+  line-height: 1.5;
+  box-shadow: none;
+}
+
+.notion-paragraph:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.notion-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--accent-blue-light);
+  border-left: 3px solid var(--accent-blue);
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+.notion-callout:hover {
+  background-color: var(--accent-blue-light);
+  box-shadow: none;
+}
+
+.notion-quote {
+  border-left: 3px solid var(--text-tertiary);
+  padding-left: var(--spacing-md);
+  font-style: italic;
+  color: var(--text-secondary);
+  box-shadow: none;
+}
+
+.notion-quote:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.notion-toggle {
+  box-shadow: none;
+}
+
+.notion-toggle:hover {
+  background-color: var(--ui-hover);
+  box-shadow: none;
+}
+
+.toggle-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  width: 100%;
+  padding: var(--block-vertical-padding) var(--block-horizontal-padding);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: inherit;
+  color: inherit;
+}
+
+.toggle-arrow {
+  transition: transform 0.2s ease;
+}
+
+.notion-block:hover .block-controls {
+  opacity: 1;
+}
+
+.block-controls {
+  position: absolute;
+  left: -24px;
+  top: 4px;
+  transform: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  cursor: grab;
+  color: var(--text-tertiary);
+}
+
+.page-icon {
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
+  cursor: pointer;
+}
+
+.page-icon:hover {
+  transform: scale(1.5);
+  opacity: 0.85;
+}
+
+.toggle-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+  opacity: 0;
+  padding-left: var(--spacing-lg);
+}
+
+.toggle-content.open {
+  max-height: 2000px;
+  opacity: 1;
+  padding-top: var(--block-vertical-padding);
+  padding-bottom: var(--block-vertical-padding);
+}
+
+.notion-divider {
+  border: none;
+  border-bottom: 1px solid var(--ui-border);
+  margin: 7px 0;
+}
+
+#search-modal {
+  display: none;
+}
+
+#search-modal.show {
+  display: flex;
+}
+
+#search-input {
+  font-size: 16px;
+}
+
+#search-results a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#search-results mark {
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+#options-menu,
+#lang-menu {
+  box-shadow: var(--shadow-md);
+  border-radius: 6px;
+  background-color: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  min-width: 180px;
+  z-index: 1000;
+}
+
+#lang-menu {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  margin-bottom: 4px;
+  padding: 4px 0;
+}
+
+#options-menu button,
+#lang-menu button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  text-align: left;
+}
+
+#options-menu button:hover,
+#lang-menu button:hover {
+  background-color: var(--ui-hover);
+}
+
+#options-menu button,
+#lang-menu button,
+#theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  text-align: left;
+}
+
+#options-menu button:hover,
+#lang-menu button:hover,
+#theme-btn:hover {
+  background-color: var(--ui-hover);
+}
+
+#options-menu button i,
+#lang-menu button i,
+#theme-btn i {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}

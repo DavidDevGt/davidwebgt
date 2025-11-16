@@ -71,12 +71,46 @@ function generateSidebar() {
 
 // Generate topbar HTML
 function generateTopbar(breadcrumb) {
+    const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'es';
+    const fallbacks = {
+      es: {
+        readingMode: 'Modo Lectura',
+        exitReadingMode: 'Salir Modo Lectura',
+        share: 'Compartir',
+        downloadCV: 'Descargar CV',
+        viewSource: 'Ver Código',
+        home: 'Inicio',
+        projects: 'Mis Proyectos',
+        about: 'Sobre mí',
+        workspace: 'Workspace'
+      },
+      en: {
+        readingMode: 'Reading Mode',
+        exitReadingMode: 'Exit Reading Mode',
+        share: 'Share',
+        downloadCV: 'Download CV',
+        viewSource: 'View Source',
+        home: 'Home',
+        projects: 'Projects',
+        about: 'About',
+        workspace: 'Workspace'
+      }
+    };
+    const langFallbacks = fallbacks[currentLang] || fallbacks.es;
+
     const readingModeEnabled = localStorage.getItem('readingMode') === 'true';
     const readingIcon = readingModeEnabled ? 'book' : 'book-open';
-    const readingText = window.i18n ? window.i18n.t(readingModeEnabled ? 'nav.exitReadingMode' : 'nav.readingMode') : (readingModeEnabled ? 'Salir Modo Lectura' : 'Modo Lectura');
-    const shareText = window.i18n ? window.i18n.t('nav.share') : 'Compartir';
-    const downloadText = window.i18n ? window.i18n.t('nav.downloadCV') : 'Descargar CV';
-    const viewSourceText = window.i18n ? window.i18n.t('nav.viewSource') : 'Ver Código';
+    const readingText = window.i18n ? window.i18n.t(readingModeEnabled ? 'nav.exitReadingMode' : 'nav.readingMode', readingModeEnabled ? langFallbacks.exitReadingMode : langFallbacks.readingMode) : (readingModeEnabled ? langFallbacks.exitReadingMode : langFallbacks.readingMode);
+    const shareText = window.i18n ? window.i18n.t('nav.share', langFallbacks.share) : langFallbacks.share;
+    const downloadText = window.i18n ? window.i18n.t('nav.downloadCV', langFallbacks.downloadCV) : langFallbacks.downloadCV;
+    const viewSourceText = window.i18n ? window.i18n.t('nav.viewSource', langFallbacks.viewSource) : langFallbacks.viewSource;
+
+    const breadcrumbFallbacks = {
+      'nav.home': langFallbacks.home,
+      'nav.projects': langFallbacks.projects,
+      'nav.about': langFallbacks.about,
+      'common.workspace': langFallbacks.workspace
+    };
 
     return `
     <header role="banner" data-breadcrumb='${JSON.stringify(breadcrumb).replace(/'/g, "'")}'>
@@ -84,7 +118,7 @@ function generateTopbar(breadcrumb) {
         <div class="max-w-[var(--notion-max-width)] mx-auto flex items-center gap-2 text-sm text-[var(--text-secondary)]">
         ${breadcrumb.map((item, index) => {
         const isLast = index === breadcrumb.length - 1;
-        const translatedItem = window.i18n ? window.i18n.t(item) : item;
+        const translatedItem = window.i18n ? window.i18n.t(item, breadcrumbFallbacks[item] || item) : (breadcrumbFallbacks[item] || item);
         const clickHandler = !isLast && index === 0 ? 'onclick="window.location.href=\'index.html\'"' : '';
         return `
             <span class="hover:bg-[var(--ui-hover)] px-2 py-1 rounded cursor-pointer ${isLast ? 'text-[var(--text-primary)]' : ''}" ${clickHandler}>${translatedItem}</span>

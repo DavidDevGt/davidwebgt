@@ -1,0 +1,21 @@
+.app {
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.main {
+  flex: 1;
+  padding: var(--spacing-lg);
+  max-width: var(--notion-max-width);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  flex: 0 0 240px;
+  background-color: var(--ui-sidebar-bg);
+  border-right: 1px solid var(--ui-border);
+  padding: var(--spacing-md) 0;
+  box-sizing: border-box;
+}
