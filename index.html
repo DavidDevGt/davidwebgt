@@ -50,11 +50,10 @@
   <meta name="theme-color" content="#0A7AFF">
 
   <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; frame-ancestors 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
 
-  <!-- Security Headers -->
+  <!-- Security Headers (Note: X-Frame-Options and frame-ancestors must be set via HTTP headers on the server) -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
 
@@ -83,7 +82,7 @@
 <body class="h-full bg-[var(--ui-bg)] text-[var(--text-primary)]">
 
    <!-- Skip to main content -->
-   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded z-50">Saltar al contenido principal</a>
+   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded z-50" data-i18n="common.skipToMain">Saltar al contenido principal</a>
 
    <!-- Layout base -->
    <div class="flex h-screen">
@@ -95,44 +94,44 @@
       <div class="p-3">
         <div class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer mb-1">
           <i data-lucide="user" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
-          <span class="text-sm font-medium">davidwebgt</span>
+          <span class="text-sm font-medium" data-i18n="common.user">davidwebgt</span>
         </div>
 
         <div onclick="openSearchModal()"
           class="px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm text-[var(--text-secondary)] flex items-center gap-2">
           <i data-lucide="search" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
-          <span>Buscar</span>
+          <span data-i18n="nav.search">Buscar</span>
           <span class="ml-auto text-xs">⌘K</span>
         </div>
       </div>
 
       <!-- Navigation -->
       <nav class="px-3 space-y-0.5" role="navigation" aria-label="Navegación principal">
-        <div class="text-xs font-semibold text-[var(--text-tertiary)] px-2 py-1.5 uppercase tracking-wide">
+        <div class="text-xs font-semibold text-[var(--text-tertiary)] px-2 py-1.5 uppercase tracking-wide" data-i18n="common.workspace">
           Workspace
         </div>
 
         <a href="index.html"
           class="nav-link flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm bg-[var(--ui-hover)]">
           <i data-lucide="rocket" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
-          <span>Inicio</span>
+          <span data-i18n="nav.home">Inicio</span>
         </a>
 
         <a href="proyectos.html"
           class="nav-link flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm">
           <i data-lucide="briefcase" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
-          <span>Mis Proyectos</span>
+          <span data-i18n="nav.projects">Mis Proyectos</span>
         </a>
 
         <a href="sobre-mi.html"
           class="nav-link flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm">
           <i data-lucide="code" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
-          <span>Sobre mí</span>
+          <span data-i18n="nav.about">Sobre mí</span>
         </a>
 
         <div class="notion-divider my-2"></div>
 
-        <div class="text-xs font-semibold text-[var(--text-tertiary)] px-2 py-1.5 uppercase tracking-wide">
+        <div class="text-xs font-semibold text-[var(--text-tertiary)] px-2 py-1.5 uppercase tracking-wide" data-i18n="common.favorites">
           Favoritos
         </div>
 
@@ -156,19 +155,38 @@
       </nav>
 
       <!-- Bottom Section -->
-      <div class="mt-auto p-3 border-t border-[var(--ui-border)]">
-        <button onclick="toggleTheme()"
-          class="w-full text-sm px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-left flex items-center gap-2"
-          aria-label="Cambiar entre tema claro y oscuro">
-          <i id="theme-icon" data-lucide="sun" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
-          <span id="theme-text">Cambiar Tema</span>
+      <div class="mt-auto p-3 border-t border-[var(--ui-border)] space-y-2">
+        <!-- Language Selector -->
+        <div class="relative">
+          <button onclick="toggleLanguageMenu()" id="lang-btn"
+            class="w-full text-sm px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-left flex items-center gap-2">
+            <span id="current-lang-flag">🇪🇸</span>
+            <span id="current-lang-text">Español</span>
+            <i data-lucide="chevron-down" class="w-3 h-3 ml-auto"></i>
+          </button>
+          <div id="lang-menu" class="hidden">
+            <button onclick="changeLanguage('es')">
+              <span>🇪🇸</span>
+              <span>Español</span>
+            </button>
+            <button onclick="changeLanguage('en')">
+              <span>🇺🇸</span>
+              <span>English</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button id="theme-btn" onclick="toggleTheme()" aria-label="Cambiar entre tema claro y oscuro">
+          <i id="theme-icon" data-lucide="sun"></i>
+          <span id="theme-text" data-i18n="nav.theme">Cambiar Tema</span>
         </button>
       </div>
     </aside>
 
     <main id="main-content" class="flex-1 overflow-y-auto bg-[var(--page-bg)]" role="main">
       <!-- Topbar -->
-      <header id="topbar-placeholder" data-breadcrumb='["Inicio"]' role="banner"></header>
+      <header id="topbar-placeholder" data-breadcrumb='["nav.home"]' role="banner"></header>
 
       <div class="max-w-[var(--notion-max-width)] mx-auto px-8 sm:px-16 py-12">
 
@@ -178,13 +196,12 @@
             style="width: 60px; height: 60px;">
             <i data-lucide="rocket" class="w-10 h-10"></i>
           </div>
-          <h1 class="text-[40px] font-bold leading-tight tracking-tight mb-2">
+          <h1 class="text-[40px] font-bold leading-tight tracking-tight mb-2" data-i18n="home.title">
             Inicio
           </h1>
           <div class="flex items-center gap-4 text-sm text-[var(--text-secondary)]">
             <span class="flex items-center gap-2"><i data-lucide="pencil"
-                class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i> Última edición: hace 12
-              min</span>
+                class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i> <span><span data-i18n="common.lastEdited"></span> <span data-i18n="common.ago"></span> 12 <span data-i18n="common.minutes"></span></span></span>
           </div>
         </div>
 
@@ -197,14 +214,14 @@
               class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
           </div>
 
-          <p class="text-base leading-relaxed py-1 px-1"> ¡Hola! Mi nombre es David Vargas. Trabajo como
+          <p class="text-base leading-relaxed py-1 px-1" data-i18n="home.subtitle"> ¡Hola! Mi nombre es David Vargas. Trabajo como
             <strong>Ingeniero de Software</strong> con experiencia desarrollando soluciones eficientes y manteniendo
             sistemas críticos en
             producción. Me enfoco en <strong>resolver problemas reales</strong>, colaborar con equipos
             multidisciplinarios y aprender continuamente para fortalecer mis habilidades.
           </p>
 
-          <p class="text-base leading-relaxed py-1 px-1">
+          <p class="text-base leading-relaxed py-1 px-1" data-i18n="home.experience">
             Durante el último año me he especializado en <strong>desarrollo móvil</strong> y <strong>soluciones en la
               nube</strong>, creando apps optimizadas, funcionales y preparadas para producción. He trabajado con
             entornos móviles, servicios cloud y arquitecturas modernas que permiten desplegar, escalar y mantener
@@ -221,7 +238,7 @@
               class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
           </div>
           <div class="text-xl">💡</div>
-          <div contenteditable="false" placeholder="Escribe algo..." class="flex-1 text-base">
+          <div contenteditable="false" placeholder="Escribe algo..." class="flex-1 text-base" data-i18n="home.callout">
             Revisa mis proyectos destacados y mi experiencia profesional. Navegando por el portafolio podrás conocer más sobre mi.
           </div>
         </div>
@@ -235,7 +252,7 @@
               class="w-6 h-6 flex items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--ui-hover)] rounded">+</button>
           </div>
 
-          <h2 class="text-2xl font-semibold flex items-center gap-2 py-1 px-1 mb-4">
+          <h2 class="text-2xl font-semibold flex items-center gap-2 py-1 px-1 mb-4" data-i18n="home.quickLinks">
             <i data-lucide="link" class="w-5 h-5 align-middle shrink-0"></i> Enlaces Rápidos
           </h2>
         </div>
@@ -244,15 +261,15 @@
           <a href="proyectos.html"
             class="notion-block relative group p-4 border border-[var(--ui-border)] rounded-lg hover:bg-[var(--ui-hover)] transition-colors">
             <div class="text-3xl mb-2"><i data-lucide="briefcase"></i></div>
-            <h3 class="font-semibold mb-1">Proyectos</h3>
-            <p class="text-sm text-[var(--text-secondary)]">Trabajos destacados y casos de estudio</p>
+            <h3 class="font-semibold mb-1" data-i18n="home.projects">Proyectos</h3>
+            <p class="text-sm text-[var(--text-secondary)]" data-i18n="home.projectsDesc">Trabajos destacados y casos de estudio</p>
           </a>
 
           <a href="sobre-mi.html"
             class="notion-block relative group p-4 border border-[var(--ui-border)] rounded-lg hover:bg-[var(--ui-hover)] transition-colors">
             <div class="text-3xl mb-2"><i data-lucide="code"></i></div>
-            <h3 class="font-semibold mb-1">Sobre mí</h3>
-            <p class="text-sm text-[var(--text-secondary)]">Mi historia y experiencia profesional</p>
+            <h3 class="font-semibold mb-1" data-i18n="home.about">Sobre mí</h3>
+            <p class="text-sm text-[var(--text-secondary)]" data-i18n="home.aboutDesc">Mi historia y experiencia profesional</p>
           </a>
         </div>
 
@@ -265,6 +282,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/searchIndex.js" defer></script>
   <script src="assets/js/ui.js" defer></script>
   <script src="assets/js/theme.js" defer></script>

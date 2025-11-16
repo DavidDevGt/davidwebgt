@@ -61,7 +61,7 @@ function sharePage() {
 
 function showShareFeedback(message) {
   const feedback = document.createElement('div');
-  feedback.textContent = message;
+  feedback.textContent = window.i18n ? window.i18n.t('common.linkCopied') : message;
   feedback.className = 'fixed top-4 right-4 bg-[var(--accent-blue)] text-white px-4 py-2 rounded shadow-lg z-50';
   document.body.appendChild(feedback);
   setTimeout(() => {
@@ -88,32 +88,48 @@ function downloadCV() {
   closeOptionsMenu();
 }
 
+// Update options menu text
+function updateOptionsMenu() {
+  // Reading mode
+  const readingModeEnabled = localStorage.getItem('readingMode') === 'true';
+  const readingBtn = document.getElementById('reading-mode-btn');
+  if (readingBtn) {
+    const icon = readingModeEnabled ? 'book' : 'book-open';
+    const text = window.i18n ? window.i18n.t(readingModeEnabled ? 'nav.exitReadingMode' : 'nav.readingMode') : (readingModeEnabled ? 'Salir Modo Lectura' : 'Modo Lectura');
+    readingBtn.innerHTML = `<i data-lucide="${icon}"></i><span>${text}</span>`;
+    if (typeof lucide !== 'undefined' && lucide.createIcons) {
+      lucide.createIcons();
+    }
+  }
+
+  // Theme
+  const isDark = document.documentElement.classList.contains('dark');
+  const themeIcon = document.getElementById('theme-icon');
+  const themeText = document.getElementById('theme-text');
+  if (themeIcon && themeText) {
+    themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+    themeText.textContent = window.i18n ? window.i18n.t('nav.theme') : 'Cambiar Tema';
+    if (typeof lucide !== 'undefined' && lucide.createIcons) {
+      lucide.createIcons();
+    }
+  }
+}
+
 function toggleReadingMode() {
     const body = document.body;
     const isReadingMode = body.classList.contains('reading-mode');
-    const btn = document.getElementById('reading-mode-btn');
 
     if (isReadingMode) {
         // Exit reading mode
         body.classList.remove('reading-mode');
         localStorage.setItem('readingMode', 'false');
-        if (btn) {
-            btn.innerHTML = '<i data-lucide="book-open"></i><span>Modo Lectura</span>';
-        }
     } else {
         // Enter reading mode
         body.classList.add('reading-mode');
         localStorage.setItem('readingMode', 'true');
-        if (btn) {
-            btn.innerHTML = '<i data-lucide="book"></i><span>Salir Modo Lectura</span>';
-        }
     }
 
-    // Re-create icons after changing innerHTML
-    if (typeof lucide !== 'undefined' && lucide.createIcons) {
-        lucide.createIcons();
-    }
-
+    updateOptionsMenu();
     closeOptionsMenu();
 }
 
@@ -151,3 +167,6 @@ document.addEventListener('keydown', (e) => {
     openSearchModal();
   }
 });
+
+// Make updateOptionsMenu globally available
+window.updateOptionsMenu = updateOptionsMenu;

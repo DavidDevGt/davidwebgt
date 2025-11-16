@@ -10,7 +10,7 @@ function openSearchModal() {
         <div class="p-4 border-b border-[var(--ui-border)]">
           <div class="flex items-center gap-2">
             <i data-lucide="search" class="w-5 h-5 text-[var(--text-secondary)]"></i>
-            <input type="text" id="search-input" placeholder="Buscar en el sitio..." class="flex-1 bg-transparent outline-none text-[var(--text-primary)]" />
+            <input type="text" id="search-input" placeholder="${window.i18n ? window.i18n.t('nav.searchPlaceholder') : 'Buscar en el sitio...'}" class="flex-1 bg-transparent outline-none text-[var(--text-primary)]" />
             <button
               onclick="closeSearchModal()"
               class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xl border-none outline-none focus:outline-none focus:ring-0"
@@ -79,7 +79,7 @@ function renderResults(results, query) {
     if (results.length === 0) {
         const noResults = document.createElement('div');
         noResults.className = 'p-4 text-[var(--text-secondary)]';
-        noResults.textContent = 'No se encontraron resultados';
+        noResults.textContent = window.i18n ? window.i18n.t('common.noResults') : 'No se encontraron resultados';
         container.appendChild(noResults);
         return;
     }

@@ -73,27 +73,32 @@ function generateSidebar() {
 function generateTopbar(breadcrumb) {
     const readingModeEnabled = localStorage.getItem('readingMode') === 'true';
     const readingIcon = readingModeEnabled ? 'book' : 'book-open';
-    const readingText = readingModeEnabled ? 'Salir Modo Lectura' : 'Modo Lectura';
+    const readingText = window.i18n ? window.i18n.t(readingModeEnabled ? 'nav.exitReadingMode' : 'nav.readingMode') : (readingModeEnabled ? 'Salir Modo Lectura' : 'Modo Lectura');
+    const shareText = window.i18n ? window.i18n.t('nav.share') : 'Compartir';
+    const downloadText = window.i18n ? window.i18n.t('nav.downloadCV') : 'Descargar CV';
+    const viewSourceText = window.i18n ? window.i18n.t('nav.viewSource') : 'Ver Código';
 
     return `
-    <div class="sticky top-0 z-10 bg-[var(--page-bg)]/80 backdrop-blur-sm border-b border-[var(--ui-border)] px-8 py-2" style="view-transition-name: topbar">
-      <div class="max-w-[var(--notion-max-width)] mx-auto flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+    <header role="banner" data-breadcrumb='${JSON.stringify(breadcrumb).replace(/'/g, "'")}'>
+      <div class="sticky top-0 z-10 bg-[var(--page-bg)]/80 backdrop-blur-sm border-b border-[var(--ui-border)] px-8 py-2" style="view-transition-name: topbar">
+        <div class="max-w-[var(--notion-max-width)] mx-auto flex items-center gap-2 text-sm text-[var(--text-secondary)]">
         ${breadcrumb.map((item, index) => {
         const isLast = index === breadcrumb.length - 1;
-        const clickHandler = !isLast && item === 'Inicio' ? 'onclick="window.location.href=\'index.html\'"' : '';
+        const translatedItem = window.i18n ? window.i18n.t(item) : item;
+        const clickHandler = !isLast && index === 0 ? 'onclick="window.location.href=\'index.html\'"' : '';
         return `
-            <span class="hover:bg-[var(--ui-hover)] px-2 py-1 rounded cursor-pointer ${isLast ? 'text-[var(--text-primary)]' : ''}" ${clickHandler}>${item}</span>
+            <span class="hover:bg-[var(--ui-hover)] px-2 py-1 rounded cursor-pointer ${isLast ? 'text-[var(--text-primary)]' : ''}" ${clickHandler}>${translatedItem}</span>
             ${!isLast ? '<span>/</span>' : ''}
           `;
     }).join('')}
         <div class="ml-auto flex items-center gap-2 relative">
-          <button onclick="sharePage()" class="hover:bg-[var(--ui-hover)] px-2 py-1 rounded cursor-pointer">Compartir</button>
+          <button onclick="sharePage()" class="hover:bg-[var(--ui-hover)] px-2 py-1 rounded cursor-pointer">${shareText}</button>
           <div class="relative">
             <button onclick="toggleOptionsMenu()" class="hover:bg-[var(--ui-hover)] px-2 py-1 rounded cursor-pointer" id="options-btn">•••</button>
             <div id="options-menu" class="absolute right-0 top-full mt-1 py-1 hidden z-10">
               <button onclick="downloadCV()">
                 <i data-lucide="download"></i>
-                <span>Descargar CV</span>
+                <span>${downloadText}</span>
               </button>
               <button onclick="toggleReadingMode()" id="reading-mode-btn">
                 <i data-lucide="${readingIcon}"></i>
@@ -101,13 +106,13 @@ function generateTopbar(breadcrumb) {
               </button>
               <button onclick="viewSourceCode()">
                 <i data-lucide="code"></i>
-                <span>Ver Código</span>
+                <span>${viewSourceText}</span>
               </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </header>
   `;
 }
 
@@ -123,3 +128,50 @@ function toggleList(element) {
         arrow.style.transform = 'rotate(90deg)';
     }
 }
+
+// Update topbar function
+function updateTopbar() {
+  const topbarEl = document.querySelector('header[role="banner"]');
+  if (topbarEl) {
+    const breadcrumbData = topbarEl.dataset.breadcrumb;
+    if (breadcrumbData) {
+      try {
+        const breadcrumb = JSON.parse(breadcrumbData);
+        topbarEl.outerHTML = generateTopbar(breadcrumb);
+        // Re-create icons after updating topbar
+        if (typeof lucide !== 'undefined' && lucide.createIcons) {
+          lucide.createIcons();
+        }
+      } catch (e) {
+        console.warn('Error updating topbar:', e);
+      }
+    }
+  }
+}
+
+// Make updateTopbar globally available
+window.updateTopbar = updateTopbar;
+
+// Insert topbar on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function () {
+    const topbarEl = document.getElementById('topbar-placeholder');
+    if (topbarEl) {
+        let breadcrumb = ['Workspace'];
+        try {
+            const data = topbarEl.dataset.breadcrumb;
+            if (data) {
+                const parsed = JSON.parse(data);
+                if (Array.isArray(parsed) && parsed.every(item => typeof item === 'string')) {
+                    breadcrumb = parsed;
+                }
+            }
+        } catch (e) {
+            console.warn('Invalid breadcrumb data:', e);
+        }
+        topbarEl.outerHTML = generateTopbar(breadcrumb);
+        // Create icons after inserting topbar
+        if (typeof lucide !== 'undefined' && lucide.createIcons) {
+          lucide.createIcons();
+        }
+    }
+});

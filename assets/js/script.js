@@ -11,23 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 
-  // Insert topbar
-  const topbarEl = document.getElementById('topbar-placeholder');
-  if (topbarEl) {
-    let breadcrumb = ['Workspace'];
-    try {
-      const data = topbarEl.dataset.breadcrumb;
-      if (data) {
-        const parsed = JSON.parse(data);
-        if (Array.isArray(parsed) && parsed.every(item => typeof item === 'string')) {
-          breadcrumb = parsed;
-        }
-      }
-    } catch (e) {
-      console.warn('Invalid breadcrumb data:', e);
-    }
-    topbarEl.outerHTML = generateTopbar(breadcrumb);
-  }
+
+  // Update options menu
+  updateOptionsMenu();
 
   // Toggle list functionality
   const toggleButtons = document.querySelectorAll('.toggle-trigger');

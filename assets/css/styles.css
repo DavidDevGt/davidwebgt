@@ -537,7 +537,8 @@ svg.lucide {
   border-radius: 2px;
 }
 
-#options-menu {
+#options-menu,
+#lang-menu {
   box-shadow: var(--shadow-md);
   border-radius: 6px;
   background-color: var(--ui-bg);
@@ -546,7 +547,17 @@ svg.lucide {
   z-index: 1000;
 }
 
-#options-menu button {
+#lang-menu {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  margin-bottom: 4px;
+  padding: 4px 0;
+}
+
+#options-menu button,
+#lang-menu button {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -561,11 +572,37 @@ svg.lucide {
   text-align: left;
 }
 
-#options-menu button:hover {
+#options-menu button:hover,
+#lang-menu button:hover {
   background-color: var(--ui-hover);
 }
 
-#options-menu button i {
+#options-menu button,
+#lang-menu button,
+#theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  text-align: left;
+}
+
+#options-menu button:hover,
+#lang-menu button:hover,
+#theme-btn:hover {
+  background-color: var(--ui-hover);
+}
+
+#options-menu button i,
+#lang-menu button i,
+#theme-btn i {
   width: 16px;
   height: 16px;
   flex-shrink: 0;

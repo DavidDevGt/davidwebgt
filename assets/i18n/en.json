@@ -1,0 +1,204 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "My Projects",
+    "about": "About Me",
+    "search": "Search",
+    "searchPlaceholder": "Search the site...",
+    "theme": "Toggle Theme",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode",
+    "share": "Share",
+    "downloadCV": "Download CV",
+    "readingMode": "Reading Mode",
+    "exitReadingMode": "Exit Reading Mode",
+    "viewSource": "View Source"
+  },
+  "home": {
+    "title": "Home",
+    "subtitle": "Hello! My name is David Vargas. I work as a Software Engineer with experience developing efficient solutions and maintaining critical systems in production.",
+    "experience": "Over the past year, I have specialized in mobile development and cloud solutions, creating optimized, functional, and production-ready apps. I have worked with mobile environments, cloud services, and modern architectures that allow deploying, scaling, and maintaining systems with thousands of active users.",
+    "callout": "Check out my featured projects and professional experience. By browsing the portfolio, you can learn more about me.",
+    "quickLinks": "Quick Links",
+    "projects": "Projects",
+    "projectsDesc": "Featured works and case studies",
+    "about": "About Me",
+    "aboutDesc": "My story and professional experience"
+  },
+  "projects": {
+    "title": "My Projects",
+    "intro": "Below is a detailed view of my most representative projects. Each one includes a description of the challenge, technologies used, and final results obtained.",
+    "dailyJournal": {
+      "title": "Daily Journal",
+      "subtitle": "Mobile App Development & Privacy",
+      "tech": "Android • Capacitor • SQLite • Material Design",
+      "impact1": "100% local, complete data privacy.",
+      "impact2": "Guaranteed performance and full functionality without internet connection.",
+      "impact3": "Export of entries and diary records.",
+      "impact4": "Integration of text emotional analysis and photo gallery.",
+      "demo": "View Demo",
+      "download": "Download APK"
+    },
+    "chromaGrid": {
+      "title": "ChromaGrid",
+      "subtitle": "Web Development & Image Processing",
+      "tech": "TypeScript • Vite • HTML5 Canvas • CSS",
+      "impact1": "Automatic color palette extraction",
+      "impact2": "Browser processing with Canvas API",
+      "demo": "View Demo",
+      "code": "Code"
+    },
+    "migration": {
+      "title": "Mobile App Migration",
+      "subtitle": "Mobile Engineering & Performance",
+      "tech": "Capacitor • TypeScript • Java SDKs • Android/iOS",
+      "impact1": "Migration from Cordova to Capacitor",
+      "impact2": "Improved compatibility and performance",
+      "impact3": "Native plugin integration"
+    },
+    "computerVision": {
+      "title": "Computer Vision App",
+      "subtitle": "Innovation & Frontend ML",
+      "tech": "Transformers.js • AI • Browser",
+      "impact1": "Object detection in images",
+      "impact2": "AI completely in the browser",
+      "impact3": "Cutting-edge technologies",
+      "demo": "View Demo",
+      "code": "Code"
+    },
+    "shamaLanding": {
+      "title": "Shama Hardware Store Landing Page",
+      "subtitle": "Web Development & Design",
+      "tech": "HTML • SCSS • jQuery • Netlify",
+      "impact1": "Landing page for hardware store",
+      "impact2": "Responsive design with SCSS",
+      "impact3": "Deployment on Netlify",
+      "demo": "View Demo",
+      "code": "Code"
+    },
+    "shamaCRM": {
+      "title": "Shama Hardware Store Mini CRM",
+      "subtitle": "Full-Stack Development & Business Solutions",
+      "tech": "Hono.js • PostgreSQL • Vue • TypeScript",
+      "impact1": "CRM system for business management",
+      "impact2": "Backend with Hono.js and PostgreSQL",
+      "impact3": "Vue frontend with TypeScript",
+      "impact4": "AI-assisted report creation and management"
+    },
+    "authGo": {
+      "title": "Auth-Go API",
+      "subtitle": "Authentication • Sessions • Security Engineering",
+      "tech": "Go • Fiber • MySQL • Docker",
+      "impact1": "Robust and scalable authentication system",
+      "impact2": "Multi-device session management with device_id",
+      "impact3": "Secure refresh tokens with individual revocation"
+    },
+    "erpRefactor": {
+      "title": "ERP/Purchase Orders Refactoring",
+      "subtitle": "Full-Stack & SysAdmin",
+      "tech": "PHP • jQuery • MySQL • Digital Ocean",
+      "impact1": "Refactoring of Legacy modules to SPA",
+      "impact2": "SQL query optimization and purchase order system refactoring",
+      "impact3": "Cloud server configuration and administration"
+    },
+    "cta": {
+      "title": "Interested in working together?",
+      "text": "I have more projects in development and I'm open to new opportunities.",
+      "button": "Learn more about me"
+    },
+    "technologies": "Technologies",
+    "impact": "Impact"
+  },
+  "about": {
+    "title": "About Me",
+    "intro": {
+      "title": "My Approach:",
+      "text": "Hello, I'm David, I have experience building efficient solutions, maintaining critical systems in production. I like working practically, solving real problems, and adding real value within teams."
+    },
+    "skills": {
+      "title": "Skills / Key Competencies",
+      "mobile": "Mobile",
+      "mobileTech": "Kotlin, Capacitor, Ionic, Android Studio, Xcode.",
+      "backend": "Backend",
+      "backendTech": "Node.js, PHP, Go, PostgreSQL, MongoDB, GraphQL.",
+      "cloud": "Cloud & DevOps",
+      "cloudTech": "Docker, AWS EC2 & S3, DigitalOcean, Cloudflare, Azure Artifacts.",
+      "methodologies": "Methodologies & Tools",
+      "methodologiesTech": "SCRUM, XP, Jira, Azure DevOps, Gitlab, OpsGenie."
+    },
+    "experience": {
+      "title": "Professional Experience",
+      "zigi": {
+        "title": "Assistant Software Engineer - Zigi App",
+        "period": "Sep. 2024 - Present",
+        "desc": "Support Technology Management in administrative management, key information handling, and coordination with development teams."
+      },
+      "allied": {
+        "title": "Mobile Software Engineer - Allied Global IT Services (GyT Continental)",
+        "period": "Oct. 2024 - Sep. 2025",
+        "desc": "Mobile development, banking sector, frontend, API integration, and authentication systems."
+      },
+      "redChapina": {
+        "title": "Support Engineer - Red Chapina / Tranzmit",
+        "period": "Mar. 2024 - Oct. 2024",
+        "desc": "L2 support operations, including deploys, production access management, and diagnostics on Linux servers (AWS) and databases."
+      },
+      "tubagua": {
+        "title": "Full Stack Programmer - Tubagua, S.A",
+        "period": "Sep. 2023 - Mar. 2024",
+        "desc": "Server and database administration, continuous improvement, and ERP system refactoring with PHP and jQuery. Internal process automation and reporting."
+      },
+      "paginaWeb": {
+        "title": "Web Developer - Página Web Guatemala",
+        "period": "May. 2023 - Aug. 2023",
+        "desc": "Web layout from scratch (HTML, CSS, jQuery, Bootstrap 5), PHP and MySQL development, and WordPress solutions."
+      },
+      "dismafer": {
+        "title": "IT Systems Analyst - DISMAFER",
+        "period": "Sep. 2020 - Apr. 2023",
+        "desc": "Remote technical support to clients, IT support to departments, network infrastructure inspection, and maintenance of ERP systems and websites."
+      }
+    },
+    "education": {
+      "title": "Education",
+      "software": {
+        "title": "Software Development Technician",
+        "institution": "Universidad Galileo",
+        "period": "2023 - 2025"
+      },
+      "graphics": {
+        "title": "Diploma in Digital Graphic Design Tools",
+        "institution": "Universidad de Occidente",
+        "period": "2022"
+      },
+      "cisco": {
+        "title": "CISCO IT Essentials Certification",
+        "institution": "INTECAP",
+        "period": "2021"
+      }
+    },
+    "contact": {
+      "title": "Contact",
+      "info": "Contact Information",
+      "social": "Social Networks",
+      "location": "CA-9, Guatemala"
+    },
+    "skillsTable": {
+      "category": "Category",
+      "technologies": "Key Technologies"
+    }
+  },
+  "common": {
+    "lastEdited": "Last edited:",
+    "ago": "ago",
+    "minutes": "min",
+    "hours": "hour",
+    "days": "days",
+    "linkCopied": "Link copied to clipboard",
+    "noResults": "No results found",
+    "workspace": "Workspace",
+    "favorites": "Favorites",
+    "user": "davidwebgt",
+    "skipToMain": "Skip to main content"
+  }
+}
