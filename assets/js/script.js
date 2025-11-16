@@ -1,24 +1,23 @@
-// Main initialization script
+/**
+ * Archivo principal de inicialización del sitio web.
+ * Registra el service worker, configura event listeners y inicializa componentes.
+ */
+
 document.addEventListener('DOMContentLoaded', function () {
-  // Register service worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('../sw.js')
       .then(registration => {
-        // Service Worker registered
       })
       .catch(error => {
-        // Service Worker registration failed
       });
   }
 
-  // Update options menu when i18n is ready
   if (window.i18n && window.i18n.isLoaded) {
     updateOptionsMenu();
   } else {
     window.addEventListener('i18nReady', updateOptionsMenu);
   }
 
-  // Toggle list functionality
   const toggleButtons = document.querySelectorAll('.toggle-trigger');
   toggleButtons.forEach(button => {
     button.addEventListener('click', function () {
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Prevent line breaks in headings
   const editables = document.querySelectorAll('[contenteditable="true"]');
   editables.forEach(el => {
     if (el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3') {
@@ -38,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Create Lucide icons after DOM is ready
   if (typeof lucide !== 'undefined' && lucide.createIcons) {
     lucide.createIcons();
   }

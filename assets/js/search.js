@@ -1,4 +1,7 @@
-// Search modal functions
+/**
+ * Abre el modal de búsqueda creando el HTML si no existe.
+ * Enfoca el input de búsqueda y recrea íconos de Lucide.
+ */
 function openSearchModal() {
     let modal = document.getElementById('search-modal');
     if (!modal) {
@@ -23,18 +26,18 @@ function openSearchModal() {
       </div>
     `;
         document.body.appendChild(modal);
-        // Event listeners
         document.getElementById('search-input').addEventListener('input', (e) => performSearch(e.target.value));
     }
     modal.classList.add('show');
-    // Focus input
     setTimeout(() => document.getElementById('search-input').focus(), 100);
-    // Create icons
     if (typeof lucide !== 'undefined' && lucide.createIcons) {
         lucide.createIcons();
     }
 }
 
+/**
+ * Cierra el modal de búsqueda removiendo la clase 'show'.
+ */
 function closeSearchModal() {
     const modal = document.getElementById('search-modal');
     if (modal) {
@@ -42,6 +45,11 @@ function closeSearchModal() {
     }
 }
 
+/**
+ * Realiza la búsqueda en el índice basado en la consulta.
+ * Filtra por título, contenido y palabras clave, ordena resultados.
+ * @param {string} query - La consulta de búsqueda.
+ */
 function performSearch(query) {
     if (!query.trim()) {
         document.getElementById('search-results').innerHTML = '';
@@ -50,7 +58,6 @@ function performSearch(query) {
 
     const queryLower = query.toLowerCase();
     const results = searchIndex.filter(item => {
-        // Search in title, content, and keywords
         return item.title.toLowerCase().includes(queryLower) ||
             item.content.toLowerCase().includes(queryLower) ||
             (item.keywords && item.keywords.some(keyword =>
@@ -58,7 +65,6 @@ function performSearch(query) {
             ));
     });
 
-    // Sort results by relevance (title matches first, then content, then keywords)
     results.sort((a, b) => {
         const aTitle = a.title.toLowerCase().includes(queryLower);
         const bTitle = b.title.toLowerCase().includes(queryLower);
@@ -66,16 +72,21 @@ function performSearch(query) {
         if (aTitle && !bTitle) return -1;
         if (!aTitle && bTitle) return 1;
 
-        // If both have title matches or both don't, sort by content length (shorter = more relevant)
         return a.content.length - b.content.length;
     });
 
     renderResults(results, query);
 }
 
+/**
+ * Renderiza los resultados de búsqueda en el contenedor.
+ * Si no hay resultados, muestra un mensaje.
+ * @param {Array} results - Array de resultados de búsqueda.
+ * @param {string} query - La consulta original.
+ */
 function renderResults(results, query) {
     const container = document.getElementById('search-results');
-    container.innerHTML = ''; // Clear previous results
+    container.innerHTML = '';
     if (results.length === 0) {
         const noResults = document.createElement('div');
         noResults.className = 'p-4 text-[var(--text-secondary)]';
@@ -107,12 +118,23 @@ function renderResults(results, query) {
     });
 }
 
+/**
+ * Escapa caracteres HTML para prevenir XSS.
+ * @param {string} text - Texto a escapar.
+ * @returns {string} Texto escapado.
+ */
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 }
 
+/**
+ * Resalta el texto de la consulta en el contenido usando <mark>.
+ * @param {string} text - Texto original.
+ * @param {string} query - Consulta a resaltar.
+ * @returns {string} Texto con resaltado.
+ */
 function highlightText(text, query) {
     const escapedText = escapeHtml(text);
     const escapedQuery = escapeHtml(query);

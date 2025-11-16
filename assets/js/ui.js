@@ -1,17 +1,31 @@
-// Navigation data
+/**
+ * Array de objetos que define los elementos de navegación principal del sitio.
+ * Cada objeto representa un enlace de navegación con su ruta, ícono y texto.
+ * @constant {Array<{href: string, icon: string, text: string}>}
+ */
 const navigation = [
     { href: 'index.html', icon: 'home', text: 'Home' },
     { href: 'proyectos.html', icon: 'briefcase', text: 'Proyectos' },
     { href: 'sobre-mi.html', icon: 'code', text: 'Sobre mí' }
 ];
 
+/**
+ * Array de objetos que define los enlaces favoritos externos.
+ * Cada objeto incluye href, icon, text y un indicador si es enlace externo.
+ * @constant {Array<{href: string, icon: string, text: string, external: boolean}>}
+ */
 const favorites = [
     { href: 'https://github.com/DavidDevGt', icon: 'github', text: 'GitHub', external: true },
     { href: 'https://www.linkedin.com/in/jdavidvl/', icon: 'briefcase', text: 'LinkedIn', external: true },
     { href: 'mailto:josuedavidvl18@gmail.com', icon: 'mail', text: 'Email', external: true }
 ];
 
-// Generate sidebar HTML
+/**
+ * Genera el HTML completo para la sidebar del sitio web.
+ * Incluye la sección de usuario, búsqueda, navegación principal, favoritos y controles de tema.
+ * Utiliza los arrays navigation y favorites para construir los enlaces dinámicamente.
+ * @returns {string} El HTML de la sidebar como una cadena de texto.
+ */
 function generateSidebar() {
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     return `
@@ -28,48 +42,54 @@ function generateSidebar() {
            <span>Buscar</span>
            <span class="ml-auto text-xs">⌘K</span>
          </div>
-      </div>
+       </div>
 
-      <!-- Navigation -->
-      <nav class="px-3 space-y-0.5">
-        <div class="text-xs font-semibold text-[var(--text-tertiary)] px-2 py-1.5 uppercase tracking-wide">
-          Workspace
-        </div>
+       <!-- Navigation -->
+       <nav class="px-3 space-y-0.5">
+         <div class="text-xs font-semibold text-[var(--text-tertiary)] px-2 py-1.5 uppercase tracking-wide">
+           Workspace
+         </div>
 
-        ${navigation.map(item => `
-          <a href="${item.href}" class="nav-link flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm ${item.href === currentPath ? 'bg-[var(--ui-hover)]' : ''}">
-            <i data-lucide="${item.icon}" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
-            <span>${item.text}</span>
-          </a>
-        `).join('')}
+         ${navigation.map(item => `
+           <a href="${item.href}" class="nav-link flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm ${item.href === currentPath ? 'bg-[var(--ui-hover)]' : ''}">
+             <i data-lucide="${item.icon}" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+             <span>${item.text}</span>
+           </a>
+         `).join('')}
 
-        <div class="notion-divider my-2"></div>
+         <div class="notion-divider my-2"></div>
 
-        <div class="text-xs font-semibold text-[var(--text-tertiary)] px-2 py-1.5 uppercase tracking-wide">
-          Favoritos
-        </div>
+         <div class="text-xs font-semibold text-[var(--text-tertiary)] px-2 py-1.5 uppercase tracking-wide">
+           Favoritos
+         </div>
 
-        ${favorites.map(item => `
-          <a href="${item.href}" ${item.external ? 'target="_blank"' : ''} class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm">
-            <i data-lucide="${item.icon}" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
-            <span>${item.text}</span>
-          </a>
-        `).join('')}
-      </nav>
+         ${favorites.map(item => `
+           <a href="${item.href}" ${item.external ? 'target="_blank"' : ''} class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm">
+             <i data-lucide="${item.icon}" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+             <span>${item.text}</span>
+           </a>
+         `).join('')}
+       </nav>
 
-      <!-- Bottom Section -->
-      <div class="mt-auto p-3 border-t border-[var(--ui-border)]">
-        <button onclick="toggleTheme()"
-                class="w-full text-sm px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-left flex items-center gap-2">
-          <i id="theme-icon" data-lucide="sun" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
-          <span id="theme-text">Cambiar Tema</span>
-        </button>
-      </div>
-    </aside>
-  `;
+       <!-- Bottom Section -->
+       <div class="mt-auto p-3 border-t border-[var(--ui-border)]">
+         <button onclick="toggleTheme()"
+                 class="w-full text-sm px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-left flex items-center gap-2">
+           <i id="theme-icon" data-lucide="sun" class="w-4 h-4 align-middle text-[var(--text-secondary)]"></i>
+           <span id="theme-text">Cambiar Tema</span>
+         </button>
+       </div>
+     </aside>
+   `;
 }
 
-// Generate topbar HTML
+/**
+ * Genera el HTML para la topbar del sitio web con breadcrumb y controles de navegación.
+ * Incluye breadcrumb, botones de compartir, menú de opciones (descargar CV, modo lectura, ver código fuente),
+ * y en móviles, controles de idioma y tema.
+ * @param {string[]} breadcrumb - Array de strings que representan el breadcrumb de navegación.
+ * @returns {string} El HTML de la topbar como una cadena de texto.
+ */
 function generateTopbar(breadcrumb) {
     const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'es';
     const languages = window.i18n ? window.i18n.getAvailableLanguages() : [{ code: 'es', name: 'Español', flag: '🇪🇸' }, { code: 'en', name: 'English', flag: '🇺🇸' }];
@@ -167,6 +187,10 @@ function generateTopbar(breadcrumb) {
   `;
 }
 
+/**
+ * Alterna la visibilidad de una lista colapsable rotando la flecha y mostrando/ocultando el contenido.
+ * @param {HTMLElement} element - El elemento HTML que contiene la flecha y activa el toggle.
+ */
 function toggleList(element) {
     const arrow = element.querySelector('.toggle-arrow');
     const content = element.nextElementSibling;
@@ -180,7 +204,11 @@ function toggleList(element) {
     }
 }
 
-// Update topbar function
+/**
+ * Actualiza la topbar existente reemplazando su contenido con nuevos datos de breadcrumb.
+ * Lee el breadcrumb del atributo data-breadcrumb del elemento header y regenera la topbar.
+ * También recrea los íconos de Lucide si están disponibles.
+ */
 function updateTopbar() {
   const topbarEl = document.querySelector('header[role="banner"]');
   if (topbarEl) {
@@ -189,7 +217,6 @@ function updateTopbar() {
       try {
         const breadcrumb = JSON.parse(breadcrumbData);
         topbarEl.outerHTML = generateTopbar(breadcrumb);
-        // Re-create icons after updating topbar
         if (typeof lucide !== 'undefined' && lucide.createIcons) {
           lucide.createIcons();
         }
@@ -200,10 +227,13 @@ function updateTopbar() {
   }
 }
 
-// Make updateTopbar globally available
 window.updateTopbar = updateTopbar;
 
-// Insert topbar when i18n is ready
+/**
+ * Inserta la topbar en el DOM reemplazando el elemento placeholder con id 'topbar-placeholder'.
+ * Obtiene el breadcrumb del atributo data-breadcrumb del placeholder o usa un valor por defecto.
+ * También recrea los íconos de Lucide si están disponibles.
+ */
 function insertTopbar() {
     const topbarEl = document.getElementById('topbar-placeholder');
     if (topbarEl) {
@@ -220,7 +250,6 @@ function insertTopbar() {
             console.warn('Invalid breadcrumb data:', e);
         }
         topbarEl.outerHTML = generateTopbar(breadcrumb);
-        // Create icons after inserting topbar
         if (typeof lucide !== 'undefined' && lucide.createIcons) {
           lucide.createIcons();
         }

@@ -1,4 +1,8 @@
-// Search index for the portfolio site
+/**
+ * Índice de búsqueda para el sitio web.
+ * Contiene objetos con información de páginas para búsqueda local.
+ * @constant {Array<{id: string, page: string, url: string, title: string, content: string, keywords: string[]}>}
+ */
 const searchIndex = [
   {
     id: 'home',

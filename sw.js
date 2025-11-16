@@ -1,4 +1,14 @@
+/**
+ * Nombre del cache para la versión actual del service worker.
+ * @constant {string}
+ */
 const CACHE_NAME = 'david-vargas-portfolio-v1';
+
+/**
+ * Lista de URLs a cachear durante la instalación del service worker.
+ * Incluye páginas, assets y recursos externos necesarios.
+ * @constant {string[]}
+ */
 const urlsToCache = [
     '/',
     '/index.html',
@@ -21,7 +31,10 @@ const urlsToCache = [
     'https://unpkg.com/lucide@latest'
 ];
 
-// Install event
+/**
+ * Evento de instalación del service worker.
+ * Cachea los recursos especificados en urlsToCache.
+ */
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -32,7 +45,10 @@ self.addEventListener('install', event => {
     );
 });
 
-// Fetch event - Stale While Revalidate strategy
+/**
+ * Evento de fetch del service worker.
+ * Implementa estrategia Stale While Revalidate para recursos cacheados.
+ */
 self.addEventListener('fetch', event => {
     // Skip cross-origin requests
     if (!event.request.url.startsWith(self.location.origin)) {
@@ -74,7 +90,10 @@ self.addEventListener('fetch', event => {
     );
 });
 
-// Activate event
+/**
+ * Evento de activación del service worker.
+ * Limpia caches antiguos que no coincidan con CACHE_NAME.
+ */
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(cacheNames => {

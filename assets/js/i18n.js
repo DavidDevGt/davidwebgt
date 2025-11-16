@@ -1,37 +1,52 @@
-// Internationalization (i18n) system for vanilla JavaScript
+/**
+ * Clase para manejar internacionalización (i18n) del sitio web.
+ * Gestiona la carga de traducciones, cambio de idioma y traducción de elementos DOM.
+ */
 class I18n {
+  /**
+   * Crea una instancia de I18n.
+   * Detecta automáticamente el idioma del navegador o usa el guardado en localStorage.
+   */
   constructor() {
     this.currentLang = this.detectLanguage();
     this.translations = {};
     this.isLoaded = false;
   }
 
-  // Detect user's preferred language
+  /**
+   * Detecta el idioma preferido del usuario.
+   * Primero verifica localStorage, luego el idioma del navegador.
+   * @returns {string} Código del idioma ('es' o 'en').
+   */
   detectLanguage() {
-    // Check localStorage first
     const saved = localStorage.getItem('language');
     if (saved && this.isValidLanguage(saved)) {
       return saved;
     }
 
-    // Check browser language
     const browserLang = navigator.language || navigator.userLanguage;
-    const lang = browserLang.split('-')[0]; // Get language without region
+    const lang = browserLang.split('-')[0];
 
     if (this.isValidLanguage(lang)) {
       return lang;
     }
 
-    // Default to Spanish
     return 'es';
   }
 
-  // Check if language is supported
+  /**
+   * Verifica si un idioma es válido.
+   * @param {string} lang - Código del idioma a verificar.
+   * @returns {boolean} True si el idioma es válido.
+   */
   isValidLanguage(lang) {
     return ['es', 'en'].includes(lang);
   }
 
-  // Load translations for current language
+  /**
+   * Carga las traducciones para el idioma actual desde un archivo JSON.
+   * @returns {Promise<boolean>} True si la carga fue exitosa.
+   */
   async loadTranslations() {
     try {
       const response = await fetch(`assets/i18n/${this.currentLang}.json`);
@@ -43,7 +58,6 @@ class I18n {
       return true;
     } catch (error) {
       console.error('Error loading translations:', error);
-      // Fallback to Spanish if current language fails
       if (this.currentLang !== 'es') {
         this.currentLang = 'es';
         return this.loadTranslations();
@@ -52,7 +66,13 @@ class I18n {
     }
   }
 
-  // Get translation by key path (dot notation)
+  /**
+   * Traduce una clave usando las traducciones cargadas.
+   * Soporta claves anidadas con puntos (ej: 'nav.home').
+   * @param {string} key - Clave de traducción.
+   * @param {string} [fallback=''] - Texto de respaldo si no se encuentra la traducción.
+   * @returns {string} Texto traducido o fallback.
+   */
   t(key, fallback = '') {
     if (!this.isLoaded) {
       console.warn('Translations not loaded yet');
@@ -73,27 +93,27 @@ class I18n {
     return value;
   }
 
-  // Translate all elements with data-i18n attribute
+  /**
+   * Traduce todos los elementos DOM que tienen atributos data-i18n.
+   * Actualiza texto, placeholders, alt, title y aria-label según corresponda.
+   */
   translatePage() {
     if (!this.isLoaded) {
       console.warn('Cannot translate page: translations not loaded');
       return;
     }
 
-    // Translate elements with data-i18n attribute
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(element => {
       const key = element.getAttribute('data-i18n');
       const translation = this.t(key);
 
       if (translation) {
-        // Handle different element types
         if (element.tagName === 'INPUT' && element.type === 'placeholder') {
           element.placeholder = translation;
         } else if (element.tagName === 'IMG') {
           element.alt = translation;
         } else {
-          // Check if translation contains HTML tags
           if (translation.includes('<')) {
             element.innerHTML = translation;
           } else {
@@ -103,7 +123,6 @@ class I18n {
       }
     });
 
-    // Translate elements with data-i18n-title
     const titleElements = document.querySelectorAll('[data-i18n-title]');
     titleElements.forEach(element => {
       const key = element.getAttribute('data-i18n-title');
@@ -113,7 +132,6 @@ class I18n {
       }
     });
 
-    // Translate elements with data-i18n-aria-label
     const ariaElements = document.querySelectorAll('[data-i18n-aria-label]');
     ariaElements.forEach(element => {
       const key = element.getAttribute('data-i18n-aria-label');
@@ -124,7 +142,12 @@ class I18n {
     });
   }
 
-  // Change language
+  /**
+   * Cambia el idioma actual y recarga las traducciones.
+   * Actualiza el DOM, guarda en localStorage y dispara eventos.
+   * @param {string} lang - Código del nuevo idioma.
+   * @returns {Promise<boolean>} True si el cambio fue exitoso.
+   */
   async changeLanguage(lang) {
     if (!this.isValidLanguage(lang)) {
       console.error(`Invalid language: ${lang}`);
@@ -132,26 +155,20 @@ class I18n {
     }
 
     if (lang === this.currentLang) {
-      return true; // Already current language
+      return true;
     }
 
     this.currentLang = lang;
     this.isLoaded = false;
 
-    // Update HTML lang attribute
     document.documentElement.lang = lang;
-
-    // Save to localStorage
     localStorage.setItem('language', lang);
 
-    // Reload translations
     const success = await this.loadTranslations();
     if (success) {
       this.translatePage();
-      // Update dynamic elements
       updateOptionsMenu();
       updateTopbar();
-      // Dispatch custom event for other modules to react
       window.dispatchEvent(new CustomEvent('languageChanged', {
         detail: { language: lang }
       }));
@@ -160,12 +177,18 @@ class I18n {
     return success;
   }
 
-  // Get current language
+  /**
+   * Obtiene el código del idioma actualmente activo.
+   * @returns {string} Código del idioma actual.
+   */
   getCurrentLanguage() {
     return this.currentLang;
   }
 
-  // Get available languages
+  /**
+   * Obtiene la lista de idiomas disponibles con sus nombres y banderas.
+   * @returns {Array<{code: string, name: string, flag: string}>} Array de objetos de idiomas.
+   */
   getAvailableLanguages() {
     return [
       { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -173,12 +196,14 @@ class I18n {
     ];
   }
 
-  // Initialize i18n system
+  /**
+   * Inicializa el sistema de i18n cargando traducciones y traduciendo la página.
+   * @returns {Promise<boolean>} True si la inicialización fue exitosa.
+   */
   async init() {
     const success = await this.loadTranslations();
     if (success) {
       this.translatePage();
-      // Initialize buttons after translations are loaded
       setTimeout(() => updateLanguageButton(), 0);
       setTimeout(() => updateOptionsMenu(), 0);
       setTimeout(() => updateTopbar(), 0);
@@ -187,13 +212,15 @@ class I18n {
   }
 }
 
-// Create global i18n instance
+/**
+ * Instancia global de la clase I18n.
+ * @type {I18n}
+ */
 const i18n = new I18n();
 
-// Note: i18n is now initialized immediately when script loads
-// No need for DOMContentLoaded listener
-
-// Language selector functions
+/**
+ * Alterna la visibilidad del menú de selección de idioma.
+ */
 function toggleLanguageMenu() {
   const menu = document.getElementById('lang-menu-mobile') || document.getElementById('lang-menu');
   if (menu) {
@@ -201,12 +228,19 @@ function toggleLanguageMenu() {
   }
 }
 
+/**
+ * Cambia al siguiente idioma disponible (es -> en -> es).
+ */
 function toggleLanguage() {
   const current = i18n.getCurrentLanguage();
   const next = current === 'es' ? 'en' : 'es';
   changeLanguage(next);
 }
 
+/**
+ * Cambia el idioma usando la instancia i18n.
+ * @param {string} lang - Código del idioma.
+ */
 function changeLanguage(lang) {
   i18n.changeLanguage(lang).then(success => {
     if (success) {
@@ -216,6 +250,9 @@ function changeLanguage(lang) {
   });
 }
 
+/**
+ * Actualiza el botón de idioma con el idioma actual.
+ */
 function updateLanguageButton() {
   const currentLang = i18n.getCurrentLanguage();
   const languages = i18n.getAvailableLanguages();
@@ -230,6 +267,9 @@ function updateLanguageButton() {
   }
 }
 
+/**
+ * Oculta el menú de selección de idioma.
+ */
 function closeLanguageMenu() {
   const menu = document.getElementById('lang-menu-mobile') || document.getElementById('lang-menu');
   if (menu) {
@@ -251,7 +291,9 @@ window.addEventListener('languageChanged', () => {
   updateLanguageButton();
 });
 
-// Update topbar function
+/**
+ * Actualiza la topbar con el breadcrumb actual.
+ */
 function updateTopbar() {
   const topbarEl = document.querySelector('header[role="banner"]');
   if (topbarEl) {
@@ -278,7 +320,9 @@ window.changeLanguage = changeLanguage;
 window.updateLanguageButton = updateLanguageButton;
 window.closeLanguageMenu = closeLanguageMenu;
 
-// Debug function for development
+/**
+ * Función de depuración que imprime información sobre el estado de i18n.
+ */
 window.debugI18n = function() {
   console.log('=== i18n Debug Info ===');
   console.log('Current Language:', i18n.getCurrentLanguage());
@@ -319,7 +363,9 @@ window.i18n = i18n;
   });
 })();
 
-// Insert topbar function
+/**
+ * Inserta la topbar en el DOM reemplazando el placeholder.
+ */
 function insertTopbar() {
   const topbarEl = document.getElementById('topbar-placeholder');
   if (topbarEl) {

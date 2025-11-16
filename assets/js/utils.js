@@ -1,4 +1,3 @@
-// Intersection Observer for stagger animations
 document.addEventListener('DOMContentLoaded', function () {
   const observerOptions = {
     threshold: 0.1,
@@ -14,24 +13,27 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }, observerOptions);
 
-  // Observe the main content area
   const main = document.querySelector('main');
   if (main) {
     observer.observe(main);
   }
 });
 
-// Stagger animation function for all blocks
+/**
+ * Anima los bloques de contenido con un retraso escalonado.
+ */
 function staggerAnimateBlocks() {
   const blocks = document.querySelectorAll('.notion-block');
   blocks.forEach((block, index) => {
     setTimeout(() => {
       block.classList.add('animate-in');
-    }, index * 100); // 100ms stagger
+    }, index * 100);
   });
 }
 
-// Share page functionality
+/**
+ * Comparte la página actual usando la API nativa o clipboard.
+ */
 function sharePage() {
   const url = window.location.href;
   const title = document.title;
@@ -42,12 +44,9 @@ function sharePage() {
       url: url
     }).catch(console.error);
   } else {
-    // Fallback: copy to clipboard
     navigator.clipboard.writeText(url).then(() => {
-      // Show temporary feedback
       showShareFeedback('Enlace copiado al portapapeles');
     }).catch(() => {
-      // Fallback for older browsers
       const textArea = document.createElement('textarea');
       textArea.value = url;
       document.body.appendChild(textArea);
@@ -59,6 +58,10 @@ function sharePage() {
   }
 }
 
+/**
+ * Muestra un mensaje de feedback temporal después de compartir.
+ * @param {string} message - Mensaje a mostrar.
+ */
 function showShareFeedback(message) {
   const feedback = document.createElement('div');
   feedback.textContent = window.i18n ? window.i18n.t('common.linkCopied') : message;
@@ -69,7 +72,9 @@ function showShareFeedback(message) {
   }, 2000);
 }
 
-// Options menu functions
+/**
+ * Alterna la visibilidad del menú de opciones.
+ */
 function toggleOptionsMenu() {
   const menu = document.getElementById('options-menu');
   if (menu) {
@@ -77,8 +82,10 @@ function toggleOptionsMenu() {
   }
 }
 
+/**
+ * Descarga el CV creando un enlace temporal.
+ */
 function downloadCV() {
-  // Download CV PDF (replace with your actual CV file)
   const link = document.createElement('a');
   link.href = 'assets/cv.pdf';
   link.download = 'David_Vargas_CV.pdf';
@@ -88,9 +95,10 @@ function downloadCV() {
   closeOptionsMenu();
 }
 
-// Update options menu text
+/**
+ * Actualiza el menú de opciones con el estado actual de tema y modo lectura.
+ */
 function updateOptionsMenu() {
-  // Reading mode
   const readingModeEnabled = localStorage.getItem('readingMode') === 'true';
   const readingBtn = document.getElementById('reading-mode-btn');
   if (readingBtn) {
@@ -102,7 +110,6 @@ function updateOptionsMenu() {
     }
   }
 
-  // Theme
   const isDark = document.documentElement.classList.contains('dark');
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
@@ -115,16 +122,17 @@ function updateOptionsMenu() {
   }
 }
 
+/**
+ * Alterna el modo de lectura guardando en localStorage.
+ */
 function toggleReadingMode() {
     const body = document.body;
     const isReadingMode = body.classList.contains('reading-mode');
 
     if (isReadingMode) {
-        // Exit reading mode
         body.classList.remove('reading-mode');
         localStorage.setItem('readingMode', 'false');
     } else {
-        // Enter reading mode
         body.classList.add('reading-mode');
         localStorage.setItem('readingMode', 'true');
     }
@@ -133,17 +141,26 @@ function toggleReadingMode() {
     closeOptionsMenu();
 }
 
-// Validate reading mode
+/**
+ * Obtiene el estado validado del modo lectura.
+ * @returns {boolean} True si está habilitado.
+ */
 function getValidatedReadingMode() {
     const saved = localStorage.getItem('readingMode');
     return saved === 'true';
 }
 
+/**
+ * Abre el repositorio de GitHub en una nueva pestaña.
+ */
 function viewSourceCode() {
   window.open('https://github.com/DavidDevGt/davidwebgt', '_blank');
   closeOptionsMenu();
 }
 
+/**
+ * Oculta el menú de opciones.
+ */
 function closeOptionsMenu() {
   const menu = document.getElementById('options-menu');
   if (menu) {
@@ -151,7 +168,6 @@ function closeOptionsMenu() {
   }
 }
 
-// Close menu when clicking outside
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('options-menu');
   const btn = document.getElementById('options-btn');
@@ -160,7 +176,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Add ⌘K listener
 document.addEventListener('keydown', (e) => {
   if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
     e.preventDefault();
@@ -168,5 +183,4 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Make updateOptionsMenu globally available
 window.updateOptionsMenu = updateOptionsMenu;
