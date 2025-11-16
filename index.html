@@ -40,15 +40,15 @@
   <link rel="preload" href="assets/cv.pdf" as="document" type="application/pdf">
 
   <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
 
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="assets/css/_variables.css">
-  <link rel="stylesheet" href="assets/css/_base.css">
-  <link rel="stylesheet" href="assets/css/_layout.css">
-  <link rel="stylesheet" href="assets/css/_components.css">
-  <link rel="stylesheet" href="assets/css/_utilities.css">
-  <link rel="stylesheet" href="assets/css/_responsive.css">
+  <!-- Non-critical styles -->
+  <link rel="preload" href="assets/css/_variables.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="assets/css/_base.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="assets/css/_layout.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="assets/css/_components.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="assets/css/_utilities.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="assets/css/_responsive.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
@@ -80,6 +80,195 @@
       }
     })();
   </script>
+
+  <!-- Critical CSS -->
+  <style>
+    :root {
+      --notion-max-width: 900px;
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --text-size-h1: 32px;
+      --text-size-h2: 24px;
+      --text-size-body: 16px;
+      --block-vertical-padding: 3px;
+      --block-horizontal-padding: 2px;
+      --ui-bg: #FFFFFF;
+      --ui-sidebar-bg: #FFFFFF;
+      --ui-hover: #F7F7F5;
+      --ui-border: rgba(55, 53, 47, 0.09);
+      --page-bg: #FFFFFF;
+      --text-primary: #37352F;
+      --text-secondary: rgba(55, 53, 47, 0.6);
+      --text-tertiary: rgba(55, 53, 47, 0.4);
+      --accent-blue: #0A7AFF;
+      --accent-blue-light: #F0F6FF;
+    }
+
+    html.dark {
+      --ui-bg: #191919;
+      --ui-sidebar-bg: #191919;
+      --ui-hover: rgba(255, 255, 255, 0.08);
+      --ui-border: rgba(255, 255, 255, 0.12);
+      --page-bg: #191919;
+      --text-primary: #EAEAEA;
+      --text-secondary: #B8B8B8;
+      --text-tertiary: #8A8A8A;
+      --accent-blue: #3291FF;
+      --accent-blue-light: rgba(50, 145, 255, 0.15);
+    }
+
+    html {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body {
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: clamp(14px, 4vw, 16px);
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--text-primary);
+      background-color: var(--page-bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1 {
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0;
+      padding: 8px 0 2px 0;
+    }
+
+    h2 {
+      font-size: clamp(20px, 4vw, 24px);
+      font-weight: 600;
+      line-height: 1.2;
+      margin: 0;
+      padding: 6px 0 2px 0;
+    }
+
+    button {
+      padding: 5px 10px;
+      border-radius: 3px;
+      border: 1px solid var(--ui-border);
+      background-color: var(--ui-bg);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+
+    button:hover {
+      background-color: var(--ui-hover);
+      border-color: var(--ui-border);
+    }
+
+    button:active {
+      transform: scale(0.99);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      transition: opacity 0.15s ease;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    [contenteditable]:focus-visible {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 1px;
+      border-radius: 3px;
+      box-shadow: none;
+    }
+
+    [contenteditable]:empty:before {
+      content: attr(placeholder);
+      color: var(--text-tertiary);
+      pointer-events: none;
+      font-weight: 400;
+    }
+
+    [contenteditable]:focus {
+      outline: none;
+      background-color: transparent;
+      border-radius: 0;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(55, 53, 47, 0.15);
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(55, 53, 47, 0.3);
+    }
+
+    html.dark ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    html.dark ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    ::selection {
+      background: var(--accent-blue-light);
+      color: var(--text-primary);
+    }
+
+    svg.lucide {
+      vertical-align: middle;
+    }
+
+    .app {
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .main {
+      flex: 1;
+      padding: var(--spacing-lg);
+      max-width: var(--notion-max-width);
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .sidebar {
+      flex: 0 0 240px;
+      background-color: var(--ui-sidebar-bg);
+      border-right: 1px solid var(--ui-border);
+      padding: var(--spacing-md) 0;
+      box-sizing: border-box;
+    }
+  </style>
 
   <title>David Vargas - Software Engineer</title>
 </head>
@@ -277,7 +466,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/i18n.js" defer></script>
   <script src="assets/js/searchIndex.js" defer></script>
   <script src="assets/js/ui.js" defer></script>
   <script src="assets/js/theme.js" defer></script>

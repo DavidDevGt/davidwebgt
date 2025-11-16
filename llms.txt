@@ -1,0 +1,8 @@
+# llms.txt - Curación de contenido para sistemas de IA
+# Portafolio de David Vargas - Software Engineer
+
+https://davidwebgt.com/ - Página principal del portafolio profesional de David Vargas, presentando su experiencia como desarrollador de software especializado en aplicaciones móviles y web.
+
+https://davidwebgt.com/proyectos.html - Sección de proyectos destacados, incluyendo casos de estudio de desarrollo de aplicaciones móviles, web y soluciones en la nube.
+
+https://davidwebgt.com/sobre-mi.html - Información detallada sobre la trayectoria profesional, habilidades técnicas y experiencia de David Vargas en el desarrollo de software.

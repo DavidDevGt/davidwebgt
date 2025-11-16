@@ -1,0 +1,4 @@
+# Configuración para X-Robots-Tag en archivos PDF
+<Files ~ "\.pdf$">
+   Header set X-Robots-Tag "noindex, nofollow"
+</Files>

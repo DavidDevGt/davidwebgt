@@ -1,0 +1,18 @@
+User-agent: *
+Disallow: /assets/cv.pdf
+Disallow: /docs/
+Sitemap: https://davidwebgt.com/sitemap.xml
+Llmstxt: https://davidwebgt.com/llms.txt
+
+# Bloquear agentes de entrenamiento de LLMs para proteger propiedad intelectual
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Anthropic AI
+Disallow: /
+
+User-agent: Cohere-ai
+Disallow: /
