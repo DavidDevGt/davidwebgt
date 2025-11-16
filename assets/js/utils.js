@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /**
- * Anima los bloques de contenido con un retraso escalonado.
+ * Animates content blocks with staggered delay.
  */
 function staggerAnimateBlocks() {
   const blocks = document.querySelectorAll('.notion-block');
@@ -32,7 +32,7 @@ function staggerAnimateBlocks() {
 }
 
 /**
- * Comparte la página actual usando la API nativa o clipboard.
+ * Shares the current page using native API or clipboard.
  */
 function sharePage() {
   const url = window.location.href;
@@ -59,8 +59,8 @@ function sharePage() {
 }
 
 /**
- * Muestra un mensaje de feedback temporal después de compartir.
- * @param {string} message - Mensaje a mostrar.
+ * Shows a temporary feedback message after sharing.
+ * @param {string} message - Message to display.
  */
 function showShareFeedback(message) {
   const feedback = document.createElement('div');
@@ -73,7 +73,7 @@ function showShareFeedback(message) {
 }
 
 /**
- * Alterna la visibilidad del menú de opciones.
+ * Toggles the visibility of the options menu.
  */
 function toggleOptionsMenu() {
   const menu = document.getElementById('options-menu');
@@ -83,7 +83,7 @@ function toggleOptionsMenu() {
 }
 
 /**
- * Descarga el CV creando un enlace temporal.
+ * Downloads the CV by creating a temporary link.
  */
 function downloadCV() {
   const link = document.createElement('a');
@@ -96,7 +96,7 @@ function downloadCV() {
 }
 
 /**
- * Actualiza el menú de opciones con el estado actual de tema y modo lectura.
+ * Updates the options menu with the current theme and reading mode state.
  */
 function updateOptionsMenu() {
   const readingModeEnabled = localStorage.getItem('readingMode') === 'true';
@@ -123,7 +123,7 @@ function updateOptionsMenu() {
 }
 
 /**
- * Alterna el modo de lectura guardando en localStorage.
+ * Toggles reading mode saving to localStorage.
  */
 function toggleReadingMode() {
     const body = document.body;
@@ -142,8 +142,8 @@ function toggleReadingMode() {
 }
 
 /**
- * Obtiene el estado validado del modo lectura.
- * @returns {boolean} True si está habilitado.
+ * Gets the validated reading mode state.
+ * @returns {boolean} True if enabled.
  */
 function getValidatedReadingMode() {
     const saved = localStorage.getItem('readingMode');
@@ -151,7 +151,7 @@ function getValidatedReadingMode() {
 }
 
 /**
- * Abre el repositorio de GitHub en una nueva pestaña.
+ * Opens the GitHub repository in a new tab.
  */
 function viewSourceCode() {
   window.open('https://github.com/DavidDevGt/davidwebgt', '_blank');
@@ -159,7 +159,7 @@ function viewSourceCode() {
 }
 
 /**
- * Oculta el menú de opciones.
+ * Hides the options menu.
  */
 function closeOptionsMenu() {
   const menu = document.getElementById('options-menu');

@@ -1,13 +1,27 @@
 /**
- * Nombre del cache para la versión actual del service worker.
+ * Cache name for the current service worker version.
+ * Used to uniquely identify cache storage and enable versioning.
+ * Update this string on each deployment to invalidate old caches.
  * @constant {string}
+ * @example
+ * // Usage in cache operations
+ * caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache));
  */
 const CACHE_NAME = 'david-vargas-portfolio-v1';
 
 /**
- * Lista de URLs a cachear durante la instalación del service worker.
- * Incluye páginas, assets y recursos externos necesarios.
+ * Array of URLs to cache during service worker installation.
+ * Includes essential pages, scripts, styles, fonts, and external resources for offline functionality.
  * @constant {string[]}
+ * @typedef {string} CacheUrl - A valid URL string for caching
+ * @example
+ * // Check if a URL is in the cache list
+ * if (urlsToCache.includes(event.request.url)) {
+ *   // Handle cached resource
+ * }
+ * @example
+ * // External dependency
+ * 'https://cdn.tailwindcss.com' // Tailwind CSS CDN
  */
 const urlsToCache = [
     '/',
@@ -32,8 +46,17 @@ const urlsToCache = [
 ];
 
 /**
- * Evento de instalación del service worker.
- * Cachea los recursos especificados en urlsToCache.
+ * Handles the service worker 'install' event.
+ * Opens the cache and adds all essential URLs for offline functionality.
+ * @param {ExtendableEvent} event - The install event, extended until caching completes.
+ * @returns {Promise<void>} Resolves when all URLs are cached.
+ * @throws {Error} If cache operations fail critically (logged, install continues).
+ * @example
+ * // Triggered automatically on SW registration
+ * navigator.serviceWorker.register('sw.js');
+ * @example
+ * // Error case: network unavailable for external URLs
+ * // Logs 'Cache addAll failed:' but completes install
  */
 self.addEventListener('install', event => {
     event.waitUntil(
@@ -46,8 +69,18 @@ self.addEventListener('install', event => {
 });
 
 /**
- * Evento de fetch del service worker.
- * Implementa estrategia Stale While Revalidate para recursos cacheados.
+ * Handles fetch events with 'stale while revalidate' strategy.
+ * Serves cached response immediately, then updates cache asynchronously.
+ * @param {FetchEvent} event - The fetch event containing request details.
+ * @example
+ * // Cached request: serves stale, updates in background
+ * fetch('/api/data'); // Returns cached, fetches fresh
+ * @example
+ * // Navigation offline: serves /index.html
+ * // When online navigation fails
+ * @example
+ * // Cross-origin request: passes through unchanged
+ * fetch('https://external.com/api'); // No caching
  */
 self.addEventListener('fetch', event => {
     // Skip cross-origin requests
@@ -91,8 +124,13 @@ self.addEventListener('fetch', event => {
 });
 
 /**
- * Evento de activación del service worker.
- * Limpia caches antiguos que no coincidan con CACHE_NAME.
+ * Handles activation event by cleaning old caches.
+ * Deletes caches not matching current CACHE_NAME to free storage.
+ * @param {ExtendableEvent} event - The activate event.
+ * @returns {Promise<void>} Resolves when cleanup is complete.
+ * @example
+ * // Automatic cleanup on SW update
+ * // Old 'portfolio-v0' cache deleted, 'portfolio-v1' retained
  */
 self.addEventListener('activate', event => {
     event.waitUntil(

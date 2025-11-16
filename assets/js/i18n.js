@@ -1,11 +1,23 @@
 /**
- * Clase para manejar internacionalización (i18n) del sitio web.
- * Gestiona la carga de traducciones, cambio de idioma y traducción de elementos DOM.
+ * @typedef {Object} LanguageInfo
+ * @property {string} code - Language code ('es' or 'en')
+ * @property {string} name - Display name
+ * @property {string} flag - Flag emoji
+ */
+
+/**
+ * Class for handling website internationalization (i18n).
+ * Manages translation loading, language switching, and DOM translation.
+ * Supports English and Spanish with localStorage persistence.
+ * @example
+ * const i18n = new I18n();
+ * await i18n.init();
+ * console.log(i18n.t('nav.home')); // 'Home' or 'Inicio'
  */
 class I18n {
   /**
-   * Crea una instancia de I18n.
-   * Detecta automáticamente el idioma del navegador o usa el guardado en localStorage.
+   * Creates an instance of I18n.
+   * Automatically detects browser language or uses the one saved in localStorage.
    */
   constructor() {
     this.currentLang = this.detectLanguage();
@@ -14,9 +26,11 @@ class I18n {
   }
 
   /**
-   * Detecta el idioma preferido del usuario.
-   * Primero verifica localStorage, luego el idioma del navegador.
-   * @returns {string} Código del idioma ('es' o 'en').
+   * Detects the user's preferred language.
+   * First checks localStorage, then browser language.
+   * @returns {string} Language code ('es' or 'en').
+   * @example
+   * const lang = i18n.detectLanguage(); // 'es' or 'en'
    */
   detectLanguage() {
     const saved = localStorage.getItem('language');
@@ -35,17 +49,24 @@ class I18n {
   }
 
   /**
-   * Verifica si un idioma es válido.
-   * @param {string} lang - Código del idioma a verificar.
-   * @returns {boolean} True si el idioma es válido.
+   * Verifies if a language is valid.
+   * @param {string} lang - Language code to verify.
+   * @returns {boolean} True if the language is valid.
+   * @example
+   * i18n.isValidLanguage('es'); // true
+   * i18n.isValidLanguage('fr'); // false
    */
   isValidLanguage(lang) {
     return ['es', 'en'].includes(lang);
   }
 
   /**
-   * Carga las traducciones para el idioma actual desde un archivo JSON.
-   * @returns {Promise<boolean>} True si la carga fue exitosa.
+   * Loads translations for the current language from a JSON file.
+   * @returns {Promise<boolean>} True if loading was successful.
+   * @throws {Error} If fetch fails or JSON is invalid.
+   * @example
+   * const success = await i18n.loadTranslations();
+   * if (!success) console.error('Failed to load translations');
    */
   async loadTranslations() {
     try {
@@ -67,11 +88,14 @@ class I18n {
   }
 
   /**
-   * Traduce una clave usando las traducciones cargadas.
-   * Soporta claves anidadas con puntos (ej: 'nav.home').
-   * @param {string} key - Clave de traducción.
-   * @param {string} [fallback=''] - Texto de respaldo si no se encuentra la traducción.
-   * @returns {string} Texto traducido o fallback.
+   * Translates a key using loaded translations.
+   * Supports nested keys with dots (e.g., 'nav.home').
+   * @param {string} key - Translation key.
+   * @param {string} [fallback=''] - Fallback text if translation is not found.
+   * @returns {string} Translated text or fallback.
+   * @example
+   * i18n.t('nav.home'); // 'Home'
+   * i18n.t('nonexistent', 'Default'); // 'Default'
    */
   t(key, fallback = '') {
     if (!this.isLoaded) {
@@ -94,8 +118,11 @@ class I18n {
   }
 
   /**
-   * Traduce todos los elementos DOM que tienen atributos data-i18n.
-   * Actualiza texto, placeholders, alt, title y aria-label según corresponda.
+   * Translates all DOM elements that have data-i18n attributes.
+   * Updates text, placeholders, alt, title, and aria-label as appropriate.
+   * @example
+   * // HTML: <span data-i18n="nav.home"></span>
+   * i18n.translatePage(); // Updates span text to 'Home'
    */
   translatePage() {
     if (!this.isLoaded) {
@@ -143,10 +170,13 @@ class I18n {
   }
 
   /**
-   * Cambia el idioma actual y recarga las traducciones.
-   * Actualiza el DOM, guarda en localStorage y dispara eventos.
-   * @param {string} lang - Código del nuevo idioma.
-   * @returns {Promise<boolean>} True si el cambio fue exitoso.
+   * Changes the current language and reloads translations.
+   * Updates the DOM, saves to localStorage, and fires events.
+   * @param {string} lang - Code of the new language.
+   * @returns {Promise<boolean>} True if the change was successful.
+   * @fires languageChanged - When language change completes.
+   * @example
+   * await i18n.changeLanguage('es'); // Changes to Spanish
    */
   async changeLanguage(lang) {
     if (!this.isValidLanguage(lang)) {
@@ -178,16 +208,21 @@ class I18n {
   }
 
   /**
-   * Obtiene el código del idioma actualmente activo.
-   * @returns {string} Código del idioma actual.
+   * Gets the code of the currently active language.
+   * @returns {string} Current language code.
+   * @example
+   * const lang = i18n.getCurrentLanguage(); // 'es' or 'en'
    */
   getCurrentLanguage() {
     return this.currentLang;
   }
 
   /**
-   * Obtiene la lista de idiomas disponibles con sus nombres y banderas.
-   * @returns {Array<{code: string, name: string, flag: string}>} Array de objetos de idiomas.
+   * Gets the list of available languages with their names and flags.
+   * @returns {Array<LanguageInfo>} Array of language objects.
+   * @example
+   * const langs = i18n.getAvailableLanguages();
+   * // [{ code: 'es', name: 'Español', flag: '🇪🇸' }, ...]
    */
   getAvailableLanguages() {
     return [
@@ -197,8 +232,10 @@ class I18n {
   }
 
   /**
-   * Inicializa el sistema de i18n cargando traducciones y traduciendo la página.
-   * @returns {Promise<boolean>} True si la inicialización fue exitosa.
+   * Initializes the i18n system by loading translations and translating the page.
+   * @returns {Promise<boolean>} True if initialization was successful.
+   * @example
+   * await i18n.init(); // Loads translations and translates DOM
    */
   async init() {
     const success = await this.loadTranslations();
@@ -213,13 +250,19 @@ class I18n {
 }
 
 /**
- * Instancia global de la clase I18n.
+ * Global singleton instance of the I18n class.
+ * Provides internationalization functionality throughout the app.
  * @type {I18n}
+ * @global
+ * @example
+ * i18n.changeLanguage('es').then(success => console.log('Language changed'));
  */
 const i18n = new I18n();
 
 /**
- * Alterna la visibilidad del menú de selección de idioma.
+ * Toggles the visibility of the language selection menu.
+ * @example
+ * toggleLanguageMenu(); // Shows/hides language menu
  */
 function toggleLanguageMenu() {
   const menu = document.getElementById('lang-menu-mobile') || document.getElementById('lang-menu');
@@ -229,7 +272,9 @@ function toggleLanguageMenu() {
 }
 
 /**
- * Cambia al siguiente idioma disponible (es -> en -> es).
+ * Changes to the next available language (es -> en -> es).
+ * @example
+ * toggleLanguage(); // Switches between 'es' and 'en'
  */
 function toggleLanguage() {
   const current = i18n.getCurrentLanguage();
@@ -238,8 +283,10 @@ function toggleLanguage() {
 }
 
 /**
- * Cambia el idioma usando la instancia i18n.
- * @param {string} lang - Código del idioma.
+ * Changes the language using the i18n instance.
+ * @param {string} lang - Language code.
+ * @example
+ * changeLanguage('en'); // Changes to English
  */
 function changeLanguage(lang) {
   i18n.changeLanguage(lang).then(success => {
@@ -251,7 +298,9 @@ function changeLanguage(lang) {
 }
 
 /**
- * Actualiza el botón de idioma con el idioma actual.
+ * Updates the language button with the current language.
+ * @example
+ * updateLanguageButton(); // Updates UI to show current language
  */
 function updateLanguageButton() {
   const currentLang = i18n.getCurrentLanguage();
@@ -268,7 +317,9 @@ function updateLanguageButton() {
 }
 
 /**
- * Oculta el menú de selección de idioma.
+ * Hides the language selection menu.
+ * @example
+ * closeLanguageMenu(); // Hides the menu
  */
 function closeLanguageMenu() {
   const menu = document.getElementById('lang-menu-mobile') || document.getElementById('lang-menu');
@@ -292,7 +343,9 @@ window.addEventListener('languageChanged', () => {
 });
 
 /**
- * Actualiza la topbar con el breadcrumb actual.
+ * Updates the topbar with the current breadcrumb.
+ * @example
+ * updateTopbar(); // Refreshes topbar content
  */
 function updateTopbar() {
   const topbarEl = document.querySelector('header[role="banner"]');
@@ -321,7 +374,9 @@ window.updateLanguageButton = updateLanguageButton;
 window.closeLanguageMenu = closeLanguageMenu;
 
 /**
- * Función de depuración que imprime información sobre el estado de i18n.
+ * Debug function that prints information about the i18n state.
+ * @example
+ * window.debugI18n(); // Logs current i18n status
  */
 window.debugI18n = function() {
   console.log('=== i18n Debug Info ===');
@@ -364,7 +419,9 @@ window.i18n = i18n;
 })();
 
 /**
- * Inserta la topbar en el DOM reemplazando el placeholder.
+ * Inserts the topbar into the DOM by replacing the placeholder.
+ * @example
+ * insertTopbar(); // Adds topbar to page
  */
 function insertTopbar() {
   const topbarEl = document.getElementById('topbar-placeholder');

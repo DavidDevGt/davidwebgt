@@ -1,6 +1,6 @@
 /**
- * Array de objetos que define los elementos de navegación principal del sitio.
- * Cada objeto representa un enlace de navegación con su ruta, ícono y texto.
+ * Array of objects defining the main navigation elements of the site.
+ * Each object represents a navigation link with its path, icon, and text.
  * @constant {Array<{href: string, icon: string, text: string}>}
  */
 const navigation = [
@@ -10,8 +10,8 @@ const navigation = [
 ];
 
 /**
- * Array de objetos que define los enlaces favoritos externos.
- * Cada objeto incluye href, icon, text y un indicador si es enlace externo.
+ * Array of objects defining external favorite links.
+ * Each object includes href, icon, text, and an indicator if it is an external link.
  * @constant {Array<{href: string, icon: string, text: string, external: boolean}>}
  */
 const favorites = [
@@ -21,10 +21,10 @@ const favorites = [
 ];
 
 /**
- * Genera el HTML completo para la sidebar del sitio web.
- * Incluye la sección de usuario, búsqueda, navegación principal, favoritos y controles de tema.
- * Utiliza los arrays navigation y favorites para construir los enlaces dinámicamente.
- * @returns {string} El HTML de la sidebar como una cadena de texto.
+ * Generates the complete HTML for the site sidebar.
+ * Includes user section, search, main navigation, favorites, and theme controls.
+ * Uses the navigation and favorites arrays to dynamically build the links.
+ * @returns {string} The sidebar HTML as a text string.
  */
 function generateSidebar() {
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
@@ -84,11 +84,11 @@ function generateSidebar() {
 }
 
 /**
- * Genera el HTML para la topbar del sitio web con breadcrumb y controles de navegación.
- * Incluye breadcrumb, botones de compartir, menú de opciones (descargar CV, modo lectura, ver código fuente),
- * y en móviles, controles de idioma y tema.
- * @param {string[]} breadcrumb - Array de strings que representan el breadcrumb de navegación.
- * @returns {string} El HTML de la topbar como una cadena de texto.
+ * Generates the HTML for the site topbar with breadcrumb and navigation controls.
+ * Includes breadcrumb, share buttons, options menu (download CV, reading mode, view source code),
+ * and on mobile, language and theme controls.
+ * @param {string[]} breadcrumb - Array of strings representing the navigation breadcrumb.
+ * @returns {string} The topbar HTML as a text string.
  */
 function generateTopbar(breadcrumb) {
     const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'es';
@@ -188,8 +188,8 @@ function generateTopbar(breadcrumb) {
 }
 
 /**
- * Alterna la visibilidad de una lista colapsable rotando la flecha y mostrando/ocultando el contenido.
- * @param {HTMLElement} element - El elemento HTML que contiene la flecha y activa el toggle.
+ * Toggles the visibility of a collapsible list by rotating the arrow and showing/hiding the content.
+ * @param {HTMLElement} element - The HTML element containing the arrow and triggering the toggle.
  */
 function toggleList(element) {
     const arrow = element.querySelector('.toggle-arrow');
@@ -205,9 +205,9 @@ function toggleList(element) {
 }
 
 /**
- * Actualiza la topbar existente reemplazando su contenido con nuevos datos de breadcrumb.
- * Lee el breadcrumb del atributo data-breadcrumb del elemento header y regenera la topbar.
- * También recrea los íconos de Lucide si están disponibles.
+ * Updates the existing topbar by replacing its content with new breadcrumb data.
+ * Reads the breadcrumb from the data-breadcrumb attribute of the header element and regenerates the topbar.
+ * Also recreates Lucide icons if available.
  */
 function updateTopbar() {
   const topbarEl = document.querySelector('header[role="banner"]');
@@ -230,9 +230,9 @@ function updateTopbar() {
 window.updateTopbar = updateTopbar;
 
 /**
- * Inserta la topbar en el DOM reemplazando el elemento placeholder con id 'topbar-placeholder'.
- * Obtiene el breadcrumb del atributo data-breadcrumb del placeholder o usa un valor por defecto.
- * También recrea los íconos de Lucide si están disponibles.
+ * Inserts the topbar into the DOM by replacing the placeholder element with id 'topbar-placeholder'.
+ * Gets the breadcrumb from the placeholder's data-breadcrumb attribute or uses a default value.
+ * Also recreates Lucide icons if available.
  */
 function insertTopbar() {
     const topbarEl = document.getElementById('topbar-placeholder');

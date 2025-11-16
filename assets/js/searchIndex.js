@@ -1,6 +1,6 @@
 /**
- * Índice de búsqueda para el sitio web.
- * Contiene objetos con información de páginas para búsqueda local.
+ * Search index for the website.
+ * Contains objects with page information for local search.
  * @constant {Array<{id: string, page: string, url: string, title: string, content: string, keywords: string[]}>}
  */
 const searchIndex = [

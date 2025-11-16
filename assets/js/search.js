@@ -1,6 +1,6 @@
 /**
- * Abre el modal de búsqueda creando el HTML si no existe.
- * Enfoca el input de búsqueda y recrea íconos de Lucide.
+ * Opens the search modal by creating the HTML if it doesn't exist.
+ * Focuses the search input and recreates Lucide icons.
  */
 function openSearchModal() {
     let modal = document.getElementById('search-modal');
@@ -36,7 +36,7 @@ function openSearchModal() {
 }
 
 /**
- * Cierra el modal de búsqueda removiendo la clase 'show'.
+ * Closes the search modal by removing the 'show' class.
  */
 function closeSearchModal() {
     const modal = document.getElementById('search-modal');
@@ -46,9 +46,9 @@ function closeSearchModal() {
 }
 
 /**
- * Realiza la búsqueda en el índice basado en la consulta.
- * Filtra por título, contenido y palabras clave, ordena resultados.
- * @param {string} query - La consulta de búsqueda.
+ * Performs search on the index based on the query.
+ * Filters by title, content, and keywords, sorts results.
+ * @param {string} query - The search query.
  */
 function performSearch(query) {
     if (!query.trim()) {
@@ -79,10 +79,10 @@ function performSearch(query) {
 }
 
 /**
- * Renderiza los resultados de búsqueda en el contenedor.
- * Si no hay resultados, muestra un mensaje.
- * @param {Array} results - Array de resultados de búsqueda.
- * @param {string} query - La consulta original.
+ * Renders search results in the container.
+ * If no results, shows a message.
+ * @param {Array} results - Array of search results.
+ * @param {string} query - The original query.
  */
 function renderResults(results, query) {
     const container = document.getElementById('search-results');
@@ -119,9 +119,9 @@ function renderResults(results, query) {
 }
 
 /**
- * Escapa caracteres HTML para prevenir XSS.
- * @param {string} text - Texto a escapar.
- * @returns {string} Texto escapado.
+ * Escapes HTML characters to prevent XSS.
+ * @param {string} text - Text to escape.
+ * @returns {string} Escaped text.
  */
 function escapeHtml(text) {
     const div = document.createElement('div');
@@ -130,10 +130,10 @@ function escapeHtml(text) {
 }
 
 /**
- * Resalta el texto de la consulta en el contenido usando <mark>.
- * @param {string} text - Texto original.
- * @param {string} query - Consulta a resaltar.
- * @returns {string} Texto con resaltado.
+ * Highlights the query text in the content using <mark>.
+ * @param {string} text - Original text.
+ * @param {string} query - Query to highlight.
+ * @returns {string} Text with highlighting.
  */
 function highlightText(text, query) {
     const escapedText = escapeHtml(text);

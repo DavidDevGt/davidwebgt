@@ -1,6 +1,6 @@
 /**
- * Alterna entre tema claro y oscuro.
- * Actualiza localStorage y llama a updateOptionsMenu y updateTopbar.
+ * Toggles between light and dark theme.
+ * Updates localStorage and calls updateOptionsMenu and updateTopbar.
  */
 function toggleTheme() {
     const html = document.documentElement;
@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /**
- * Obtiene el tema validado desde localStorage.
- * @returns {string|null} 'dark', 'light' o null.
+ * Gets the validated theme from localStorage.
+ * @returns {string|null} 'dark', 'light', or null.
  */
 function getValidatedTheme() {
     const savedTheme = localStorage.getItem('theme');
@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /**
- * Obtiene el estado validado del modo lectura desde localStorage.
- * @returns {boolean} True si está habilitado.
+ * Gets the validated reading mode state from localStorage.
+ * @returns {boolean} True if enabled.
  */
 function getValidatedReadingMode() {
     const saved = localStorage.getItem('readingMode');
