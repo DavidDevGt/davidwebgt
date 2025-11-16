@@ -89,32 +89,38 @@ function downloadCV() {
 }
 
 function toggleReadingMode() {
-  const body = document.body;
-  const isReadingMode = body.classList.contains('reading-mode');
-  const btn = document.getElementById('reading-mode-btn');
+    const body = document.body;
+    const isReadingMode = body.classList.contains('reading-mode');
+    const btn = document.getElementById('reading-mode-btn');
 
-  if (isReadingMode) {
-    // Exit reading mode
-    body.classList.remove('reading-mode');
-    localStorage.setItem('readingMode', 'false');
-    if (btn) {
-      btn.innerHTML = '<i data-lucide="book-open"></i><span>Modo Lectura</span>';
+    if (isReadingMode) {
+        // Exit reading mode
+        body.classList.remove('reading-mode');
+        localStorage.setItem('readingMode', 'false');
+        if (btn) {
+            btn.innerHTML = '<i data-lucide="book-open"></i><span>Modo Lectura</span>';
+        }
+    } else {
+        // Enter reading mode
+        body.classList.add('reading-mode');
+        localStorage.setItem('readingMode', 'true');
+        if (btn) {
+            btn.innerHTML = '<i data-lucide="book"></i><span>Salir Modo Lectura</span>';
+        }
     }
-  } else {
-    // Enter reading mode
-    body.classList.add('reading-mode');
-    localStorage.setItem('readingMode', 'true');
-    if (btn) {
-      btn.innerHTML = '<i data-lucide="book"></i><span>Salir Modo Lectura</span>';
+
+    // Re-create icons after changing innerHTML
+    if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons();
     }
-  }
 
-  // Re-create icons after changing innerHTML
-  if (typeof lucide !== 'undefined' && lucide.createIcons) {
-    lucide.createIcons();
-  }
+    closeOptionsMenu();
+}
 
-  closeOptionsMenu();
+// Validate reading mode
+function getValidatedReadingMode() {
+    const saved = localStorage.getItem('readingMode');
+    return saved === 'true';
 }
 
 function viewSourceCode() {

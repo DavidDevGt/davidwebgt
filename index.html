@@ -34,6 +34,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -45,15 +46,10 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0A7AFF">
 
-  <!-- Theme script -->
-  <script>
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      document.documentElement.classList.add('dark');
-      if (!savedTheme) localStorage.setItem('theme', 'dark');
-    }
-  </script>
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+
+  <!-- Theme script moved to theme.js -->
 
   <title>David Vargas - Software Engineer</title>
 </head>
@@ -96,7 +92,7 @@
         <a href="proyectos.html"
           class="nav-link flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-sm">
           <i data-lucide="briefcase" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
-          <span>Proyectos</span>
+          <span>Mis Proyectos</span>
         </a>
 
         <a href="sobre-mi.html"
@@ -240,13 +236,13 @@
   </div>
 
   <!-- Scripts -->
-  <script src="assets/js/searchIndex.js"></script>
-  <script src="assets/js/ui.js"></script>
-  <script src="assets/js/theme.js"></script>
-  <script src="assets/js/search.js"></script>
-  <script src="assets/js/utils.js"></script>
-  <script src="assets/js/script.js"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="assets/js/searchIndex.js" defer></script>
+  <script src="assets/js/ui.js" defer></script>
+  <script src="assets/js/theme.js" defer></script>
+  <script src="assets/js/search.js" defer></script>
+  <script src="assets/js/utils.js" defer></script>
+  <script src="assets/js/script.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
 
 </body>
 

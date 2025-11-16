@@ -75,20 +75,47 @@ function performSearch(query) {
 
 function renderResults(results, query) {
     const container = document.getElementById('search-results');
+    container.innerHTML = ''; // Clear previous results
     if (results.length === 0) {
-        container.innerHTML = '<div class="p-4 text-[var(--text-secondary)]">No se encontraron resultados</div>';
+        const noResults = document.createElement('div');
+        noResults.className = 'p-4 text-[var(--text-secondary)]';
+        noResults.textContent = 'No se encontraron resultados';
+        container.appendChild(noResults);
         return;
     }
-    container.innerHTML = results.map(result => `
-    <a href="${result.url}" class="block p-4 border-b border-[var(--ui-border)] hover:bg-[var(--ui-hover)] last:border-b-0">
-      <div class="font-semibold text-[var(--text-primary)]">${highlightText(result.title, query)}</div>
-      <div class="text-sm text-[var(--text-secondary)]">${result.page}</div>
-      <div class="text-sm text-[var(--text-secondary)] mt-1">${highlightText(result.content.substring(0, 100), query)}...</div>
-    </a>
-  `).join('');
+    results.forEach(result => {
+        const link = document.createElement('a');
+        link.href = result.url;
+        link.className = 'block p-4 border-b border-[var(--ui-border)] hover:bg-[var(--ui-hover)] last:border-b-0';
+
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'font-semibold text-[var(--text-primary)]';
+        titleDiv.innerHTML = highlightText(result.title, query);
+
+        const pageDiv = document.createElement('div');
+        pageDiv.className = 'text-sm text-[var(--text-secondary)]';
+        pageDiv.textContent = result.page;
+
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'text-sm text-[var(--text-secondary)] mt-1';
+        contentDiv.innerHTML = highlightText(result.content.substring(0, 100), query) + '...';
+
+        link.appendChild(titleDiv);
+        link.appendChild(pageDiv);
+        link.appendChild(contentDiv);
+        container.appendChild(link);
+    });
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 function highlightText(text, query) {
-    const regex = new RegExp(`(${query})`, 'gi');
-    return text.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-600">$1</mark>');
+    const escapedText = escapeHtml(text);
+    const escapedQuery = escapeHtml(query);
+    const regex = new RegExp(`(${escapedQuery})`, 'gi');
+    return escapedText.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-600">$1</mark>');
 }

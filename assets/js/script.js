@@ -2,19 +2,30 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Register service worker
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('../sw.js')
       .then(registration => {
-        console.log('Service Worker registered successfully:', registration);
+        // Service Worker registered
       })
       .catch(error => {
-        console.log('Service Worker registration failed:', error);
+        // Service Worker registration failed
       });
   }
 
   // Insert topbar
   const topbarEl = document.getElementById('topbar-placeholder');
   if (topbarEl) {
-    const breadcrumb = topbarEl.dataset.breadcrumb ? JSON.parse(topbarEl.dataset.breadcrumb) : ['Workspace'];
+    let breadcrumb = ['Workspace'];
+    try {
+      const data = topbarEl.dataset.breadcrumb;
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed) && parsed.every(item => typeof item === 'string')) {
+          breadcrumb = parsed;
+        }
+      }
+    } catch (e) {
+      console.warn('Invalid breadcrumb data:', e);
+    }
     topbarEl.outerHTML = generateTopbar(breadcrumb);
   }
 
