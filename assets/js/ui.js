@@ -72,6 +72,12 @@ function generateSidebar() {
 // Generate topbar HTML
 function generateTopbar(breadcrumb) {
     const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'es';
+    const languages = window.i18n ? window.i18n.getAvailableLanguages() : [{ code: 'es', name: 'Español', flag: '🇪🇸' }, { code: 'en', name: 'English', flag: '🇺🇸' }];
+    const current = languages.find(lang => lang.code === currentLang) || languages[0];
+    const isMobile = window.innerWidth < 768;
+    const themeIcon = document.documentElement.classList.contains('dark') ? 'sun' : 'moon';
+    const themeText = window.i18n ? window.i18n.t('nav.theme', 'Cambiar Tema') : 'Cambiar Tema';
+
     const fallbacks = {
       es: {
         readingMode: 'Modo Lectura',
@@ -129,19 +135,30 @@ function generateTopbar(breadcrumb) {
           <button onclick="sharePage()" class="hover:bg-[var(--ui-hover)] px-2 py-1 rounded cursor-pointer">${shareText}</button>
           <div class="relative">
             <button onclick="toggleOptionsMenu()" class="hover:bg-[var(--ui-hover)] px-2 py-1 rounded cursor-pointer" id="options-btn">•••</button>
-            <div id="options-menu" class="absolute right-0 top-full mt-1 py-1 hidden z-10">
-              <button onclick="downloadCV()">
-                <i data-lucide="download"></i>
+            <div id="options-menu" class="absolute right-0 top-full mt-1 py-1 hidden z-10" style="background-color: var(--ui-bg); border: 1px solid var(--ui-border); border-radius: 6px; min-width: 180px;">
+              <button onclick="downloadCV()" class="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-[var(--ui-hover)]">
+                <i data-lucide="download" class="w-4 h-4"></i>
                 <span>${downloadText}</span>
               </button>
-              <button onclick="toggleReadingMode()" id="reading-mode-btn">
-                <i data-lucide="${readingIcon}"></i>
+              <button onclick="toggleReadingMode()" id="reading-mode-btn" class="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-[var(--ui-hover)]">
+                <i data-lucide="${readingIcon}" class="w-4 h-4"></i>
                 <span>${readingText}</span>
               </button>
-              <button onclick="viewSourceCode()">
-                <i data-lucide="code"></i>
+              <button onclick="viewSourceCode()" class="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-[var(--ui-hover)]">
+                <i data-lucide="code" class="w-4 h-4"></i>
                 <span>${viewSourceText}</span>
               </button>
+              ${isMobile ? `
+              <div class="border-t border-[var(--ui-border)] my-1"></div>
+              <button onclick="toggleLanguage()" class="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-[var(--ui-hover)]">
+                <span id="current-lang-flag-mobile">${current.flag}</span>
+                <span id="current-lang-text-mobile">${current.name}</span>
+              </button>
+              <button onclick="toggleTheme()" class="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-[var(--ui-hover)]">
+                <i data-lucide="${themeIcon}" class="w-4 h-4"></i>
+                <span>${themeText}</span>
+              </button>
+              ` : ''}
             </div>
           </div>
         </div>
@@ -186,8 +203,8 @@ function updateTopbar() {
 // Make updateTopbar globally available
 window.updateTopbar = updateTopbar;
 
-// Insert topbar on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function () {
+// Insert topbar when i18n is ready
+function insertTopbar() {
     const topbarEl = document.getElementById('topbar-placeholder');
     if (topbarEl) {
         let breadcrumb = ['Workspace'];
@@ -207,5 +224,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (typeof lucide !== 'undefined' && lucide.createIcons) {
           lucide.createIcons();
         }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    if (window.i18n && window.i18n.isLoaded) {
+        insertTopbar();
+    } else {
+        window.addEventListener('i18nReady', insertTopbar);
     }
 });

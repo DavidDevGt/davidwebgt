@@ -15,6 +15,10 @@
     left: 0;
   }
 
+  .sidebar .relative {
+    display: none;
+  }
+
   .main {
     padding: var(--spacing-sm);
   }

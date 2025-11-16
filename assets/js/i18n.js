@@ -93,7 +93,12 @@ class I18n {
         } else if (element.tagName === 'IMG') {
           element.alt = translation;
         } else {
-          element.textContent = translation;
+          // Check if translation contains HTML tags
+          if (translation.includes('<')) {
+            element.innerHTML = translation;
+          } else {
+            element.textContent = translation;
+          }
         }
       }
     });
@@ -190,10 +195,16 @@ const i18n = new I18n();
 
 // Language selector functions
 function toggleLanguageMenu() {
-  const menu = document.getElementById('lang-menu');
+  const menu = document.getElementById('lang-menu-mobile') || document.getElementById('lang-menu');
   if (menu) {
     menu.classList.toggle('hidden');
   }
+}
+
+function toggleLanguage() {
+  const current = i18n.getCurrentLanguage();
+  const next = current === 'es' ? 'en' : 'es';
+  changeLanguage(next);
 }
 
 function changeLanguage(lang) {
@@ -220,7 +231,7 @@ function updateLanguageButton() {
 }
 
 function closeLanguageMenu() {
-  const menu = document.getElementById('lang-menu');
+  const menu = document.getElementById('lang-menu-mobile') || document.getElementById('lang-menu');
   if (menu) {
     menu.classList.add('hidden');
   }
@@ -228,8 +239,8 @@ function closeLanguageMenu() {
 
 // Close language menu when clicking outside
 document.addEventListener('click', (e) => {
-  const menu = document.getElementById('lang-menu');
-  const btn = document.getElementById('lang-btn');
+  const menu = document.getElementById('lang-menu-mobile') || document.getElementById('lang-menu');
+  const btn = document.getElementById('lang-btn') || document.querySelector('button[onclick="toggleLanguageMenu()"]');
   if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
     closeLanguageMenu();
   }
@@ -261,6 +272,7 @@ function updateTopbar() {
 }
 
 // Make functions globally available immediately
+window.toggleLanguage = toggleLanguage;
 window.toggleLanguageMenu = toggleLanguageMenu;
 window.changeLanguage = changeLanguage;
 window.updateLanguageButton = updateLanguageButton;
@@ -300,6 +312,9 @@ window.i18n = i18n;
           i18n.translatePage();
         });
       }
+
+      // Dispatch event to notify other modules that i18n is ready
+      window.dispatchEvent(new CustomEvent('i18nReady'));
     }
   });
 })();

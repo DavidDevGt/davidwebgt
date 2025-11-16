@@ -11,9 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 
-
-  // Update options menu
-  updateOptionsMenu();
+  // Update options menu when i18n is ready
+  if (window.i18n && window.i18n.isLoaded) {
+    updateOptionsMenu();
+  } else {
+    window.addEventListener('i18nReady', updateOptionsMenu);
+  }
 
   // Toggle list functionality
   const toggleButtons = document.querySelectorAll('.toggle-trigger');

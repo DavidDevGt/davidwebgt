@@ -16,8 +16,8 @@
   },
   "home": {
     "title": "Home",
-    "subtitle": "Hello! My name is David Vargas. I work as a Software Engineer with experience developing efficient solutions and maintaining critical systems in production.",
-    "experience": "Over the past year, I have specialized in mobile development and cloud solutions, creating optimized, functional, and production-ready apps. I have worked with mobile environments, cloud services, and modern architectures that allow deploying, scaling, and maintaining systems with thousands of active users.",
+    "subtitle": "Hello! My name is David Vargas. I work as a <strong>Software Engineer</strong> with experience developing efficient solutions and maintaining critical systems in production. I focus on <strong>solving real problems</strong>, collaborating with multidisciplinary teams, and learning continuously to strengthen my skills.",
+    "experience": "Over the past year, I have specialized in <strong>mobile development</strong> and <strong>cloud solutions</strong>, creating optimized, functional, and production-ready apps. I have worked with mobile environments, cloud services, and modern architectures that allow deploying, scaling, and maintaining systems with thousands of active users.",
     "callout": "Check out my featured projects and professional experience. By browsing the portfolio, you can learn more about me.",
     "quickLinks": "Quick Links",
     "projects": "Projects",
@@ -99,7 +99,7 @@
       "tech": "PHP • jQuery • MySQL • Digital Ocean",
       "impact1": "Refactoring of Legacy modules to SPA",
       "impact2": "SQL query optimization and purchase order system refactoring",
-      "impact3": "Cloud server configuration and administration"
+      "impact3": "Digital Ocean server configuration and administration"
     },
     "cta": {
       "title": "Interested in working together?",
@@ -113,7 +113,7 @@
     "title": "About Me",
     "intro": {
       "title": "My Approach:",
-      "text": "Hello, I'm David, I have experience building efficient solutions, maintaining critical systems in production. I like working practically, solving real problems, and adding real value within teams."
+      "text": "Hello, I'm David, I have <strong>experience building efficient solutions</strong>, maintaining critical systems in production. I like working practically, solving real problems, and adding real value within teams.<br><br>One of my favorite hobbies is <strong>creating tools and solutions</strong> that make my day-to-day easier, always learning something new in the process. In the professional field, I value teamwork, continuous learning, and being part of a company that accompanies my personal and professional development goals."
     },
     "skills": {
       "title": "Skills / Key Competencies",

@@ -16,8 +16,8 @@
   },
   "home": {
     "title": "Inicio",
-    "subtitle": "Hola! Mi nombre es David Vargas. Trabajo como Ingeniero de Software con experiencia desarrollando soluciones eficientes y manteniendo sistemas críticos en producción.",
-    "experience": "Durante el último año me he especializado en desarrollo móvil y soluciones en la nube, creando apps optimizadas, funcionales y preparadas para producción.",
+    "subtitle": "Hola! Mi nombre es David Vargas. Trabajo como <strong>Ingeniero de Software</strong> con experiencia desarrollando soluciones eficientes y manteniendo sistemas críticos en producción. Me enfoco en <strong>resolver problemas reales</strong>, colaborar con equipos multidisciplinarios y aprender continuamente para fortalecer mis habilidades.",
+    "experience": "Durante el último año me he especializado en <strong>desarrollo móvil</strong> y <strong>soluciones en la nube</strong>, creando apps optimizadas, funcionales y preparadas para producción. He trabajado con entornos móviles, servicios cloud y arquitecturas modernas que permiten desplegar, escalar y mantener sistemas con miles de usuarios activos.",
     "callout": "Revisa mis proyectos destacados y mi experiencia profesional. Navegando por el portafolio podrás conocer más sobre mi.",
     "quickLinks": "Enlaces Rápidos",
     "projects": "Proyectos",
@@ -99,7 +99,7 @@
       "tech": "PHP • jQuery • MySQL • Digital Ocean",
       "impact1": "Refactorización de módulos Legacy a SPA",
       "impact2": "Optimización de consultas SQL y refactor del sistema de pedidos",
-      "impact3": "Configuración y administración de servidores en Cloud"
+      "impact3": "Configuración y administración de servidores en Digital Ocean"
     },
     "cta": {
       "title": "¿Interesado en trabajar juntos?",
@@ -113,7 +113,7 @@
     "title": "Sobre Mí",
     "intro": {
       "title": "Mi Enfoque:",
-      "text": "Hola, soy David, tengo experiencia construyendo soluciones eficientes, manteniendo sistemas críticos en producción. Me gusta trabajar de forma práctica, resolver problemas reales y aportar valor real dentro de los equipos."
+      "text": "Hola, soy David, tengo <strong>experiencia construyendo soluciones</strong> eficientes, manteniendo sistemas críticos en producción. Me gusta trabajar de forma práctica, resolver problemas reales y aportar valor real dentro de los equipos.<br><br>Uno de mis pasatiempos favoritos es <strong>crear herramientas y soluciones</strong> que hagan más sencillo mi día a día, siempre aprendiendo algo nuevo en el proceso. En el ámbito profesional, valoro el trabajo en equipo, el aprendizaje continuo y formar parte de una empresa que acompañe mis objetivos de desarrollo personal y profesional."
     },
     "skills": {
       "title": "Skills / Competencias Clave",

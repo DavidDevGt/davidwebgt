@@ -4,12 +4,17 @@ function toggleTheme() {
     const isDark = html.classList.toggle('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     updateOptionsMenu();
+    if (typeof updateTopbar === 'function') updateTopbar();
 }
 
 
 // Load theme on page load
 document.addEventListener('DOMContentLoaded', function () {
-    updateOptionsMenu();
+    if (window.i18n && window.i18n.isLoaded) {
+        updateOptionsMenu();
+    } else {
+        window.addEventListener('i18nReady', updateOptionsMenu);
+    }
 });
 
 // Validate localStorage theme
