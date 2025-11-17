@@ -5,8 +5,8 @@
  */
 const navigation = [
     { href: 'index.html', icon: 'home', text: 'Home' },
-    { href: 'proyectos.html', icon: 'briefcase', text: 'Proyectos' },
-    { href: 'sobre-mi.html', icon: 'code', text: 'Sobre mí' }
+    { href: 'proyectos.html', icon: 'briefcase', text: 'Projects' },
+    { href: 'sobre-mi.html', icon: 'code', text: 'About' }
 ];
 
 /**
@@ -94,7 +94,9 @@ function generateTopbar(breadcrumb) {
     const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'es';
     const languages = window.i18n ? window.i18n.getAvailableLanguages() : [{ code: 'es', name: 'Español', flag: '🇪🇸' }, { code: 'en', name: 'English', flag: '🇺🇸' }];
     const current = languages.find(lang => lang.code === currentLang) || languages[0];
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth <= 640;
+    const isSmallScreen = window.innerWidth < 1025;
+    const isDesktop = window.innerWidth >= 1367;
     const themeIcon = document.documentElement.classList.contains('dark') ? 'sun' : 'moon';
     const themeText = window.i18n ? window.i18n.t('nav.theme', 'Cambiar Tema') : 'Cambiar Tema';
 
@@ -139,9 +141,10 @@ function generateTopbar(breadcrumb) {
     };
 
     return `
-    <header role="banner" data-breadcrumb='${JSON.stringify(breadcrumb).replace(/'/g, "'")}'>
-      <div class="sticky top-0 z-10 bg-[var(--page-bg)]/80 backdrop-blur-sm border-b border-[var(--ui-border)] px-8 py-2" style="view-transition-name: topbar">
-        <div class="max-w-[var(--notion-max-width)] mx-auto flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+    <header role="banner" data-breadcrumb='${JSON.stringify(breadcrumb).replace(/'/g, "'")}' class="topbar ${isDesktop ? 'fixed' : ''}">
+      <div class="sticky top-0 z-10 bg-[var(--page-bg)]/80 backdrop-blur-sm border-[var(--ui-border)] px-8 py-2" style="view-transition-name: topbar">
+        <div class="max-w-[var(--notion-max-width)] mx-auto flex items-center gap-2 ${isMobile ? 'text-xs' : 'text-sm'} text-[var(--text-secondary)]">
+        ${isSmallScreen ? '<button onclick="toggleSidebar()" class="p-2 hover:bg-[var(--ui-hover)] rounded text-sm" aria-label="Abrir menú lateral" aria-expanded="false" id="sidebar-toggle">☰</button>' : ''}
         ${breadcrumb.map((item, index) => {
         const isLast = index === breadcrumb.length - 1;
         const translatedItem = window.i18n ? window.i18n.t(item, breadcrumbFallbacks[item] || item) : (breadcrumbFallbacks[item] || item);
@@ -168,7 +171,7 @@ function generateTopbar(breadcrumb) {
                 <i data-lucide="code" class="w-4 h-4"></i>
                 <span>${viewSourceText}</span>
               </button>
-              ${isMobile ? `
+              ${isSmallScreen ? `
               <div class="border-t border-[var(--ui-border)] my-1"></div>
               <button onclick="toggleLanguage()" class="flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-[var(--ui-hover)]">
                 <span id="current-lang-flag-mobile">${current.flag}</span>
@@ -256,6 +259,91 @@ function insertTopbar() {
     }
 }
 
+/**
+ * Toggles the sidebar visibility on small screens.
+ */
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const body = document.body;
+    const overlay = document.querySelector('.sidebar-overlay');
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    if (sidebar) {
+        const isOpen = sidebar.classList.toggle('open');
+        body.classList.toggle('sidebar-open', isOpen);
+        if (overlay) {
+            overlay.classList.toggle('active', isOpen);
+        }
+        if (toggleBtn) {
+            toggleBtn.setAttribute('aria-expanded', isOpen.toString());
+        }
+        sidebar.setAttribute('aria-hidden', (!isOpen).toString());
+        if (isOpen) {
+            document.addEventListener('click', closeSidebarOnClickOutside);
+            document.addEventListener('keydown', handleSidebarKeydown);
+            // Focus trap: focus first focusable element in sidebar
+            const firstFocusable = sidebar.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (firstFocusable) firstFocusable.focus();
+        } else {
+            document.removeEventListener('click', closeSidebarOnClickOutside);
+            document.removeEventListener('keydown', handleSidebarKeydown);
+        }
+    }
+}
+
+/**
+ * Closes the sidebar when clicking outside of it.
+ */
+function closeSidebarOnClickOutside(e) {
+    const sidebar = document.querySelector('.sidebar');
+    const body = document.body;
+    const overlay = document.querySelector('.sidebar-overlay');
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    if (sidebar && !sidebar.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+        sidebar.classList.remove('open');
+        body.classList.remove('sidebar-open');
+        if (overlay) overlay.classList.remove('active');
+        if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+        sidebar.setAttribute('aria-hidden', 'true');
+        document.removeEventListener('click', closeSidebarOnClickOutside);
+        document.removeEventListener('keydown', handleSidebarKeydown);
+    }
+}
+
+/**
+ * Handles keyboard navigation for the sidebar (Escape to close, focus trap).
+ */
+function handleSidebarKeydown(e) {
+    const sidebar = document.querySelector('.sidebar');
+    if (!sidebar || !sidebar.classList.contains('open')) return;
+
+    if (e.key === 'Escape') {
+        toggleSidebar();
+        return;
+    }
+
+    // Focus trap
+    const focusableElements = sidebar.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    if (e.key === 'Tab') {
+        if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+                lastElement.focus();
+                e.preventDefault();
+            }
+        } else {
+            if (document.activeElement === lastElement) {
+                firstElement.focus();
+                e.preventDefault();
+            }
+        }
+    }
+}
+
+window.toggleSidebar = toggleSidebar;
+window.closeSidebarOnClickOutside = closeSidebarOnClickOutside;
+
 document.addEventListener('DOMContentLoaded', function () {
     if (window.i18n && window.i18n.isLoaded) {
         insertTopbar();
@@ -263,3 +351,34 @@ document.addEventListener('DOMContentLoaded', function () {
         window.addEventListener('i18nReady', insertTopbar);
     }
 });
+
+// Update topbar on window resize to show/hide hamburger button
+window.addEventListener('resize', () => {
+    updateTopbar();
+});
+
+// Handle responsive sidebar behavior globally
+const sizeMediaQuery = window.matchMedia('(min-width: 1025px)');
+
+function handleResponsiveChange() {
+    const sidebar = document.querySelector('.sidebar');
+    const body = document.body;
+    const isLargeScreen = sizeMediaQuery.matches;
+
+    if (sidebar) {
+        if (isLargeScreen) {
+            // Large screens: ensure sidebar is visible
+            sidebar.classList.remove('open');
+            body.classList.remove('sidebar-open');
+        } else {
+            // Small screens: ensure sidebar is hidden
+            sidebar.classList.remove('open');
+            body.classList.remove('sidebar-open');
+        }
+    }
+    // Update topbar to show/hide hamburger button
+    updateTopbar();
+}
+
+sizeMediaQuery.addEventListener('change', handleResponsiveChange);
+handleResponsiveChange(); // Initialize

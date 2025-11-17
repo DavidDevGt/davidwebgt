@@ -22,6 +22,13 @@
   --text-tertiary: rgba(55, 53, 47, 0.4);
   --accent-blue: #0A7AFF;
   --accent-blue-light: #F0F6FF;
+
+  /* Breakpoints */
+  --breakpoint-mobile: 640px;
+  --breakpoint-small-tablet: 641px;
+  --breakpoint-large-tablet: 821px;
+  --breakpoint-laptop: 1025px;
+  --breakpoint-desktop: 1367px;
 }
 
 html.dark {

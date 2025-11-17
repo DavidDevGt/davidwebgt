@@ -7,7 +7,7 @@
  * // Usage in cache operations
  * caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache));
  */
-const CACHE_NAME = 'david-vargas-portfolio-v2';
+const CACHE_NAME = 'david-vargas-portfolio-v22';
 
 /**
  * Array of URLs to cache during service worker installation.

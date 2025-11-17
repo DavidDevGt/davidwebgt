@@ -1,26 +1,129 @@
-@media (max-width: 767px) {
-
+/* Mobile: ≤640px */
+@media (max-width: var(--breakpoint-mobile)) {
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: -240px;
-    width: 240px;
-    height: 100vh;
-    z-index: 1000;
+    transform: translateX(-100%);
+    z-index: 25;
     border-right: none;
-    transition: left 0.3s ease;
   }
 
   .sidebar.open {
-    left: 0;
+    transform: translateX(0);
+  }
+
+  .main {
+    margin-left: 0;
+    padding: var(--spacing-xs);
+  }
+
+  body.sidebar-open .main {
+    margin-left: 240px;
+  }
+
+  .topbar {
+    padding: var(--spacing-xs) var(--spacing-sm);
   }
 
   .sidebar .relative {
     display: none;
   }
 
+  body {
+    font-size: clamp(13px, 4vw, 15px);
+  }
+
+  h1 {
+    font-size: clamp(22px, 6vw, 28px);
+    padding: 3px 0 2px 0;
+  }
+
+  h2 {
+    font-size: clamp(18px, 5vw, 22px);
+    padding: 2px 0 1px 0;
+  }
+
+  .notion-block {
+    padding: 1px 0.5px;
+  }
+
+  .notion-heading,
+  .notion-paragraph {
+    padding: 1px 0.5px;
+  }
+
+  .notion-callout {
+    padding: var(--spacing-xs) var(--spacing-xs);
+  }
+
+  .toggle-trigger {
+    padding: 1px 0.5px;
+  }
+
+  .notion-quote {
+    padding-left: var(--spacing-xs);
+  }
+
+  button {
+    padding: 2px 4px;
+    font-size: 12px;
+  }
+
+  #options-menu button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  body.reading-mode main {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none;
+    padding-left: var(--spacing-xs);
+    padding-right: var(--spacing-xs);
+    font-size: clamp(13px, 4vw, 15px);
+    line-height: 1.4;
+  }
+
+  body.reading-mode .notion-block {
+    margin-bottom: 0;
+  }
+
+  body.reading-mode h1 {
+    font-size: clamp(22px, 6vw, 28px);
+    margin-bottom: 0;
+  }
+
+  body.reading-mode h2 {
+    font-size: clamp(18px, 5vw, 22px);
+    margin-bottom: 0;
+  }
+
+  #reading-mode-btn {
+    display: none !important;
+  }
+}
+
+/* Small Tablet: 641px – 820px */
+@media (min-width: var(--breakpoint-small-tablet)) and (max-width: calc(var(--breakpoint-large-tablet) - 1px)) {
+  .sidebar {
+    transform: translateX(-100%);
+    z-index: 25;
+    border-right: none;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
   .main {
+    margin-left: 0;
     padding: var(--spacing-sm);
+  }
+
+  body.sidebar-open .main {
+    margin-left: 240px;
+  }
+
+  .sidebar .relative {
+    display: none;
   }
 
   body {
@@ -97,15 +200,25 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-
-  /* Tablet */
+/* Large Tablet: 821px – 1024px */
+@media (min-width: var(--breakpoint-large-tablet)) and (max-width: calc(var(--breakpoint-laptop) - 1px)) {
   .sidebar {
-    flex: 0 0 200px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
   }
 
   .main {
+    margin-left: 0;
     padding: var(--spacing-md);
+    transition: margin-left 0.3s ease;
+  }
+
+  body.sidebar-open .main {
+    margin-left: 240px;
   }
 
   body {
@@ -121,13 +234,61 @@
   }
 }
 
-@media (min-width: 1024px) {
-
+/* Laptop: 1025px – 1366px */
+@media (min-width: var(--breakpoint-laptop)) and (max-width: calc(var(--breakpoint-desktop) - 1px)) {
   .sidebar {
-    flex: 0 0 240px;
+    transform: translateX(0);
   }
 
   .main {
+    margin-left: 240px;
     padding: var(--spacing-lg);
   }
+
+  .topbar.fixed {
+    left: 240px;
+  }
 }
+
+/* Desktop: ≥1367px */
+@media (min-width: var(--breakpoint-desktop)) {
+  .sidebar {
+    transform: translateX(0);
+  }
+
+  .main {
+    margin-left: 240px;
+    padding: var(--spacing-xl);
+  }
+
+  .topbar.fixed {
+    left: 240px;
+  }
+
+  body {
+    font-size: 18px;
+  }
+
+  h1 {
+    font-size: 42px;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+
+  .notion-block {
+    padding: 4px 2px;
+  }
+
+  .notion-heading,
+  .notion-paragraph {
+    padding: 4px 2px;
+  }
+
+  button {
+    padding: 6px 12px;
+    font-size: 16px;
+  }
+}
+

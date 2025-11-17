@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Inicio",
-    "projects": "Mis Proyectos",
+    "projects": "Proyectos",
     "about": "Sobre mí",
     "search": "Buscar",
     "searchPlaceholder": "Buscar en el sitio...",
@@ -26,7 +26,7 @@
     "aboutDesc": "Mi historia y experiencia profesional"
   },
   "projects": {
-    "title": "Mis Proyectos",
+    "title": "Proyectos",
     "intro": "A continuación, una visión detallada de mis proyectos más representativos. Cada uno incluye una descripción del reto, las tecnologías utilizadas y los resultados finales obtenidos.",
     "dailyJournal": {
       "title": "Daily Journal",

@@ -255,23 +255,49 @@
     }
 
     .main {
-      flex: 1;
       padding: var(--spacing-lg);
       max-width: var(--notion-max-width);
-      margin: 0 auto;
       box-sizing: border-box;
     }
 
+    @media (min-width: 1200px) {
+      .sidebar {
+        left: 0;
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 240px;
+      }
+    }
+
     .sidebar {
-      flex: 0 0 240px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 240px;
+      height: 100vh;
       background-color: var(--ui-sidebar-bg);
       border-right: 1px solid var(--ui-border);
       padding: var(--spacing-md) 0;
       box-sizing: border-box;
+      overflow-y: auto;
+      z-index: 20;
+    }
+
+    @media (max-width: 1199px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
     }
   </style>
 
-  <title>David Vargas - Software Engineer</title>
+  <title>David Vargas - Portafolio Digital</title>
 </head>
 
 <body class="h-full bg-[var(--ui-bg)] text-[var(--text-primary)]">
@@ -280,10 +306,10 @@
    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded z-50" data-i18n="common.skipToMain">Saltar al contenido principal</a>
 
    <!-- Layout base -->
-   <div class="flex min-h-screen">
+   <div>
 
     <!-- SIDEBAR -->
-    <aside class="sidebar border-r border-[var(--ui-border)] bg-[var(--ui-sidebar-bg)] flex flex-col overflow-y-auto"
+    <aside class="sidebar border-r border-[var(--ui-border)] bg-[var(--ui-sidebar-bg)]" aria-hidden="true"
       style="view-transition-name: sidebar">
       <!-- Top Section -->
       <div class="p-3">
@@ -350,10 +376,10 @@
       </nav>
 
       <!-- Bottom Section -->
-      <div class="mt-auto p-3 border-t border-[var(--ui-border)] space-y-2">
+      <div class="absolute bottom-0 left-0 right-0 p-3 border-t border-[var(--ui-border)] space-y-2">
         <!-- Language Selector -->
         <div class="relative">
-          <button onclick="toggleLanguageMenu()" id="lang-btn"
+          <button onclick="toggleLanguageMenu()" id="lang-btn" aria-label="Seleccionar idioma"
             class="w-full text-sm px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-left flex items-center gap-2">
             <span id="current-lang-flag">🇪🇸</span>
             <span id="current-lang-text">Español</span>
@@ -372,12 +398,16 @@
         </div>
 
         <!-- Theme Toggle -->
-        <button id="theme-btn" onclick="toggleTheme()" aria-label="Cambiar entre tema claro y oscuro">
+        <button id="theme-btn" onclick="toggleTheme()" aria-label="Cambiar entre tema claro y oscuro"
+          class="w-full text-sm px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-left flex items-center gap-2">
           <i id="theme-icon" data-lucide="sun"></i>
           <span id="theme-text" data-i18n="nav.theme">Cambiar Tema</span>
         </button>
       </div>
     </aside>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
 
     <main id="main-content" class="flex-1 overflow-y-auto bg-[var(--page-bg)]" role="main">
       <!-- Topbar -->
@@ -387,7 +417,7 @@
 
         <!-- Page Icon + Title -->
         <div class="mb-6">
-          <div class="page-icon inline-flex items-center justify-center mb-4 cursor-pointer"
+          <div class="page-icon inline-flex items-center justify-center mb-4 mt-8 cursor-pointer"
             style="width: 60px; height: 60px;">
             <i data-lucide="rocket" class="w-10 h-10"></i>
           </div>
