@@ -293,6 +293,20 @@
         transform: translateX(0);
       }
     }
+
+    /* ------------------------------------------------ */
+    /* CSS Crítico para limitar ancho en Desktop */
+    /* ------------------------------------------------ */
+    @media (min-width: 1024px) {
+      .page-content-wrapper {
+        max-width: 72rem; /* Equivalente a max-w-6xl para mejor aprovechamiento del ancho */
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 2rem; /* Equivalente a lg:px-8 */
+        padding-right: 2rem;
+      }
+    }
+    /* ------------------------------------------------ */
   </style>
 
   <title>Proyectos - Portafolio Digital</title>
@@ -392,9 +406,9 @@
               <span>🇺🇸</span>
               <span>English</span>
             </button>
+            </div>
           </div>
         </div>
-
         <!-- Theme Toggle -->
         <button id="theme-btn" onclick="toggleTheme()" aria-label="Cambiar entre tema claro y oscuro"
           class="w-full text-sm px-2 py-1.5 rounded hover:bg-[var(--ui-hover)] cursor-pointer text-left flex items-center gap-2">
@@ -413,21 +427,21 @@
       <header id="topbar-placeholder" data-breadcrumb='["nav.home", "nav.projects"]' role="banner"></header>
 
       <div class="max-w-[var(--notion-max-width)] mx-auto px-8 sm:px-16 py-12">
-
-        <!-- Page Icon + Title -->
-        <div class="mb-6">
-          <div class="page-icon inline-flex items-center justify-center mb-4 mt-8 cursor-pointer"
-            style="width: 60px; height: 60px;">
-            <i data-lucide="briefcase" class="w-10 h-10"></i>
+        <div class="page-content-wrapper max-w-6xl mx-auto px-4 lg:px-8">
+          <!-- Page Icon + Title -->
+          <div class="mb-6">
+            <div class="page-icon inline-flex items-center justify-center mb-4 mt-8 cursor-pointer"
+              style="width: 60px; height: 60px;">
+              <i data-lucide="briefcase" class="w-10 h-10"></i>
+            </div>
+            <h1 class="text-[40px] font-bold leading-tight tracking-tight mb-2" data-i18n="projects.title">
+              Mis Proyectos
+            </h1>
+            <div class="flex items-center gap-4 text-sm text-[var(--text-secondary)]">
+              <span class="flex items-center gap-2"><i data-lucide="pencil"
+                  class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i> <span><span data-i18n="common.lastEdited"></span> <span data-i18n="common.ago"></span> 1 <span data-i18n="common.hours"></span></span></span>
+            </div>
           </div>
-          <h1 class="text-[40px] font-bold leading-tight tracking-tight mb-2" data-i18n="projects.title">
-            Mis Proyectos
-          </h1>
-          <div class="flex items-center gap-4 text-sm text-[var(--text-secondary)]">
-            <span class="flex items-center gap-2"><i data-lucide="pencil"
-                class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i> <span><span data-i18n="common.lastEdited"></span> <span data-i18n="common.ago"></span> 1 <span data-i18n="common.hours"></span></span></span>
-          </div>
-        </div>
 
         <!-- Intro -->
         <div class="notion-block relative group mb-6">

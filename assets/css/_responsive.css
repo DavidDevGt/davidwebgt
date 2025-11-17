@@ -314,12 +314,22 @@
   .main {
     margin-left: 240px;
     padding: var(--spacing-xl);
+    max-width: none !important;
   }
 
   .main > div {
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+  }
+
+  /* Clase genérica para centrar y limitar ancho en el contenido principal */
+  .page-content-wrapper {
+    max-width: 1152px; /* max-w-6xl para mejor aprovechamiento del ancho */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .topbar.fixed {

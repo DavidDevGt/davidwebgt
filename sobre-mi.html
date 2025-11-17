@@ -293,6 +293,20 @@
         transform: translateX(0);
       }
     }
+
+    /* ------------------------------------------------ */
+    /* CSS Crítico para limitar ancho en Desktop */
+    /* ------------------------------------------------ */
+    @media (min-width: 1024px) {
+      .page-content-wrapper {
+        max-width: 72rem; /* Equivalente a max-w-6xl para mejor aprovechamiento del ancho */
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 2rem; /* Equivalente a lg:px-8 */
+        padding-right: 2rem;
+      }
+    }
+    /* ------------------------------------------------ */
   </style>
 
   <title>Sobre mí - Portafolio Digital</title>
@@ -413,22 +427,22 @@
       <header id="topbar-placeholder" data-breadcrumb='["nav.home", "nav.about"]' role="banner"></header>
 
       <div class="max-w-[var(--notion-max-width)] mx-auto px-8 sm:px-16 py-12">
+        <div class="page-content-wrapper max-w-6xl mx-auto px-4 lg:px-8">
+          <!-- Page Icon + Title -->
+          <div class="mb-6">
+            <div class="page-icon inline-flex items-center justify-center mb-4 mt-8 cursor-pointer"
+              style="width: 60px; height: 60px;">
+              <i data-lucide="code" class="w-10 h-10"></i>
+            </div>
+            <h1 class="text-[40px] font-bold leading-tight tracking-tight mb-2" data-i18n="about.title">
+              Sobre Mí
+            </h1>
+            <div class="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+              <i data-lucide="pencil" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
+              <span><span data-i18n="common.lastEdited"></span> <span data-i18n="common.ago"></span> 3 <span data-i18n="common.days"></span></span>
+            </div>
 
-        <!-- Page Icon + Title -->
-        <div class="mb-6">
-          <div class="page-icon inline-flex items-center justify-center mb-4 mt-8 cursor-pointer"
-            style="width: 60px; height: 60px;">
-            <i data-lucide="code" class="w-10 h-10"></i>
           </div>
-          <h1 class="text-[40px] font-bold leading-tight tracking-tight mb-2" data-i18n="about.title">
-            Sobre Mí
-          </h1>
-          <div class="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-            <i data-lucide="pencil" class="w-4 h-4 shrink-0 align-middle text-[var(--text-secondary)]"></i>
-            <span><span data-i18n="common.lastEdited"></span> <span data-i18n="common.ago"></span> 3 <span data-i18n="common.days"></span></span>
-          </div>
-
-        </div>
 
         <!-- Intro -->
         <div class="notion-block relative group mb-8">
@@ -647,9 +661,9 @@
 
         </div>
 
-        <!-- Espaciado final -->
-        <div class="h-64"></div>
-
+          <!-- Espaciado final -->
+          <div class="h-64"></div>
+        </div>
       </div>
     </main>
   </div>
