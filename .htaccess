@@ -2,3 +2,43 @@
 <Files ~ "\.pdf$">
    Header set X-Robots-Tag "noindex, nofollow"
 </Files>
+
+# Cache headers para archivos estáticos
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML - cache corto
+  ExpiresByType text/html "access plus 1 hour"
+
+  # CSS, JS - cache largo
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType application/x-javascript "access plus 1 year"
+
+  # Imágenes
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+
+  # Fuentes
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+
+  # JSON y otros
+  ExpiresByType application/json "access plus 1 year"
+  ExpiresByType application/manifest+json "access plus 1 year"
+</IfModule>
+
+# Cache-Control alternativo si Expires no está disponible
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|png|jpg|jpeg|gif|svg|webp|woff|woff2|json)$">
+    Header set Cache-Control "max-age=31536000, public"
+  </FilesMatch>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "max-age=3600, public"
+  </FilesMatch>
+</IfModule>

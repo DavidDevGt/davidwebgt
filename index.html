@@ -36,7 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="dns-prefetch" href="https://unpkg.com">
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
   <link rel="preload" href="assets/cv.pdf" as="document" type="application/pdf">
 
   <!-- Tailwind -->
@@ -279,7 +279,7 @@
    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded z-50" data-i18n="common.skipToMain">Saltar al contenido principal</a>
 
    <!-- Layout base -->
-   <div class="flex h-screen">
+   <div class="flex min-h-screen">
 
     <!-- SIDEBAR -->
     <aside class="sidebar border-r border-[var(--ui-border)] bg-[var(--ui-sidebar-bg)] flex flex-col overflow-y-auto"
