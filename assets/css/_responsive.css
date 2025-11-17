@@ -99,6 +99,18 @@
   #reading-mode-btn {
     display: none !important;
   }
+
+  .projects-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .projects-grid > div {
+    max-width: 320px;
+    width: 100%;
+  }
 }
 
 /* Small Tablet: 641px – 820px */
