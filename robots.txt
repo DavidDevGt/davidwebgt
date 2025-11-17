@@ -2,7 +2,6 @@ User-agent: *
 Disallow: /assets/cv.pdf
 Disallow: /docs/
 Sitemap: https://davidwebgt.com/sitemap.xml
-Llmstxt: https://davidwebgt.com/llms.txt
 
 # Bloquear agentes de entrenamiento de LLMs para proteger propiedad intelectual
 User-agent: GPTBot
