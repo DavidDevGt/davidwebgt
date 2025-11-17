@@ -7,7 +7,7 @@
  * // Usage in cache operations
  * caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache));
  */
-const CACHE_NAME = 'david-vargas-portfolio-v1';
+const CACHE_NAME = 'david-vargas-portfolio-v2';
 
 /**
  * Array of URLs to cache during service worker installation.
@@ -29,7 +29,12 @@ const urlsToCache = [
     '/proyectos.html',
     '/sobre-mi.html',
     '/manifest.json',
-    '/assets/css/styles.css',
+    '/assets/css/_variables.css',
+    '/assets/css/_base.css',
+    '/assets/css/_layout.css',
+    '/assets/css/_components.css',
+    '/assets/css/_utilities.css',
+    '/assets/css/_responsive.css',
     '/assets/js/i18n.js',
     '/assets/js/script.js',
     '/assets/js/ui.js',
@@ -39,6 +44,9 @@ const urlsToCache = [
     '/assets/js/searchIndex.js',
     '/assets/i18n/es.json',
     '/assets/i18n/en.json',
+    '/assets/icons/icon-192.png',
+    '/assets/icons/icon-512.png',
+    '/assets/images/og-image.jpg',
     '/assets/cv.pdf',
     'https://cdn.tailwindcss.com',
     'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
