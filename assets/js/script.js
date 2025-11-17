@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
           setTimeout(() => {
             element.style.backgroundColor = originalBg;
             element.style.boxShadow = originalShadow;
-          }, 3000);
+          }, 4000);
         }
       }, 500);
     }
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
           element.style.backgroundColor = 'var(--accent-blue-light)';
           setTimeout(() => {
             element.style.backgroundColor = originalBg;
-          }, 2000);
+          }, 4000);
         }
       }, 100);
     }
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => {
           element.style.backgroundColor = originalBg;
           element.style.boxShadow = originalShadow;
-        }, 3000);
+        }, 4000);
 
         console.log('Scrolled to element:', hash, 'attempt:', attempt);
       }
