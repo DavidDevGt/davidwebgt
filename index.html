@@ -34,7 +34,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="preconnect" href="https://cdn.tailwindcss.com">
   <link rel="preload" href="assets/cv.pdf" as="document" type="application/pdf">
@@ -246,6 +246,52 @@
 
     svg.lucide {
       vertical-align: middle;
+    }
+
+    /* Critical component styles */
+    .notion-block {
+      position: relative;
+      border-radius: 3px;
+      padding: var(--block-vertical-padding) var(--block-horizontal-padding);
+      box-sizing: border-box;
+      transition: background-color 0.15s ease, box-shadow 0.15s ease;
+      opacity: 0;
+      transform: translate3d(0, 10px, 0);
+      will-change: opacity, transform;
+    }
+
+    .notion-block:hover {
+      background-color: var(--ui-hover);
+      box-shadow: none;
+    }
+
+    .notion-callout {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background-color: var(--accent-blue-light);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 3px;
+      box-shadow: none;
+    }
+
+    .notion-callout:hover {
+      background-color: var(--accent-blue-light);
+      box-shadow: none;
+    }
+
+    .project-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    html.dark .project-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     .app {

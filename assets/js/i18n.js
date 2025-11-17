@@ -393,29 +393,64 @@ window.i18n = i18n;
 
 // Initialize immediately
 (function initI18nImmediately() {
-  // Detect language and start loading translations
   const detectedLang = i18n.detectLanguage();
-
-  // Load translations immediately
-  i18n.loadTranslations().then(success => {
-    if (success) {
-      // Update language button immediately
-      updateLanguageButton();
-
-      // Translate page if DOM is ready
-      if (document.readyState !== 'loading') {
-        i18n.translatePage();
-      } else {
-        // Wait for DOM ready
-        document.addEventListener('DOMContentLoaded', () => {
-          i18n.translatePage();
-        });
-      }
-
-      // Dispatch event to notify other modules that i18n is ready
+  // Cache check first
+  const cached = localStorage.getItem(`i18n_${detectedLang}`);
+  if (cached) {
+    i18n.translations = JSON.parse(cached);
+    i18n.isLoaded = true;
+    // Update UI immediately
+    updateLanguageButton();
+    if (document.readyState !== 'loading') {
+      i18n.translatePage();
       window.dispatchEvent(new CustomEvent('i18nReady'));
+    } else {
+      document.addEventListener('DOMContentLoaded', () => {
+        i18n.translatePage();
+        window.dispatchEvent(new CustomEvent('i18nReady'));
+      });
     }
-  });
+  } else {
+    // Lazy load with requestIdleCallback
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        i18n.loadTranslations().then(success => {
+          if (success) {
+            localStorage.setItem(`i18n_${detectedLang}`, JSON.stringify(i18n.translations));
+            updateLanguageButton();
+            if (document.readyState !== 'loading') {
+              i18n.translatePage();
+              window.dispatchEvent(new CustomEvent('i18nReady'));
+            } else {
+              document.addEventListener('DOMContentLoaded', () => {
+                i18n.translatePage();
+                window.dispatchEvent(new CustomEvent('i18nReady'));
+              });
+            }
+          }
+        });
+      });
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      setTimeout(() => {
+        i18n.loadTranslations().then(success => {
+          if (success) {
+            localStorage.setItem(`i18n_${detectedLang}`, JSON.stringify(i18n.translations));
+            updateLanguageButton();
+            if (document.readyState !== 'loading') {
+              i18n.translatePage();
+              window.dispatchEvent(new CustomEvent('i18nReady'));
+            } else {
+              document.addEventListener('DOMContentLoaded', () => {
+                i18n.translatePage();
+                window.dispatchEvent(new CustomEvent('i18nReady'));
+              });
+            }
+          }
+        });
+      }, 0);
+    }
+  }
 })();
 
 /**

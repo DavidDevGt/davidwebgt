@@ -211,7 +211,11 @@ function toggleList(element) {
  * Updates the existing topbar by replacing its content with new breadcrumb data.
  * Reads the breadcrumb from the data-breadcrumb attribute of the header element and regenerates the topbar.
  * Also recreates Lucide icons if available.
+ * Optimized to avoid unnecessary updates.
  */
+let cachedTopbarHTML = '';
+let cachedBreadcrumb = null;
+
 function updateTopbar() {
   const topbarEl = document.querySelector('header[role="banner"]');
   if (topbarEl) {
@@ -219,9 +223,17 @@ function updateTopbar() {
     if (breadcrumbData) {
       try {
         const breadcrumb = JSON.parse(breadcrumbData);
-        topbarEl.outerHTML = generateTopbar(breadcrumb);
-        if (typeof lucide !== 'undefined' && lucide.createIcons) {
-          lucide.createIcons();
+        // Check if breadcrumb changed
+        if (JSON.stringify(breadcrumb) !== JSON.stringify(cachedBreadcrumb)) {
+          cachedBreadcrumb = breadcrumb;
+          const newHTML = generateTopbar(breadcrumb);
+          if (newHTML !== cachedTopbarHTML) {
+            cachedTopbarHTML = newHTML;
+            topbarEl.outerHTML = newHTML;
+            if (typeof lucide !== 'undefined' && lucide.createIcons) {
+              lucide.createIcons();
+            }
+          }
         }
       } catch (e) {
         console.warn('Error updating topbar:', e);
