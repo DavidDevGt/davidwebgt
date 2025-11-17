@@ -94,9 +94,9 @@ function generateTopbar(breadcrumb) {
     const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'es';
     const languages = window.i18n ? window.i18n.getAvailableLanguages() : [{ code: 'es', name: 'Español', flag: '🇪🇸' }, { code: 'en', name: 'English', flag: '🇺🇸' }];
     const current = languages.find(lang => lang.code === currentLang) || languages[0];
-    const isMobile = window.innerWidth <= 640;
-    const isSmallScreen = window.innerWidth < 1025;
-    const isDesktop = window.innerWidth >= 1367;
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+    const isSmallScreen = window.matchMedia('(max-width: 1024px)').matches;
+    const isDesktop = window.matchMedia('(min-width: 1367px)').matches;
     const themeIcon = document.documentElement.classList.contains('dark') ? 'sun' : 'moon';
     const themeText = window.i18n ? window.i18n.t('nav.theme', 'Cambiar Tema') : 'Cambiar Tema';
 
