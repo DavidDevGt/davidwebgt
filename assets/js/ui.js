@@ -45,7 +45,7 @@ function generateSidebar() {
        </div>
 
        <!-- Navigation -->
-       <nav class="px-3 space-y-0.5">
+       <nav class="px-3 space-y-0.5" role="navigation" aria-label="Navegación principal">
          <div class="text-xs font-semibold text-[var(--text-tertiary)] px-2 py-1.5 uppercase tracking-wide">
            Workspace
          </div>
@@ -384,10 +384,12 @@ function handleResponsiveChange() {
             // Large screens: ensure sidebar is visible
             sidebar.classList.remove('open');
             body.classList.remove('sidebar-open');
+            sidebar.removeAttribute('aria-hidden');
         } else {
             // Small screens: ensure sidebar is hidden
             sidebar.classList.remove('open');
             body.classList.remove('sidebar-open');
+            sidebar.setAttribute('aria-hidden', 'true');
         }
     }
     // Update topbar to show/hide hamburger button
