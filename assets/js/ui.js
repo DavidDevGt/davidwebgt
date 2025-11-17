@@ -277,6 +277,15 @@ function toggleSidebar() {
             toggleBtn.setAttribute('aria-expanded', isOpen.toString());
         }
         sidebar.setAttribute('aria-hidden', (!isOpen).toString());
+        // Manage focusable elements in sidebar
+        const focusableElements = sidebar.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        focusableElements.forEach(el => {
+            if (isOpen) {
+                el.removeAttribute('tabindex');
+            } else {
+                el.setAttribute('tabindex', '-1');
+            }
+        });
         if (isOpen) {
             document.addEventListener('click', closeSidebarOnClickOutside);
             document.addEventListener('keydown', handleSidebarKeydown);
@@ -304,6 +313,11 @@ function closeSidebarOnClickOutside(e) {
         if (overlay) overlay.classList.remove('active');
         if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
         sidebar.setAttribute('aria-hidden', 'true');
+        // Make focusable elements unfocusable
+        const focusableElements = sidebar.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        focusableElements.forEach(el => {
+            el.setAttribute('tabindex', '-1');
+        });
         document.removeEventListener('click', closeSidebarOnClickOutside);
         document.removeEventListener('keydown', handleSidebarKeydown);
     }
