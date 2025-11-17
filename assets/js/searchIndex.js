@@ -10,7 +10,8 @@ const searchIndex = [
     url: 'index.html',
     title: 'Inicio',
     content: 'Hola! Mi nombre es David Vargas. Trabajo como Ingeniero de Software con experiencia desarrollando soluciones eficientes y manteniendo sistemas críticos en producción. Me enfoco en resolver problemas reales, colaborar con equipos multidisciplinarios y aprender continuamente para fortalecer mis habilidades.',
-    keywords: ['david vargas', 'ingeniero software', 'desarrollo', 'soluciones', 'equipos', 'aprender']
+    keywords: ['david vargas', 'ingeniero software', 'desarrollo', 'soluciones', 'equipos', 'aprender', 'david vargas', 'software engineer', 'development', 'solutions', 'teams', 'learn'],
+    anchor: '#home-intro'
   },
   {
     id: 'home-experience',
@@ -18,7 +19,8 @@ const searchIndex = [
     url: 'index.html',
     title: 'Experiencia Profesional',
     content: 'Durante el último año me he especializado en desarrollo móvil y soluciones en la nube, creando apps optimizadas, funcionales y preparadas para producción. He trabajado con entornos móviles, servicios cloud y arquitecturas modernas.',
-    keywords: ['movil', 'desarrollo movil', 'nube', 'cloud', 'apps', 'produccion', 'arquitecturas']
+    keywords: ['movil', 'desarrollo movil', 'nube', 'cloud', 'apps', 'produccion', 'arquitecturas', 'mobile', 'mobile development', 'cloud', 'apps', 'production', 'architectures'],
+    anchor: '#home-intro'
   },
   {
     id: 'projects-daily-journal',
@@ -26,7 +28,8 @@ const searchIndex = [
     url: 'proyectos.html',
     title: 'Daily Journal - App de Diario Personal',
     content: 'Mobile App Development & Privacy. Tecnologías: Javascript, Capacitor, SQLite, Android, Material Design. Aplicación de diario personal completamente local con privacidad total de datos. Funcionalidad offline completa, exportación de entradas, análisis emocional de texto y galería de fotos integrada.',
-    keywords: ['daily journal', 'diario', 'android', 'capacitor', 'sqlite', 'material design', 'privacidad', 'offline', 'emocional', 'galeria']
+    keywords: ['daily journal', 'diario', 'android', 'capacitor', 'sqlite', 'material design', 'privacidad', 'offline', 'emocional', 'galeria', 'daily journal', 'diary', 'android', 'capacitor', 'sqlite', 'material design', 'privacy', 'offline', 'emotional', 'gallery'],
+    anchor: '#project-daily-journal'
   },
   {
     id: 'projects-chromagrid',
@@ -34,7 +37,8 @@ const searchIndex = [
     url: 'proyectos.html',
     title: 'ChromaGrid - Extracción de Paletas de Color',
     content: 'Web Development & Image Processing. Tecnologías: TypeScript, Vite, HTML5 Canvas, CSS. Herramienta web para extracción automática de paletas de colores desde imágenes usando procesamiento en el navegador con Canvas API.',
-    keywords: ['chromagrid', 'paletas', 'colores', 'typescript', 'vite', 'canvas', 'imagenes', 'procesamiento']
+    keywords: ['chromagrid', 'paletas', 'colores', 'typescript', 'vite', 'canvas', 'imagenes', 'procesamiento', 'chromagrid', 'palettes', 'colors', 'typescript', 'vite', 'canvas', 'images', 'processing'],
+    anchor: '#project-chromagrid'
   },
   {
     id: 'projects-migration',
@@ -42,7 +46,7 @@ const searchIndex = [
     url: 'proyectos.html',
     title: 'Migración Mobile App - Cordova a Capacitor',
     content: 'Mobile Engineering & Performance. Tecnologías: Capacitor, TypeScript, Java SDKs, Android/iOS. Migración completa de aplicación móvil de Cordova a Capacitor, mejorando compatibilidad y rendimiento con integración de plugins nativos.',
-    keywords: ['migracion', 'cordova', 'capacitor', 'typescript', 'java', 'android', 'ios', 'plugins', 'nativos']
+    keywords: ['migracion', 'cordova', 'capacitor', 'typescript', 'java', 'android', 'ios', 'plugins', 'nativos', 'migration', 'cordova', 'capacitor', 'typescript', 'java', 'android', 'ios', 'plugins', 'native']
   },
   {
     id: 'projects-computer-vision',
@@ -50,7 +54,7 @@ const searchIndex = [
     url: 'proyectos.html',
     title: 'Computer Vision App - Detección de Objetos',
     content: 'Innovation & Frontend ML. Tecnologías: Transformers.js, IA, Navegador. Aplicación de visión computacional que detecta objetos en imágenes usando IA completamente en el navegador con tecnologías de última generación.',
-    keywords: ['computer vision', 'vision', 'objetos', 'transformers.js', 'ia', 'navegador', 'deteccion']
+    keywords: ['computer vision', 'vision', 'objetos', 'transformers.js', 'ia', 'navegador', 'deteccion', 'computer vision', 'vision', 'objects', 'transformers.js', 'ai', 'browser', 'detection']
   },
   {
     id: 'projects-shama-landing',
@@ -58,7 +62,7 @@ const searchIndex = [
     url: 'proyectos.html',
     title: 'Landing Page Ferretería Shama',
     content: 'Web Development & Design. Tecnologías: HTML, SCSS, jQuery, Netlify. Página web responsive para ferretería con diseño moderno usando SCSS y despliegue en Netlify.',
-    keywords: ['shama', 'ferreteria', 'landing page', 'html', 'scss', 'jquery', 'netlify', 'responsive']
+    keywords: ['shama', 'ferreteria', 'landing page', 'html', 'scss', 'jquery', 'netlify', 'responsive', 'shama', 'hardware store', 'landing page', 'html', 'scss', 'jquery', 'netlify', 'responsive']
   },
   {
     id: 'projects-shama-crm',
@@ -66,7 +70,7 @@ const searchIndex = [
     url: 'proyectos.html',
     title: 'Mini CRM Ferretería Shama',
     content: 'Full-Stack Development & Business Solutions. Tecnologías: Hono.js, PostgreSQL, Vue, TypeScript. Sistema CRM completo para gestión empresarial con backend en Hono.js, base de datos PostgreSQL, frontend Vue con TypeScript y reportes asistidos por IA.',
-    keywords: ['crm', 'shama', 'hono.js', 'postgresql', 'vue', 'typescript', 'reportes', 'ia', 'backend', 'frontend']
+    keywords: ['crm', 'shama', 'hono.js', 'postgresql', 'vue', 'typescript', 'reportes', 'ia', 'backend', 'frontend', 'crm', 'shama', 'hono.js', 'postgresql', 'vue', 'typescript', 'reports', 'ai', 'backend', 'frontend']
   },
   {
     id: 'projects-auth-go',
@@ -74,7 +78,7 @@ const searchIndex = [
     url: 'proyectos.html',
     title: 'Auth-Go API - Sistema de Autenticación',
     content: 'Authentication • Sessions • Security Engineering. Tecnologías: Go, Fiber, MySQL, Docker. API robusta de autenticación con manejo de sesiones multi-dispositivo, refresh tokens seguros con revocación individual y arquitectura escalable.',
-    keywords: ['auth-go', 'autenticacion', 'go', 'fiber', 'mysql', 'docker', 'sesiones', 'tokens', 'seguridad']
+    keywords: ['auth-go', 'autenticacion', 'go', 'fiber', 'mysql', 'docker', 'sesiones', 'tokens', 'seguridad', 'auth-go', 'authentication', 'go', 'fiber', 'mysql', 'docker', 'sessions', 'tokens', 'security']
   },
   {
     id: 'projects-erp-refactor',
@@ -82,7 +86,7 @@ const searchIndex = [
     url: 'proyectos.html',
     title: 'Refactorización ERP/Pedidos',
     content: 'Full-Stack & SysAdmin. Tecnologías: PHP, jQuery, MySQL, Digital Ocean. Refactorización completa de módulos legacy a SPA, optimización de consultas SQL, refactor del sistema de pedidos y administración de servidores en cloud.',
-    keywords: ['erp', 'pedidos', 'php', 'jquery', 'mysql', 'digital ocean', 'refactorizacion', 'spa', 'consultas', 'servidores']
+    keywords: ['erp', 'pedidos', 'php', 'jquery', 'mysql', 'digital ocean', 'refactorizacion', 'spa', 'consultas', 'servidores', 'erp', 'orders', 'php', 'jquery', 'mysql', 'digital ocean', 'refactoring', 'spa', 'queries', 'servers']
   },
   {
     id: 'about-me',
@@ -90,7 +94,8 @@ const searchIndex = [
     url: 'sobre-mi.html',
     title: 'Sobre mí - David Vargas',
     content: 'Mi enfoque: Hola, soy David, tengo experiencia construyendo soluciones eficientes, manteniendo sistemas críticos en producción. Me gusta crear herramientas y soluciones que hagan más sencillo mi día a día, siempre aprendiendo algo nuevo en el proceso.',
-    keywords: ['sobre mi', 'david', 'enfoque', 'soluciones', 'produccion', 'herramientas', 'aprender']
+    keywords: ['sobre mi', 'david', 'enfoque', 'soluciones', 'produccion', 'herramientas', 'aprender', 'about me', 'david', 'approach', 'solutions', 'production', 'tools', 'learn'],
+    anchor: '#about-intro'
   },
   {
     id: 'about-skills-mobile',
@@ -98,7 +103,8 @@ const searchIndex = [
     url: 'sobre-mi.html',
     title: 'Skills - Desarrollo Móvil',
     content: 'Mobile: Kotlin, Capacitor, Ionic, Android Studio, Xcode. Experiencia completa en desarrollo móvil nativo e híbrido con las mejores herramientas del mercado.',
-    keywords: ['mobile', 'kotlin', 'capacitor', 'ionic', 'android studio', 'xcode', 'nativo', 'hibrido']
+    keywords: ['mobile', 'kotlin', 'capacitor', 'ionic', 'android studio', 'xcode', 'nativo', 'hibrido', 'mobile', 'kotlin', 'capacitor', 'ionic', 'android studio', 'xcode', 'native', 'hybrid'],
+    anchor: '#about-skills'
   },
   {
     id: 'about-skills-backend',
@@ -106,7 +112,7 @@ const searchIndex = [
     url: 'sobre-mi.html',
     title: 'Skills - Desarrollo Backend',
     content: 'Backend: Node.js, PHP, Go, PostgreSQL, MongoDB, GraphQL. Desarrollo de APIs robustas y sistemas backend escalables con múltiples tecnologías.',
-    keywords: ['backend', 'node.js', 'php', 'go', 'postgresql', 'mongodb', 'graphql', 'apis']
+    keywords: ['backend', 'node.js', 'php', 'go', 'postgresql', 'mongodb', 'graphql', 'apis', 'backend', 'node.js', 'php', 'go', 'postgresql', 'mongodb', 'graphql', 'apis']
   },
   {
     id: 'about-skills-cloud',
@@ -114,7 +120,7 @@ const searchIndex = [
     url: 'sobre-mi.html',
     title: 'Skills - Cloud & DevOps',
     content: 'Cloud & DevOps: Docker, AWS EC2 & S3, DigitalOcean, Cloudflare, Azure Artifacts. Administración de infraestructura cloud y prácticas DevOps.',
-    keywords: ['cloud', 'devops', 'docker', 'aws', 'digitalocean', 'cloudflare', 'azure', 'infraestructura']
+    keywords: ['cloud', 'devops', 'docker', 'aws', 'digitalocean', 'cloudflare', 'azure', 'infraestructura', 'cloud', 'devops', 'docker', 'aws', 'digitalocean', 'cloudflare', 'azure', 'infrastructure']
   },
   {
     id: 'about-skills-methodologies',
@@ -122,7 +128,7 @@ const searchIndex = [
     url: 'sobre-mi.html',
     title: 'Skills - Metodologías y Herramientas',
     content: 'Metodologías & Tools: SCRUM, XP, Jira, Azure DevOps, Gitlab, OpsGenie. Experiencia en metodologías ágiles y herramientas de gestión de proyectos.',
-    keywords: ['scrum', 'xp', 'jira', 'azure devops', 'gitlab', 'opsgenie', 'agiles', 'metodologias']
+    keywords: ['scrum', 'xp', 'jira', 'azure devops', 'gitlab', 'opsgenie', 'agiles', 'metodologias', 'scrum', 'xp', 'jira', 'azure devops', 'gitlab', 'opsgenie', 'agile', 'methodologies']
   },
   {
     id: 'about-experience-zigi',
@@ -130,7 +136,8 @@ const searchIndex = [
     url: 'sobre-mi.html',
     title: 'Experiencia - Assistant Software Engineer en Zigi App',
     content: 'Assistant Software Engineer - Zigi App (Sep. 2024 - Presente). Apoyo a Gerencia de Tecnología en gestión administrativa, manejo de información clave y coordinación con equipos de desarrollo.',
-    keywords: ['zigi app', 'assistant', 'gerencia tecnologia', 'administrativa', 'coordinacion']
+    keywords: ['zigi app', 'assistant', 'gerencia tecnologia', 'administrativa', 'coordinacion', 'zigi app', 'assistant', 'technology management', 'administrative', 'coordination'],
+    anchor: '#about-experience'
   },
   {
     id: 'about-experience-allied',
@@ -138,7 +145,7 @@ const searchIndex = [
     url: 'sobre-mi.html',
     title: 'Experiencia - Mobile Software Engineer en Allied Global',
     content: 'Mobile Software Engineer - Allied Global IT Services (Oct. 2024 - Sep. 2025). Desarrollo móvil en sector bancario, frontend y integración de APIs y sistemas de autenticación.',
-    keywords: ['allied global', 'mobile', 'bancario', 'frontend', 'apis', 'autenticacion']
+    keywords: ['allied global', 'mobile', 'bancario', 'frontend', 'apis', 'autenticacion', 'allied global', 'mobile', 'banking', 'frontend', 'apis', 'authentication']
   },
   {
     id: 'about-experience-red-chapina',
@@ -178,7 +185,7 @@ const searchIndex = [
     url: 'sobre-mi.html',
     title: 'Educación - Técnico en Desarrollo de Software',
     content: 'Técnico en Desarrollo de Software - Universidad Galileo (2023 - 2025). Formación técnica especializada en desarrollo de software.',
-    keywords: ['universidad galileo', 'tecnico', 'desarrollo software', 'formacion']
+    keywords: ['universidad galileo', 'tecnico', 'desarrollo software', 'formacion', 'universidad galileo', 'technician', 'software development', 'training']
   },
   {
     id: 'about-education-graphics',
@@ -202,6 +209,7 @@ const searchIndex = [
     url: 'sobre-mi.html',
     title: 'Información de Contacto',
     content: 'Email: josuedavidvl18@gmail.com, Ubicación: CA-9, Guatemala. Redes sociales: LinkedIn y GitHub disponibles.',
-    keywords: ['contacto', 'email', 'guatemala', 'linkedin', 'github', 'redes sociales']
+    keywords: ['contacto', 'email', 'guatemala', 'linkedin', 'github', 'redes sociales', 'contact', 'email', 'guatemala', 'linkedin', 'github', 'social networks'],
+    anchor: '#about-contact'
   }
 ];

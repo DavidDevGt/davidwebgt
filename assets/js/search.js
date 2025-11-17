@@ -1,4 +1,14 @@
 /**
+ * Updates the search input placeholder with current language.
+ */
+function updateSearchPlaceholder() {
+    const searchInput = document.getElementById('search-input');
+    if (searchInput && window.i18n) {
+        searchInput.placeholder = window.i18n.t('nav.searchPlaceholder', 'Buscar en el sitio...');
+    }
+}
+
+/**
  * Opens the search modal by creating the HTML if it doesn't exist.
  * Focuses the search input and recreates Lucide icons.
  */
@@ -13,10 +23,11 @@ function openSearchModal() {
         <div class="p-4 border-b border-[var(--ui-border)]">
           <div class="flex items-center gap-2">
             <i data-lucide="search" class="w-5 h-5 text-[var(--text-secondary)]"></i>
-            <input type="text" id="search-input" placeholder="${window.i18n ? window.i18n.t('nav.searchPlaceholder') : 'Buscar en el sitio...'}" class="flex-1 bg-transparent outline-none text-[var(--text-primary)]" />
+            <input type="text" id="search-input" placeholder="${window.i18n ? window.i18n.t('nav.searchPlaceholder', 'Buscar en el sitio...') : 'Buscar en el sitio...'}" class="flex-1 bg-transparent outline-none text-[var(--text-primary)]" />
             <button
               onclick="closeSearchModal()"
               class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xl border-none outline-none focus:outline-none focus:ring-0"
+              aria-label="${window.i18n ? window.i18n.t('common.close', 'Cerrar') : 'Cerrar'}"
             >
               ×
             </button>
@@ -29,6 +40,7 @@ function openSearchModal() {
         document.getElementById('search-input').addEventListener('input', (e) => performSearch(e.target.value));
     }
     modal.classList.add('show');
+    updateSearchPlaceholder(); // Ensure placeholder is up to date
     setTimeout(() => document.getElementById('search-input').focus(), 100);
     if (typeof lucide !== 'undefined' && lucide.createIcons) {
         lucide.createIcons();
@@ -96,7 +108,7 @@ function renderResults(results, query) {
     }
     results.forEach(result => {
         const link = document.createElement('a');
-        link.href = result.url;
+        link.href = result.anchor ? `${result.url}${result.anchor}` : result.url;
         link.className = 'block p-4 border-b border-[var(--ui-border)] hover:bg-[var(--ui-hover)] last:border-b-0';
 
         const titleDiv = document.createElement('div');
@@ -141,3 +153,9 @@ function highlightText(text, query) {
     const regex = new RegExp(`(${escapedQuery})`, 'gi');
     return escapedText.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-600">$1</mark>');
 }
+
+// Listen for language changes to update search placeholder
+window.addEventListener('languageChanged', updateSearchPlaceholder);
+
+// Make functions globally available
+window.updateSearchPlaceholder = updateSearchPlaceholder;
