@@ -1,5 +1,5 @@
-/* Very Small Mobile: ≤400px */
-@media (max-width: 400px) {
+/* Very Small Mobile: ≤360px */
+@media (max-width: 360px) {
   .projects-grid {
     display: flex !important;
     flex-direction: column !important;
