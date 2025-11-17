@@ -108,7 +108,7 @@
   }
 
   .projects-grid > div {
-    max-width: 320px;
+    max-width: 280px;
     width: 100%;
   }
 }
@@ -209,6 +209,18 @@
 
   #reading-mode-btn {
     display: none !important;
+  }
+
+  .projects-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .projects-grid > div {
+    max-width: 280px;
+    width: 100%;
   }
 }
 
