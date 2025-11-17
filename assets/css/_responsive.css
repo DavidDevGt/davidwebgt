@@ -316,6 +316,10 @@
     padding: var(--spacing-xl);
   }
 
+  .main > div {
+    max-width: 100% !important;
+  }
+
   .topbar.fixed {
     left: 240px;
   }
